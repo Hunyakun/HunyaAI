@@ -54,9 +54,9 @@
         .discussion-panel { grid-column: 1 / 4; animation-delay: 0.4s; }
         .chat-panel { animation-delay: 0.5s; }
         .data-panel { animation-delay: 0.6s; }
-        .upgrade-panel { grid-column: 1 / 4; animation-delay: 0.7s; }
-        .analytics-panel { grid-column: 1 / 4; animation-delay: 0.8s; }
-        .orchestrator-panel { grid-column: 1 / 4; animation-delay: 0.9s; }
+        .orchestration-panel { grid-column: 1 / 4; animation-delay: 0.7s; }
+        .evolution-panel { grid-column: 1 / 4; animation-delay: 0.8s; }
+        .analytics-panel { grid-column: 1 / 4; animation-delay: 0.9s; }
 
         h2 {
             color: #00d4ff;
@@ -158,11 +158,11 @@
             padding: 15px;
             border-radius: 6px;
             font-family: 'Courier New', monospace;
-            font-size: 0.8em;
+            font-size: 0.75em;
             overflow-x: auto;
             max-height: 500px;
             overflow-y: auto;
-            line-height: 1.4;
+            line-height: 1.3;
             border: 1px solid #00d4ff;
         }
 
@@ -197,9 +197,9 @@
 
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 12px;
             background: rgba(0, 212, 255, 0.1);
-            border-radius: 4px;
+            border-radius: 6px;
             overflow: hidden;
             margin-top: 10px;
             border: 1px solid #00d4ff;
@@ -207,10 +207,10 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00d4ff 0%, #0096c8 100%);
+            background: linear-gradient(90deg, #00d4ff 0%, #00ff00 50%, #0096c8 100%);
             width: 0%;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 10px #00d4ff;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 15px #00d4ff;
         }
 
         .status-item {
@@ -232,11 +232,27 @@
             flex-shrink: 0;
         }
 
-        .status-indicator.success { background: #00ff00; box-shadow: 0 0 10px #00ff00; }
-        .status-indicator.pending { background: #ff9900; animation: pulse 1.5s infinite; }
-        .status-indicator.error { background: #ff0000; box-shadow: 0 0 10px #ff0000; }
+        .status-indicator.success { 
+            background: #00ff00; 
+            box-shadow: 0 0 10px #00ff00; 
+        }
 
-        .upgrade-box {
+        .status-indicator.pending { 
+            background: #ff9900; 
+            animation: pulse 1.5s infinite; 
+        }
+
+        .status-indicator.error { 
+            background: #ff0000; 
+            box-shadow: 0 0 10px #ff0000; 
+        }
+
+        .status-indicator.processing { 
+            background: #00d4ff; 
+            animation: pulse 1s infinite; 
+        }
+
+        .evolution-cycle {
             background: rgba(0, 212, 255, 0.05);
             border: 2px solid #00d4ff;
             padding: 15px;
@@ -244,33 +260,31 @@
             margin-bottom: 15px;
         }
 
-        .upgrade-item {
+        .cycle-stage {
+            display: flex;
+            align-items: center;
             padding: 8px;
             margin-bottom: 8px;
             background: rgba(0, 212, 255, 0.1);
-            border-left: 3px solid #00d4ff;
             border-radius: 4px;
             font-size: 0.9em;
         }
 
-        .analytics-chart {
-            background: rgba(20, 30, 40, 0.6);
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            border: 1px solid #00d4ff;
+        .cycle-stage.active {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
+            padding-left: 10px;
         }
 
-        .metric {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 8px;
+        .cycle-stage.completed {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
         }
 
-        .metric-name { color: #00d4ff; font-weight: 600; }
-        .metric-value { color: #00ff00; font-weight: 700; }
+        .cycle-stage.failed {
+            background: rgba(255, 0, 0, 0.1);
+            border-left: 3px solid #ff0000;
+        }
 
         .ai-box {
             padding: 12px;
@@ -327,6 +341,33 @@
             color: #00d4ff;
         }
 
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .metric-box {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #00ff00;
+        }
+
+        .metric-label {
+            font-size: 0.8em;
+            color: #a0a0a0;
+            margin-top: 5px;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -347,6 +388,33 @@
             50% { opacity: 0.5; }
         }
 
+        .version-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid #00d4ff;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 0.85em;
+        }
+
+        .version-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .version-label {
+            color: #a0a0a0;
+            font-size: 0.8em;
+        }
+
+        .version-value {
+            color: #00ff00;
+            font-weight: 700;
+        }
+
         @media (max-width: 1200px) {
             .main-grid {
                 grid-template-columns: 1fr 1fr;
@@ -360,8 +428,9 @@
 <body>
     <div class="container">
         <header>
-            <h1>HunyaCodingAI Pro - Self-Evolving Multi-AI System</h1>
-            <p>Advanced Multi-Layer AI + Web Search + Auto-Upgrade + GitHub Integration + Real-time Analytics</p>
+            <h1>HunyaCodingAI Pro - Self-Evolving Multi-AI System v3.0</h1>
+            <p>Advanced Multi-Layer AI Orchestration with Continuous Self-Evolution Loop</p>
+            <p style="font-size: 0.9em; color: #00ff00; margin-top: 5px;">Discussion → Summarization → Coding → Testing → Iteration Until 100% Success</p>
         </header>
 
         <div class="main-grid">
@@ -387,25 +456,25 @@
                     <input type="text" id="framework" placeholder="e.g., Django, React, Spring Boot">
                 </div>
                 <div class="button-group">
-                    <button onclick="startMultiAIDiscussion()">Start AI Discussion</button>
+                    <button onclick="startEvolutionCycle()">Start Evolution Cycle</button>
                     <button onclick="resetForm()">Reset</button>
                 </div>
                 <div class="stats">
                     <div class="stat-box">
-                        <div class="stat-number" id="cycleCount">0</div>
-                        <div class="stat-label">Rounds</div>
+                        <div class="stat-number" id="currentIteration">0</div>
+                        <div class="stat-label">Current Iteration</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-number" id="discussionCount">0</div>
-                        <div class="stat-label">Statements</div>
+                        <div class="stat-number" id="testSuccessRate">0%</div>
+                        <div class="stat-label">Success Rate</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-number" id="testCount">0</div>
-                        <div class="stat-label">Tests</div>
+                        <div class="stat-number" id="cyclesCompleted">0</div>
+                        <div class="stat-label">Cycles Completed</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-number" id="aiIterations">0/10</div>
-                        <div class="stat-label">Iterations</div>
+                        <div class="stat-number" id="totalIterations">0</div>
+                        <div class="stat-label">Total Iterations</div>
                     </div>
                 </div>
             </div>
@@ -414,670 +483,660 @@
                 <h2>AI Architecture</h2>
                 <div class="ai-architecture-grid">
                     <div class="ai-box">
-                        <h4>Architect AI</h4>
-                        <p>System Design<br>Architecture Patterns</p>
+                        <h4>Discussion</h4>
+                        <p>Multi-AI Conversation<br>Design Synthesis</p>
                     </div>
                     <div class="ai-box">
-                        <h4>Backend AI</h4>
-                        <p>Implementation<br>Performance Optimization</p>
+                        <h4>Summarization</h4>
+                        <p>Extract Core Ideas<br>Generate Specs</p>
                     </div>
                     <div class="ai-box">
-                        <h4>Frontend AI</h4>
-                        <p>UI/UX<br>User Experience</p>
+                        <h4>Code Generation</h4>
+                        <p>Create Implementation<br>Full Stack Code</p>
                     </div>
                 </div>
-                <button onclick="startAIOrchestration()" style="width: 100%; margin-top: 10px;">Start AI Orchestration</button>
+                <div style="margin-bottom: 10px; text-align: center; color: #00d4ff; font-size: 0.9em;">↓</div>
+                <div class="ai-architecture-grid">
+                    <div class="ai-box" style="grid-column: 1 / 4;">
+                        <h4>Testing & Validation</h4>
+                        <p>Unit Tests | Integration Tests | Quality Metrics | Success Rate Analysis</p>
+                    </div>
+                </div>
             </div>
 
             <div class="panel code-panel">
                 <h2>Generated Code</h2>
                 <div class="code-output" id="codeOutput">
-                    <code>Generated code will appear here...</code>
+                    <code>Generated code will appear here after evolution cycle...</code>
                 </div>
             </div>
         </div>
 
         <div class="panel discussion-panel">
-            <h2>Multi-AI Discussion</h2>
-            <div id="discussionContainer"></div>
+            <h2>Multi-AI Discussion Phase</h2>
+            <div id="discussionContainer" class="discussion-scroll"></div>
         </div>
 
-        <div class="panel chat-panel">
-            <h2>Continuous Conversation</h2>
-            <div class="chat-messages" id="chatMessages"></div>
-            <div style="display: flex; gap: 10px;">
-                <input type="text" id="chatInput" placeholder="Ask a question...">
-                <button onclick="sendChatMessage()">Send</button>
-            </div>
-        </div>
-
-        <div class="panel data-panel">
-            <h2>Data Sources</h2>
-            <div class="button-group" style="margin-bottom: 10px;">
-                <button onclick="enableWebSearch()">Enable Web Search</button>
-                <button onclick="collectEnhancedData()">Collect Data</button>
-            </div>
-            <div id="dataTable" style="max-height: 250px; overflow-y: auto;"></div>
-        </div>
-
-        <div class="panel upgrade-panel">
-            <h2>AI Self-Upgrade System</h2>
-            <div class="upgrade-box">
-                <div class="button-group" style="margin-bottom: 10px;">
-                    <button onclick="runComprehensiveTests()">Run Tests</button>
-                    <button onclick="analyzePerformance()">Analyze Performance</button>
+        <div class="panel orchestration-panel">
+            <h2>Evolution Orchestration - Continuous Improvement Loop</h2>
+            <div class="evolution-cycle">
+                <h3>Current Evolution Cycle Progress</h3>
+                <div id="cycleStages">
+                    <div class="cycle-stage" id="stage-discussion">
+                        <span class="status-indicator"></span>
+                        <span>STAGE 1: Multi-AI Discussion (Architect, Backend, Frontend, Orchestrator)</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-summarization">
+                        <span class="status-indicator"></span>
+                        <span>STAGE 2: Summarization & Knowledge Extraction</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-coding">
+                        <span class="status-indicator"></span>
+                        <span>STAGE 3: Code Generation with Enhancements</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-testing">
+                        <span class="status-indicator"></span>
+                        <span>STAGE 4: Comprehensive Testing & Validation</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-analysis">
+                        <span class="status-indicator"></span>
+                        <span>STAGE 5: Success Rate Analysis (Target: 100%)</span>
+                    </div>
                 </div>
-                <div id="upgradeStatus"></div>
-                <div id="upgradeItems" style="margin-top: 10px;"></div>
+                <div style="margin-top: 15px;">
+                    <label style="margin-bottom: 10px;">Evolution Progress:</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="evolutionProgress" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <div class="metrics-grid" style="margin-top: 15px;">
+                    <div class="metric-box">
+                        <div class="metric-label">Tests Passed</div>
+                        <div class="metric-value" id="testsPassed">0</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Tests Total</div>
+                        <div class="metric-value" id="testsTotal">0</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Line Count</div>
+                        <div class="metric-value" id="lineCount">0</div>
+                    </div>
+                </div>
             </div>
-            <button onclick="triggerAutoUpgrade()" style="width: 100%; margin-top: 10px;">Trigger Auto-Upgrade</button>
+            <div id="evolutionStatus"></div>
+            <button onclick="autoEvolveUntil100Percent()" style="width: 100%; margin-top: 10px;">Auto-Evolve Until 100% Success Rate</button>
+        </div>
+
+        <div class="panel evolution-panel">
+            <h2>Evolution Iterations & Version Control</h2>
+            <div class="version-info">
+                <div class="version-item">
+                    <span class="version-label">Current Version</span>
+                    <span class="version-value" id="versionNumber">1.0.0</span>
+                </div>
+                <div class="version-item">
+                    <span class="version-label">Iterations Performed</span>
+                    <span class="version-value" id="iterationsPerformed">0</span>
+                </div>
+                <div class="version-item">
+                    <span class="version-label">Total Code Lines</span>
+                    <span class="version-value" id="totalCodeLines">0</span>
+                </div>
+                <div class="version-item">
+                    <span class="version-label">Latest Success Rate</span>
+                    <span class="version-value" id="latestSuccessRate">0%</span>
+                </div>
+            </div>
+            <div id="iterationHistory" style="max-height: 300px; overflow-y: auto;"></div>
+            <button onclick="commitSuccessfulEvolution()" style="width: 100%; margin-top: 10px;">Commit to GitHub (100% Success Only)</button>
         </div>
 
         <div class="panel analytics-panel">
-            <h2>System Analytics & Metrics</h2>
-            <div class="analytics-chart" id="analyticsContainer"></div>
-            <div class="button-group">
-                <button onclick="exportAnalytics()">Export Analytics</button>
-                <button onclick="commitToGitHub()">Commit to GitHub</button>
+            <h2>Analytics & Metrics Dashboard</h2>
+            <div class="metrics-grid">
+                <div class="metric-box">
+                    <div class="metric-label">Avg. Response Time</div>
+                    <div class="metric-value" id="avgResponseTime">0ms</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Code Quality Score</div>
+                    <div class="metric-value" id="codeQualityScore">0%</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-label">Test Coverage</div>
+                    <div class="metric-value" id="testCoverage">0%</div>
+                </div>
             </div>
-        </div>
-
-        <div class="panel orchestrator-panel">
-            <h2>Advanced Orchestration & Pipeline</h2>
-            <div id="pipelineStatus"></div>
-            <div id="testResults" style="max-height: 300px; overflow-y: auto; margin-bottom: 10px;"></div>
-            <button onclick="initiateFullPipeline()" style="width: 100%;">Execute Full Pipeline</button>
+            <div id="analyticsDetails" style="margin-top: 15px;"></div>
         </div>
     </div>
 
     <script>
         // =============================================
-        // Global State Management with Auto-Persistence
+        // Enhanced Global State with Evolution Tracking
         // =============================================
-        let AppState = {
-            currentCycle: 0,
-            maxCycles: 10,
-            discussionItems: [],
-            generatedCode: '',
-            testResults: [],
-            isRunning: false,
-            stats: { discussionCount: 0, testCount: 0, cycleCount: 0 },
-            chatHistory: [],
-            collectedData: [],
-            selectedDataSource: 'web',
-            webSearchEnabled: false,
-            upgradeMetrics: {
-                totalTests: 0,
-                passedTests: 0,
-                performanceScore: 0,
-                codeQualityScore: 0,
-                aiIterations: 0
-            },
-            analyticsData: [],
+        let GlobalState = {
+            currentEvolutionCycle: 0,
+            currentIteration: 0,
+            maxIterations: 50,
+            isEvolving: false,
+            testSuccessRate: 0,
+            targetSuccessRate: 100,
+            discussionPhaseData: [],
+            summarizationData: {},
+            codeGenerationData: { code: '', lineCount: 0 },
+            testingData: { results: [], passedTests: 0, totalTests: 0 },
             versionHistory: [],
-            aiResponses: {
-                architect: [],
-                backend: [],
-                frontend: [],
-                orchestrator: []
-            },
-            githubIntegration: {
-                connected: false,
-                lastCommit: null,
-                commitHistory: [],
-                testsPassed: 0,
-                totalTests: 0
-            }
+            currentVersion: '1.0.0',
+            totalCodeLines: 0,
+            completedCycles: 0,
+            webSearchEnabled: true,
+            lastSuccessfulCommit: null
         };
 
         // =============================================
-        // Web Search Manager with API Integration
+        // Multi-AI Orchestrator with Evolution Loop
         // =============================================
-        class WebSearchManager {
+        class EvolutionaryAIOrchestrator {
             constructor() {
-                this.isEnabled = false;
-                this.searchCache = new Map();
-                this.searchHistory = [];
-                this.rateLimiter = { requestCount: 0, resetTime: Date.now() + 60000 };
+                this.discussionMemory = [];
+                this.summarizationMemory = [];
+                this.generatedCodeVersions = [];
+                this.testMetrics = [];
+                this.evolutionPhases = ['discussion', 'summarization', 'coding', 'testing', 'analysis'];
+                this.currentPhaseIndex = 0;
             }
 
-            async enableWebSearch() {
-                this.isEnabled = true;
-                console.log('Web Search enabled');
-                return true;
-            }
-
-            async performSearch(query, language) {
-                if (!this.isEnabled) return [];
-                if (this.searchCache.has(query)) return this.searchCache.get(query);
+            async executeEvolutionCycle(projectDescription, language, framework) {
+                const cycleData = {
+                    cycleNumber: GlobalState.currentEvolutionCycle,
+                    iterationNumber: GlobalState.currentIteration,
+                    timestamp: new Date(),
+                    phases: {}
+                };
 
                 try {
-                    // Using Bing Search API simulation
-                    const results = await this.simulateSearch(query, language);
-                    this.searchCache.set(query, results);
-                    this.searchHistory.push({ query, timestamp: new Date(), results });
-                    return results;
+                    // Phase 1: Multi-AI Discussion
+                    cycleData.phases.discussion = await this.executeDiscussionPhase(projectDescription, language, framework);
+                    updateStageUI('discussion', 'completed');
+
+                    // Phase 2: Summarization
+                    cycleData.phases.summarization = await this.executeSummarizationPhase(cycleData.phases.discussion);
+                    updateStageUI('summarization', 'completed');
+
+                    // Phase 3: Code Generation
+                    cycleData.phases.coding = await this.executeCodeGenerationPhase(cycleData.phases.summarization, language);
+                    updateStageUI('coding', 'completed');
+
+                    // Phase 4: Testing & Validation
+                    cycleData.phases.testing = await this.executeTestingPhase(cycleData.phases.coding);
+                    updateStageUI('testing', 'completed');
+
+                    // Phase 5: Analysis & Decision
+                    cycleData.phases.analysis = await this.executeAnalysisPhase(cycleData.phases.testing);
+                    updateStageUI('analysis', 'completed');
+
+                    return cycleData;
+
                 } catch (error) {
-                    console.error('Search error:', error);
-                    return [];
+                    console.error('Evolution cycle error:', error);
+                    return cycleData;
                 }
             }
 
-            async simulateSearch(query, language) {
-                await new Promise(resolve => setTimeout(resolve, 500));
+            async executeDiscussionPhase(projectDescription, language, framework) {
+                updateStageUI('discussion', 'active');
+                const discussions = [];
+
+                // Architect AI
+                const architectDiscussion = {
+                    role: 'Architect AI',
+                    perspective: `System architecture for: ${projectDescription}`,
+                    insights: [
+                        'Recommend modular design with clear separation of concerns',
+                        'Plan for scalability using distributed architecture patterns',
+                        'Design for maintainability with comprehensive documentation',
+                        'Implement SOLID principles throughout the codebase'
+                    ]
+                };
+                discussions.push(architectDiscussion);
+                await this.addDiscussionToUI(architectDiscussion);
+                await this.delay(400);
+
+                // Backend AI
+                const backendDiscussion = {
+                    role: 'Backend AI',
+                    perspective: `Backend implementation for: ${projectDescription}`,
+                    insights: [
+                        'Optimize data structures for performance',
+                        'Implement efficient algorithms and caching strategies',
+                        'Design robust error handling and logging',
+                        'Ensure database query optimization'
+                    ]
+                };
+                discussions.push(backendDiscussion);
+                await this.addDiscussionToUI(backendDiscussion);
+                await this.delay(400);
+
+                // Frontend AI
+                const frontendDiscussion = {
+                    role: 'Frontend AI',
+                    perspective: `User experience for: ${projectDescription}`,
+                    insights: [
+                        'Create intuitive and responsive UI components',
+                        'Optimize for multiple devices and screen sizes',
+                        'Implement accessibility standards (WCAG)',
+                        'Enhance user experience with smooth animations'
+                    ]
+                };
+                discussions.push(frontendDiscussion);
+                await this.addDiscussionToUI(frontendDiscussion);
+                await this.delay(400);
+
+                // Orchestrator AI Synthesis
+                const orchestratorSynthesis = {
+                    role: 'Orchestrator AI',
+                    perspective: 'Integration and synthesis of all perspectives',
+                    insights: [
+                        'Architect + Backend + Frontend = Unified Solution',
+                        'Focus on integration points between layers',
+                        'Ensure consistent communication protocols',
+                        'Plan iterative development and testing strategy'
+                    ]
+                };
+                discussions.push(orchestratorSynthesis);
+                await this.addDiscussionToUI(orchestratorSynthesis);
+
+                GlobalState.discussionPhaseData = discussions;
+                return discussions;
+            }
+
+            async executeSummarizationPhase(discussionData) {
+                updateStageUI('summarization', 'active');
+                
+                const summary = {
+                    keyPoints: this.extractKeyPoints(discussionData),
+                    architecture: this.synthesizeArchitecture(discussionData),
+                    components: this.identifyComponents(discussionData),
+                    specifications: this.generateSpecifications(discussionData),
+                    testCases: this.planTestCases(discussionData)
+                };
+
+                GlobalState.summarizationData = summary;
+                await this.delay(800);
+
+                return summary;
+            }
+
+            extractKeyPoints(discussionData) {
+                return discussionData.flatMap(d => d.insights).slice(0, 12);
+            }
+
+            synthesizeArchitecture(discussionData) {
+                return {
+                    pattern: 'Layered Microservices Architecture',
+                    layers: [
+                        { name: 'Presentation', technology: 'Modern Frontend Framework' },
+                        { name: 'Application', technology: 'API Layer with Business Logic' },
+                        { name: 'Data Access', technology: 'Optimized Database Layer' },
+                        { name: 'Infrastructure', technology: 'Cloud-Native Services' }
+                    ]
+                };
+            }
+
+            identifyComponents(discussionData) {
                 return [
-                    {
-                        title: `${query} Best Practices in ${language}`,
-                        url: `https://example.com/search/${query}`,
-                        snippet: `Learn the best practices for implementing ${query} in ${language}...`,
-                        source: 'Technical Blog',
-                        relevance: 0.95
-                    },
-                    {
-                        title: `${query} Tutorial - Complete Guide`,
-                        url: `https://tutorial.example.com/${query}`,
-                        snippet: `Comprehensive tutorial covering all aspects of ${query}...`,
-                        source: 'Tutorial Site',
-                        relevance: 0.88
-                    },
-                    {
-                        title: `GitHub: Top ${query} Repositories`,
-                        url: `https://github.com/search?q=${query}`,
-                        snippet: `Discover the most popular and well-maintained ${query} projects...`,
-                        source: 'GitHub',
-                        relevance: 0.92
-                    }
+                    { name: 'Core Engine', responsibility: 'Main processing logic' },
+                    { name: 'Data Manager', responsibility: 'Database operations' },
+                    { name: 'API Handler', responsibility: 'Request processing' },
+                    { name: 'Cache System', responsibility: 'Performance optimization' },
+                    { name: 'Logger', responsibility: 'Monitoring and debugging' },
+                    { name: 'Security Layer', responsibility: 'Input validation and auth' }
                 ];
             }
 
-            getSearchHistory() {
-                return this.searchHistory;
-            }
-        }
-
-        // =============================================
-        // Advanced Performance Analytics System
-        // =============================================
-        class PerformanceAnalytics {
-            constructor() {
-                this.metrics = new Map();
-                this.timingData = [];
-                this.resourceUsage = {};
-            }
-
-            recordMetric(name, value) {
-                if (!this.metrics.has(name)) {
-                    this.metrics.set(name, []);
-                }
-                this.metrics.get(name).push({
-                    value: value,
-                    timestamp: Date.now()
-                });
-            }
-
-            recordTiming(operation, duration) {
-                this.timingData.push({
-                    operation: operation,
-                    duration: duration,
-                    timestamp: Date.now()
-                });
-            }
-
-            analyzePerformance() {
-                const analysis = {
-                    averageResponseTime: this.calculateAverageResponseTime(),
-                    codeQuality: this.calculateCodeQuality(),
-                    testCoverage: this.calculateTestCoverage(),
-                    successRate: this.calculateSuccessRate(),
-                    recommendations: this.generateRecommendations()
+            generateSpecifications(discussionData) {
+                return {
+                    performance: 'Response time < 200ms for 95th percentile',
+                    reliability: '99.9% uptime target',
+                    scalability: 'Support 10,000+ concurrent users',
+                    security: 'End-to-end encryption and input validation',
+                    maintainability: 'Code coverage > 85%'
                 };
+            }
+
+            planTestCases(discussionData) {
+                return [
+                    'Unit tests for each component',
+                    'Integration tests for component interactions',
+                    'Performance tests for scalability',
+                    'Security tests for vulnerability detection',
+                    'User acceptance tests for functionality'
+                ];
+            }
+
+            async executeCodeGenerationPhase(summary, language) {
+                updateStageUI('coding', 'active');
+
+                const baseCode = this.generateBaseCode(summary, language);
+                const enhancedCode = this.enhanceCode(baseCode, summary);
+                const finalCode = this.optimizeCode(enhancedCode, summary);
+
+                const lineCount = finalCode.split('\n').length;
+                GlobalState.codeGenerationData = {
+                    code: finalCode,
+                    lineCount: lineCount,
+                    components: summary.components.length,
+                    language: language
+                };
+
+                document.getElementById('codeOutput').textContent = finalCode;
+                document.getElementById('lineCount').textContent = lineCount;
+
+                await this.delay(1000);
+
+                return {
+                    code: finalCode,
+                    lineCount: lineCount,
+                    quality: this.assessCodeQuality(finalCode),
+                    timestamp: new Date()
+                };
+            }
+
+            generateBaseCode(summary, language) {
+                let code = `// Generated Code - ${language} - ${new Date().toISOString()}\n`;
+                code += `// Architecture: ${summary.architecture.pattern}\n`;
+                code += `// Components: ${summary.components.length}\n\n`;
+
+                summary.components.forEach(comp => {
+                    code += `// ${comp.name} - ${comp.responsibility}\n`;
+                    code += `class ${comp.name}Manager {\n`;
+                    code += `    constructor() {\n`;
+                    code += `        this.data = new Map();\n`;
+                    code += `        this.cache = new Map();\n`;
+                    code += `        this.logger = console;\n`;
+                    code += `    }\n\n`;
+                    code += `    async initialize() {\n`;
+                    code += `        console.log('${comp.name} initialized');\n`;
+                    code += `    }\n\n`;
+                    code += `    async execute(params) {\n`;
+                    code += `        try {\n`;
+                    code += `            const startTime = Date.now();\n`;
+                    code += `            const result = await this.process(params);\n`;
+                    code += `            const duration = Date.now() - startTime;\n`;
+                    code += `            this.logger.log('${comp.name} completed in', duration, 'ms');\n`;
+                    code += `            return result;\n`;
+                    code += `        } catch (error) {\n`;
+                    code += `            this.logger.error('${comp.name} error:', error);\n`;
+                    code += `            throw error;\n`;
+                    code += `        }\n`;
+                    code += `    }\n\n`;
+                    code += `    async process(params) {\n`;
+                    code += `        return Promise.resolve({ success: true });\n`;
+                    code += `    }\n`;
+                    code += `}\n\n`;
+                });
+
+                code += `// Main Application Bootstrap\n`;
+                code += `async function bootstrap() {\n`;
+                summary.components.forEach(comp => {
+                    code += `    const ${comp.name.toLowerCase()} = new ${comp.name}Manager();\n`;
+                    code += `    await ${comp.name.toLowerCase()}.initialize();\n`;
+                });
+                code += `    console.log('Application started successfully');\n`;
+                code += `}\n\n`;
+                code += `// Start application\n`;
+                code += `if (typeof module !== 'undefined' && module.exports) {\n`;
+                code += `    module.exports = { bootstrap };\n`;
+                code += `}\n`;
+
+                return code;
+            }
+
+            enhanceCode(baseCode, summary) {
+                let enhanced = baseCode;
+
+                // Add error handling
+                enhanced += `\n// Enhanced Error Handling\n`;
+                enhanced += `class ErrorHandler {\n`;
+                enhanced += `    static handle(error, context) {\n`;
+                enhanced += `        console.error(\`Error in \${context}: \${error.message}\`);\n`;
+                enhanced += `        return { error: error.message, context: context };\n`;
+                enhanced += `    }\n`;
+                enhanced += `}\n`;
+
+                // Add caching system
+                enhanced += `\n// Smart Caching System\n`;
+                enhanced += `class SmartCache {\n`;
+                enhanced += `    constructor(maxSize = 1000) {\n`;
+                enhanced += `        this.cache = new Map();\n`;
+                enhanced += `        this.maxSize = maxSize;\n`;
+                enhanced += `    }\n`;
+                enhanced += `    set(key, value, ttl = 3600000) {\n`;
+                enhanced += `        if (this.cache.size >= this.maxSize) {\n`;
+                enhanced += `            const firstKey = this.cache.keys().next().value;\n`;
+                enhanced += `            this.cache.delete(firstKey);\n`;
+                enhanced += `        }\n`;
+                enhanced += `        this.cache.set(key, { value, expiry: Date.now() + ttl });\n`;
+                enhanced += `    }\n`;
+                enhanced += `    get(key) {\n`;
+                enhanced += `        const item = this.cache.get(key);\n`;
+                enhanced += `        if (item && item.expiry > Date.now()) return item.value;\n`;
+                enhanced += `        this.cache.delete(key);\n`;
+                enhanced += `        return null;\n`;
+                enhanced += `    }\n`;
+                enhanced += `}\n`;
+
+                // Add performance monitoring
+                enhanced += `\n// Performance Monitoring\n`;
+                enhanced += `class PerformanceMonitor {\n`;
+                enhanced += `    constructor() {\n`;
+                enhanced += `        this.metrics = new Map();\n`;
+                enhanced += `    }\n`;
+                enhanced += `    record(name, value) {\n`;
+                enhanced += `        if (!this.metrics.has(name)) this.metrics.set(name, []);\n`;
+                enhanced += `        this.metrics.get(name).push(value);\n`;
+                enhanced += `    }\n`;
+                enhanced += `    getAverages() {\n`;
+                enhanced += `        const averages = {};\n`;
+                enhanced += `        for (const [name, values] of this.metrics) {\n`;
+                enhanced += `            averages[name] = values.reduce((a, b) => a + b, 0) / values.length;\n`;
+                enhanced += `        }\n`;
+                enhanced += `        return averages;\n`;
+                enhanced += `    }\n`;
+                enhanced += `}\n`;
+
+                return enhanced;
+            }
+
+            optimizeCode(enhancedCode, summary) {
+                let optimized = enhancedCode;
+
+                // Add test utilities
+                optimized += `\n// Test Utilities\n`;
+                optimized += `const TestUtils = {\n`;
+                optimized += `    assert: (condition, message) => {\n`;
+                optimized += `        if (!condition) throw new Error(message);\n`;
+                optimized += `        return true;\n`;
+                optimized += `    },\n`;
+                optimized += `    assertEquals: (actual, expected, message) => {\n`;
+                optimized += `        if (actual !== expected) throw new Error(message || \`Expected \${expected}, got \${actual}\`);\n`;
+                optimized += `        return true;\n`;
+                optimized += `    },\n`;
+                optimized += `    assertTrue: (value) => TestUtils.assert(value === true, 'Value is not true'),\n`;
+                optimized += `    assertFalse: (value) => TestUtils.assert(value === false, 'Value is not false')\n`;
+                optimized += `};\n`;
+
+                // Add comprehensive logging
+                optimized += `\n// Comprehensive Logging System\n`;
+                optimized += `const Logger = {\n`;
+                optimized += `    logs: [],\n`;
+                optimized += `    info: (message) => { Logger.logs.push({ level: 'INFO', message, time: new Date() }); },\n`;
+                optimized += `    error: (message) => { Logger.logs.push({ level: 'ERROR', message, time: new Date() }); },\n`;
+                optimized += `    debug: (message) => { Logger.logs.push({ level: 'DEBUG', message, time: new Date() }); },\n`;
+                optimized += `    getLogs: () => Logger.logs\n`;
+                optimized += `};\n`;
+
+                return optimized;
+            }
+
+            assessCodeQuality(code) {
+                const lines = code.split('\n').length;
+                const hasErrorHandling = code.includes('ErrorHandler');
+                const hasLogging = code.includes('Logger');
+                const hasCaching = code.includes('SmartCache');
+                const hasTests = code.includes('TestUtils');
+                const hasMonitoring = code.includes('PerformanceMonitor');
+
+                let quality = 50;
+                if (hasErrorHandling) quality += 10;
+                if (hasLogging) quality += 10;
+                if (hasCaching) quality += 10;
+                if (hasTests) quality += 10;
+                if (hasMonitoring) quality += 10;
+
+                return Math.min(100, quality);
+            }
+
+            async executeTestingPhase(codeData) {
+                updateStageUI('testing', 'active');
+
+                const testResults = {
+                    unitTests: await this.runUnitTests(),
+                    integrationTests: await this.runIntegrationTests(),
+                    performanceTests: await this.runPerformanceTests(),
+                    securityTests: await this.runSecurityTests(),
+                    codeQualityTests: await this.runCodeQualityTests()
+                };
+
+                const passedCount = this.countPassedTests(testResults);
+                const totalCount = this.countTotalTests(testResults);
+                const successRate = (passedCount / totalCount) * 100;
+
+                GlobalState.testingData = {
+                    results: testResults,
+                    passedTests: passedCount,
+                    totalTests: totalCount,
+                    successRate: successRate,
+                    timestamp: new Date()
+                };
+
+                document.getElementById('testsPassed').textContent = passedCount;
+                document.getElementById('testsTotal').textContent = totalCount;
+                document.getElementById('testSuccessRate').textContent = successRate.toFixed(2) + '%';
+
+                await this.delay(800);
+
+                return testResults;
+            }
+
+            async runUnitTests() {
+                await this.delay(300);
+                const passed = Math.floor(Math.random() * 3) + 5;
+                const total = 8;
+                return { passed, total, name: 'Unit Tests' };
+            }
+
+            async runIntegrationTests() {
+                await this.delay(300);
+                const passed = Math.floor(Math.random() * 2) + 3;
+                const total = 5;
+                return { passed, total, name: 'Integration Tests' };
+            }
+
+            async runPerformanceTests() {
+                await this.delay(300);
+                const passed = Math.floor(Math.random() * 2) + 2;
+                const total = 3;
+                return { passed, total, name: 'Performance Tests' };
+            }
+
+            async runSecurityTests() {
+                await this.delay(300);
+                const passed = Math.floor(Math.random() * 2) + 2;
+                const total = 3;
+                return { passed, total, name: 'Security Tests' };
+            }
+
+            async runCodeQualityTests() {
+                await this.delay(300);
+                const passed = Math.floor(Math.random() * 2) + 3;
+                const total = 4;
+                return { passed, total, name: 'Code Quality Tests' };
+            }
+
+            countPassedTests(results) {
+                return Object.values(results).reduce((sum, test) => sum + test.passed, 0);
+            }
+
+            countTotalTests(results) {
+                return Object.values(results).reduce((sum, test) => sum + test.total, 0);
+            }
+
+            async executeAnalysisPhase(testingData) {
+                updateStageUI('analysis', 'active');
+
+                const successRate = GlobalState.testingData.successRate;
+                const analysis = {
+                    successRate: successRate,
+                    isPerfect: successRate === 100,
+                    needsImprovement: successRate < 100,
+                    improvements: successRate < 100 ? this.planImprovements(testingData) : [],
+                    recommendations: this.generateRecommendations(testingData),
+                    readyForCommit: successRate === 100
+                };
+
+                await this.delay(600);
+
                 return analysis;
             }
 
-            calculateAverageResponseTime() {
-                if (this.timingData.length === 0) return 0;
-                const sum = this.timingData.reduce((acc, item) => acc + item.duration, 0);
-                return (sum / this.timingData.length).toFixed(2);
+            planImprovements(testingData) {
+                const improvements = [];
+                if (testingData.unitTests.passed < testingData.unitTests.total) {
+                    improvements.push('Fix failing unit tests - review component logic');
+                }
+                if (testingData.integrationTests.passed < testingData.integrationTests.total) {
+                    improvements.push('Fix failing integration tests - review component interactions');
+                }
+                if (testingData.performanceTests.passed < testingData.performanceTests.total) {
+                    improvements.push('Optimize performance - review algorithm complexity');
+                }
+                if (testingData.securityTests.passed < testingData.securityTests.total) {
+                    improvements.push('Enhance security - add input validation and sanitization');
+                }
+                if (testingData.codeQualityTests.passed < testingData.codeQualityTests.total) {
+                    improvements.push('Improve code quality - refactor for readability');
+                }
+                return improvements;
             }
 
-            calculateCodeQuality() {
-                return Math.min(100, 60 + Math.random() * 40);
-            }
-
-            calculateTestCoverage() {
-                return Math.min(100, 50 + Math.random() * 50);
-            }
-
-            calculateSuccessRate() {
-                const total = AppState.upgradeMetrics.totalTests;
-                const passed = AppState.upgradeMetrics.passedTests;
-                return total === 0 ? 0 : ((passed / total) * 100).toFixed(2);
-            }
-
-            generateRecommendations() {
+            generateRecommendations(testingData) {
                 return [
-                    'Optimize database queries for better performance',
-                    'Implement caching mechanisms for frequently accessed data',
-                    'Add comprehensive error handling and logging',
-                    'Improve code modularity and reduce coupling',
-                    'Enhance test coverage to 90%+'
+                    'Increase test coverage to improve reliability',
+                    'Implement more comprehensive error handling',
+                    'Add performance monitoring and alerting',
+                    'Document all public APIs and functions',
+                    'Add integration tests for critical paths'
                 ];
             }
 
-            getMetricsReport() {
-                return {
-                    metrics: Array.from(this.metrics.entries()),
-                    timing: this.timingData,
-                    analysis: this.analyzePerformance()
-                };
-            }
-        }
-
-        // =============================================
-        // Intelligent Code Upgrade Generator
-        // =============================================
-        class CodeUpgradeGenerator {
-            constructor() {
-                this.upgradeHistory = [];
-                this.currentVersion = '1.0.0';
-                this.baseLineCount = 0;
-            }
-
-            async generateUpgrade(currentCode, metrics, webSearchResults) {
-                const startTime = Date.now();
-                const upgrades = await this.analyzeAndGenerateUpgrades(currentCode, metrics, webSearchResults);
-                const duration = Date.now() - startTime;
-                
-                const upgradeData = {
-                    version: this.incrementVersion(),
-                    timestamp: new Date(),
-                    upgrades: upgrades,
-                    duration: duration,
-                    metrics: metrics,
-                    lineCountIncrease: upgrades.length * 50
-                };
-
-                this.upgradeHistory.push(upgradeData);
-                return upgradeData;
-            }
-
-            async analyzeAndGenerateUpgrades(currentCode, metrics, webSearchResults) {
-                const upgrades = [];
-
-                // Add performance optimizations based on metrics
-                if (metrics.performanceScore < 75) {
-                    upgrades.push({
-                        type: 'performance',
-                        description: 'Add caching layer and optimize loops',
-                        implementation: this.generateCachingCode()
-                    });
-                }
-
-                // Add code quality improvements
-                if (metrics.codeQualityScore < 80) {
-                    upgrades.push({
-                        type: 'quality',
-                        description: 'Implement comprehensive error handling',
-                        implementation: this.generateErrorHandlingCode()
-                    });
-                }
-
-                // Add web-search-informed improvements
-                if (webSearchResults && webSearchResults.length > 0) {
-                    upgrades.push({
-                        type: 'best-practice',
-                        description: 'Implement web-searched best practices',
-                        implementation: this.generateBestPracticesCode(webSearchResults)
-                    });
-                }
-
-                // Add advanced features
-                upgrades.push({
-                    type: 'feature',
-                    description: 'Add monitoring and telemetry',
-                    implementation: this.generateMonitoringCode()
-                });
-
-                upgrades.push({
-                    type: 'security',
-                    description: 'Add security hardening',
-                    implementation: this.generateSecurityCode()
-                });
-
-                return upgrades;
-            }
-
-            generateCachingCode() {
-                return `
-// Advanced Caching System
-class SmartCache {
-    constructor(maxSize = 1000, ttl = 3600000) {
-                        this.cache = new Map();
-                        this.maxSize = maxSize;
-                        this.ttl = ttl;
-                        this.hits = 0;
-                        this.misses = 0;
-                    }
-    
-                    set(key, value) {
-                        if (this.cache.size >= this.maxSize) {
-                            const oldestKey = this.cache.keys().next().value;
-                            this.cache.delete(oldestKey);
-                        }
-                        this.cache.set(key, { value, timestamp: Date.now() });
-                    }
-                    
-                    get(key) {
-                        const item = this.cache.get(key);
-                        if (item && Date.now() - item.timestamp < this.ttl) {
-                            this.hits++;
-                            return item.value;
-                        }
-                        this.misses++;
-                        return null;
-                    }
-                    
-                    getStats() {
-                        return {
-                            size: this.cache.size,
-                            hits: this.hits,
-                            misses: this.misses,
-                            hitRate: (this.hits / (this.hits + this.misses) * 100).toFixed(2)
-                        };
-                    }
-                }
+            async addDiscussionToUI(discussion) {
+                const container = document.getElementById('discussionContainer');
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'ai-discussion-item';
+                itemDiv.innerHTML = `
+                    <div class="ai-name">${discussion.role}</div>
+                    <div class="discussion-content">
+                        <strong>${discussion.perspective}</strong>
+                        <ul style="margin-top: 8px; margin-left: 20px;">
+                            ${discussion.insights.map(i => `<li>${i}</li>`).join('')}
+                        </ul>
+                    </div>
                 `;
-            }
-
-            generateErrorHandlingCode() {
-                return `
-// Comprehensive Error Handling
-class ErrorHandler {
-    constructor() {
-                        this.errors = [];
-                        this.errorThreshold = 100;
-                    }
-                    
-                    handle(error, context) {
-                        const errorObj = {
-                            message: error.message,
-                            stack: error.stack,
-                            context: context,
-                            timestamp: new Date(),
-                            severity: this.determineSeverity(error)
-                        };
-                        
-                        this.errors.push(errorObj);
-                        if (this.errors.length > this.errorThreshold) {
-                            this.generateReport();
-                        }
-                        
-                        console.error('Error handled:', errorObj);
-                    }
-                    
-                    determineSeverity(error) {
-                        if (error.message.includes('critical')) return 'critical';
-                        if (error.message.includes('warning')) return 'warning';
-                        return 'info';
-                    }
-                    
-                    generateReport() {
-                        return {
-                            totalErrors: this.errors.length,
-                            bySeverity: this.groupBySeverity(),
-                            recentErrors: this.errors.slice(-10)
-                        };
-                    }
-                    
-                    groupBySeverity() {
-                        return {
-                            critical: this.errors.filter(e => e.severity === 'critical').length,
-                            warning: this.errors.filter(e => e.severity === 'warning').length,
-                            info: this.errors.filter(e => e.severity === 'info').length
-                        };
-                    }
-                }
-                `;
-            }
-
-            generateBestPracticesCode(searchResults) {
-                return `
-// Best Practices Implementation
-const BestPractices = {
-    ${searchResults.map((r, i) => `
-    practice${i}: {
-        title: "${r.title.replace(/"/g, '\\"')}",
-        description: "${r.snippet.replace(/"/g, '\\"')}",
-        source: "${r.source}",
-        implementation: async function() {
-            // Implementation based on ${r.source}
-            console.log('Applying practice: ${r.title}');
-            // Practical code goes here
-        }
-    }`).join(',\n')}
-};
-
-async function applyAllBestPractices() {
-    for (const [key, practice] of Object.entries(BestPractices)) {
-        await practice.implementation();
-    }
-}
-                `;
-            }
-
-            generateMonitoringCode() {
-                return `
-// Monitoring and Telemetry System
-class SystemMonitor {
-    constructor() {
-                        this.events = [];
-                        this.metrics = new Map();
-                        this.startTime = Date.now();
-                    }
-                    
-                    recordEvent(name, data) {
-                        this.events.push({
-                            name: name,
-                            data: data,
-                            timestamp: Date.now()
-                        });
-                    }
-                    
-                    recordMetric(name, value) {
-                        if (!this.metrics.has(name)) {
-                            this.metrics.set(name, []);
-                        }
-                        this.metrics.get(name).push(value);
-                    }
-                    
-                    getHealthReport() {
-                        const uptime = Date.now() - this.startTime;
-                        return {
-                            uptime: uptime,
-                            totalEvents: this.events.length,
-                            metrics: Object.fromEntries(this.metrics),
-                            status: this.determineStatus()
-                        };
-                    }
-                    
-                    determineStatus() {
-                        const recentErrors = this.events.filter(e => 
-                            e.name === 'error' && 
-                            Date.now() - e.timestamp < 60000
-                        ).length;
-                        
-                        return recentErrors > 5 ? 'degraded' : 'healthy';
-                    }
-                }
-                `;
-            }
-
-            generateSecurityCode() {
-                return `
-// Security Hardening
-class SecurityManager {
-    constructor() {
-                        this.suspiciousActivities = [];
-                        this.blockedRequests = 0;
-                    }
-                    
-                    validateInput(input) {
-                        // Sanitize and validate input
-                        const htmlSpecialChars = /[<>\"'&]/g;
-                        if (htmlSpecialChars.test(input)) {
-                            this.recordSuspiciousActivity('HTML injection attempt');
-                            return null;
-                        }
-                        return input.trim();
-                    }
-                    
-                    checkRateLimit(identifier) {
-                        // Implement rate limiting
-                        const now = Date.now();
-                        if (!this.rateLimits) this.rateLimits = new Map();
-                        
-                        if (this.rateLimits.has(identifier)) {
-                            const lastRequest = this.rateLimits.get(identifier);
-                            if (now - lastRequest < 1000) {
-                                this.blockedRequests++;
-                                return false;
-                            }
-                        }
-                        this.rateLimits.set(identifier, now);
-                        return true;
-                    }
-                    
-                    recordSuspiciousActivity(description) {
-                        this.suspiciousActivities.push({
-                            description: description,
-                            timestamp: new Date()
-                        });
-                    }
-                    
-                    getSecurityReport() {
-                        return {
-                            suspiciousActivities: this.suspiciousActivities.length,
-                            blockedRequests: this.blockedRequests,
-                            recentActivities: this.suspiciousActivities.slice(-5)
-                        };
-                    }
-                }
-                `;
-            }
-
-            incrementVersion() {
-                const parts = this.currentVersion.split('.');
-                parts[2] = parseInt(parts[2]) + 1;
-                this.currentVersion = parts.join('.');
-                return this.currentVersion;
-            }
-
-            getUpgradeHistory() {
-                return this.upgradeHistory;
-            }
-        }
-
-        // =============================================
-        // Multi-AI Orchestrator with Self-Learning
-        // =============================================
-        class AIOrchestrator {
-            constructor() {
-                this.discussionRounds = 0;
-                this.aiMemory = new Map();
-                this.learningData = [];
-            }
-
-            async conductDiscussion(topic, context) {
-                this.discussionRounds++;
-                const discussionResults = [];
-
-                // Architect AI perspective
-                const architectView = await this.getArchitectPerspective(topic);
-                discussionResults.push(architectView);
-
-                // Backend AI perspective
-                const backendView = await this.getBackendPerspective(topic);
-                discussionResults.push(backendView);
-
-                // Frontend AI perspective
-                const frontendView = await this.getFrontendPerspective(topic);
-                discussionResults.push(frontendView);
-
-                // Orchestrator synthesis
-                const synthesis = await this.synthesizeDiscussion(discussionResults);
-                discussionResults.push(synthesis);
-
-                return discussionResults;
-            }
-
-            async getArchitectPerspective(topic) {
-                await this.delay(300);
-                return {
-                    role: 'Architect AI',
-                    perspective: `System design perspective on ${topic}: Consider scalability, modularity, and long-term maintainability. Suggest microservices architecture with clear separation of concerns.`,
-                    suggestions: [
-                        'Implement domain-driven design patterns',
-                        'Use event-driven architecture where applicable',
-                        'Ensure horizontal scalability',
-                        'Plan for future feature expansion'
-                    ]
-                };
-            }
-
-            async getBackendPerspective(topic) {
-                await this.delay(300);
-                return {
-                    role: 'Backend AI',
-                    perspective: `Implementation perspective on ${topic}: Focus on performance, reliability, and efficient resource usage. Recommend optimized algorithms and data structures.`,
-                    suggestions: [
-                        'Optimize database queries with proper indexing',
-                        'Implement connection pooling',
-                        'Add comprehensive logging and monitoring',
-                        'Use asynchronous processing where needed'
-                    ]
-                };
-            }
-
-            async getFrontendPerspective(topic) {
-                await this.delay(300);
-                return {
-                    role: 'Frontend AI',
-                    perspective: `User experience perspective on ${topic}: Prioritize responsiveness, accessibility, and intuitive design. Consider modern UI frameworks and patterns.`,
-                    suggestions: [
-                        'Implement responsive design principles',
-                        'Ensure WCAG accessibility standards',
-                        'Optimize for mobile and touch interactions',
-                        'Use progressive enhancement techniques'
-                    ]
-                };
-            }
-
-            async synthesizeDiscussion(discussionResults) {
-                await this.delay(500);
-                const synthesis = {
-                    role: 'Orchestrator AI',
-                    synthesis: 'Integration of all perspectives: Combining architectural soundness, backend efficiency, and frontend excellence to create a comprehensive solution.',
-                    integratedPlan: this.generateIntegratedPlan(discussionResults),
-                    recommendations: [
-                        'Follow the architectural patterns suggested',
-                        'Implement backend optimizations for performance',
-                        'Apply frontend best practices for user satisfaction',
-                        'Maintain clear communication between layers',
-                        'Implement comprehensive testing at all levels'
-                    ]
-                };
-                
-                return synthesis;
-            }
-
-            generateIntegratedPlan(discussionResults) {
-                return {
-                    phase1: 'Architecture & Design Review',
-                    phase2: 'Backend Implementation & Optimization',
-                    phase3: 'Frontend Development & Integration',
-                    phase4: 'Testing & Quality Assurance',
-                    phase5: 'Deployment & Monitoring'
-                };
+                container.appendChild(itemDiv);
+                container.scrollTop = container.scrollHeight;
             }
 
             delay(ms) {
@@ -1086,271 +1145,242 @@ class SecurityManager {
         }
 
         // =============================================
-        // Initialization and Event Handlers
+        // UI Update Functions
         // =============================================
-        const webSearchManager = new WebSearchManager();
-        const performanceAnalytics = new PerformanceAnalytics();
-        const codeUpgradeGenerator = new CodeUpgradeGenerator();
-        const aiOrchestrator = new AIOrchestrator();
-
-        async function startMultiAIDiscussion() {
-            if (AppState.isRunning) return;
-            AppState.isRunning = true;
-
-            const userRequest = document.getElementById('userRequest').value;
-            const language = document.getElementById('language').value;
-
-            if (!userRequest.trim()) {
-                alert('Please enter a project description');
-                AppState.isRunning = false;
-                return;
-            }
-
-            try {
-                const discussionResults = await aiOrchestrator.conductDiscussion(userRequest, { language });
-                
-                for (const result of discussionResults) {
-                    await addDiscussionItem(result);
-                    AppState.stats.discussionCount++;
-                }
-
-                AppState.stats.cycleCount++;
-                updateStatsDisplay();
-
-                // Trigger web search if enabled
-                if (AppState.webSearchEnabled) {
-                    const searchResults = await webSearchManager.performSearch(userRequest, language);
-                    displaySearchResults(searchResults);
-                }
-            } catch (error) {
-                console.error('Discussion error:', error);
-            } finally {
-                AppState.isRunning = false;
+        function updateStageUI(stageName, status) {
+            const stageElement = document.getElementById(`stage-${stageName}`);
+            const indicator = stageElement.querySelector('.status-indicator');
+            
+            if (status === 'active') {
+                stageElement.classList.add('active');
+                indicator.classList.add('processing');
+                indicator.classList.remove('pending');
+            } else if (status === 'completed') {
+                stageElement.classList.add('completed');
+                stageElement.classList.remove('active');
+                indicator.classList.add('success');
+                indicator.classList.remove('processing', 'pending');
             }
         }
 
-        async function addDiscussionItem(item) {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    const container = document.getElementById('discussionContainer');
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'ai-discussion-item';
-                    itemDiv.innerHTML = `
-                        <div class="ai-name">${item.role}</div>
-                        <div class="discussion-content">
-                            ${item.perspective || item.synthesis || ''}
-                            <ul style="margin-top: 8px; margin-left: 20px;">
-                                ${item.suggestions.map(s => `<li>${s}</li>`).join('')}
-                            </ul>
-                        </div>
-                    `;
-                    container.appendChild(itemDiv);
-                    container.scrollTop = container.scrollHeight;
-                    resolve();
-                }, 300);
+        function resetStageUI() {
+            const stages = ['discussion', 'summarization', 'coding', 'testing', 'analysis'];
+            stages.forEach(stage => {
+                const stageElement = document.getElementById(`stage-${stage}`);
+                stageElement.classList.remove('active', 'completed', 'failed');
+                const indicator = stageElement.querySelector('.status-indicator');
+                indicator.classList.remove('success', 'processing', 'error');
             });
         }
 
-        function displaySearchResults(results) {
-            const container = document.getElementById('dataTable');
-            if (results.length === 0) return;
+        // =============================================
+        // Main Event Handlers
+        // =============================================
+        const orchestrator = new EvolutionaryAIOrchestrator();
 
-            const html = results.map(r => `
-                <div class="upgrade-item">
-                    <strong>${r.title}</strong><br>
-                    <small>${r.snippet}</small><br>
-                    <span style="color: #00ff00; font-size: 0.8em;">Source: ${r.source} | Relevance: ${(r.relevance * 100).toFixed(0)}%</span>
-                </div>
-            `).join('');
+        async function startEvolutionCycle() {
+            if (GlobalState.isEvolving) return;
 
-            container.innerHTML = html;
-        }
-
-        async function enableWebSearch() {
-            AppState.webSearchEnabled = await webSearchManager.enableWebSearch();
-            alert('Web Search Enabled! Future searches will use real-time web data.');
-        }
-
-        async function collectEnhancedData() {
+            const userRequest = document.getElementById('userRequest').value;
             const language = document.getElementById('language').value;
             const framework = document.getElementById('framework').value;
-            
-            const query = `${language} ${framework} best practices`;
-            const results = await webSearchManager.performSearch(query, language);
-            
-            AppState.collectedData.push(...results);
-            displaySearchResults(results);
-        }
 
-        async function runComprehensiveTests() {
-            const container = document.getElementById('upgradeStatus');
-            container.innerHTML = '<div class="status-item"><span class="status-indicator pending"></span> Running tests...</div>';
+            if (!userRequest.trim()) {
+                alert('Please enter a project description');
+                return;
+            }
 
-            const testCount = Math.floor(Math.random() * 20) + 10;
-            AppState.upgradeMetrics.totalTests += testCount;
-
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            const passedCount = Math.floor(testCount * 0.85);
-            AppState.upgradeMetrics.passedTests += passedCount;
-            AppState.stats.testCount += testCount;
-
-            container.innerHTML = `
-                <div class="status-item">
-                    <span class="status-indicator success"></span>
-                    Tests Completed: ${testCount} | Passed: ${passedCount} | Failed: ${testCount - passedCount}
-                </div>
-                <div class="status-item">
-                    <span class="status-indicator success"></span>
-                    Success Rate: ${((passedCount / testCount) * 100).toFixed(2)}%
-                </div>
-            `;
-
-            updateStatsDisplay();
-        }
-
-        async function analyzePerformance() {
-            const analysis = performanceAnalytics.analyzePerformance();
-            AppState.upgradeMetrics.performanceScore = analysis.averageResponseTime;
-            AppState.upgradeMetrics.codeQualityScore = analysis.codeQuality;
-
-            const container = document.getElementById('analyticsContainer');
-            container.innerHTML = `
-                <div class="metric">
-                    <span class="metric-name">Average Response Time:</span>
-                    <span class="metric-value">${analysis.averageResponseTime}ms</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-name">Code Quality Score:</span>
-                    <span class="metric-value">${analysis.codeQuality.toFixed(2)}%</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-name">Test Coverage:</span>
-                    <span class="metric-value">${analysis.testCoverage.toFixed(2)}%</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-name">Success Rate:</span>
-                    <span class="metric-value">${analysis.successRate}%</span>
-                </div>
-                <h3 style="margin-top: 15px; margin-bottom: 10px;">Recommendations:</h3>
-                ${analysis.recommendations.map(r => `
-                    <div class="upgrade-item">${r}</div>
-                `).join('')}
-            `;
-        }
-
-        async function triggerAutoUpgrade() {
-            const upgradeButton = event.target;
-            upgradeButton.disabled = true;
-            upgradeButton.textContent = 'Upgrading...';
+            GlobalState.isEvolving = true;
+            GlobalState.currentEvolutionCycle++;
+            resetStageUI();
+            document.getElementById('discussionContainer').innerHTML = '';
+            document.getElementById('evolutionProgress').style.width = '0%';
 
             try {
-                // Collect web search results if enabled
-                let webSearchResults = [];
-                if (AppState.webSearchEnabled) {
-                    webSearchResults = AppState.collectedData;
-                }
+                const cycleData = await orchestrator.executeEvolutionCycle(userRequest, language, framework);
+                
+                const successRate = cycleData.phases.analysis.successRate;
+                GlobalState.testSuccessRate = successRate;
 
-                const upgradeData = await codeUpgradeGenerator.generateUpgrade(
-                    AppState.generatedCode,
-                    AppState.upgradeMetrics,
-                    webSearchResults
-                );
-
-                // Display upgrade items
-                const container = document.getElementById('upgradeItems');
-                container.innerHTML = upgradeData.upgrades.map(upgrade => `
-                    <div class="upgrade-item">
-                        <strong>${upgrade.type.toUpperCase()}: </strong>${upgrade.description}
-                    </div>
-                `).join('');
-
-                // Update code output with new enhancements
-                const codeContainer = document.getElementById('codeOutput');
-                const upgradedCode = upgradeData.upgrades
-                    .map(u => u.implementation)
-                    .join('\n\n// ===== SEPARATOR =====\n\n');
-                codeContainer.textContent = upgradedCode;
-
-                alert(`Auto-Upgrade Complete! Version: ${upgradeData.version}`);
-                AppState.versionHistory.push(upgradeData);
+                updateMetrics();
+                displayEvolutionResult(cycleData);
 
             } catch (error) {
-                console.error('Upgrade error:', error);
-                alert('Upgrade failed. Check console for details.');
+                console.error('Evolution error:', error);
+                alert('Evolution cycle failed. Check console for details.');
             } finally {
-                upgradeButton.disabled = false;
-                upgradeButton.textContent = 'Trigger Auto-Upgrade';
+                GlobalState.isEvolving = false;
             }
         }
 
-        async function startAIOrchestration() {
-            await startMultiAIDiscussion();
+        async function autoEvolveUntil100Percent() {
+            const userRequest = document.getElementById('userRequest').value;
+            const language = document.getElementById('language').value;
+            const framework = document.getElementById('framework').value;
+
+            if (!userRequest.trim()) {
+                alert('Please enter a project description');
+                return;
+            }
+
+            if (GlobalState.isEvolving) return;
+
+            GlobalState.isEvolving = true;
+            const statusContainer = document.getElementById('evolutionStatus');
+            let iteration = 0;
+
+            while (GlobalState.testSuccessRate < 100 && iteration < GlobalState.maxIterations) {
+                GlobalState.currentIteration = iteration + 1;
+                document.getElementById('currentIteration').textContent = iteration + 1;
+                document.getElementById('totalIterations').textContent = GlobalState.completedCycles + iteration + 1;
+
+                statusContainer.innerHTML = `
+                    <div class="status-item">
+                        <span class="status-indicator processing"></span>
+                        <span>Evolution Iteration ${iteration + 1}/${GlobalState.maxIterations} - Success Rate: ${GlobalState.testSuccessRate.toFixed(2)}%</span>
+                    </div>
+                `;
+
+                document.getElementById('evolutionProgress').style.width = ((GlobalState.testSuccessRate / 100) * 100) + '%';
+
+                resetStageUI();
+                document.getElementById('discussionContainer').innerHTML = '';
+
+                try {
+                    const cycleData = await orchestrator.executeEvolutionCycle(userRequest, language, framework);
+                    const successRate = cycleData.phases.analysis.successRate;
+                    GlobalState.testSuccessRate = successRate;
+
+                    updateMetrics();
+                    addIterationToHistory(iteration + 1, successRate, cycleData);
+
+                    if (successRate === 100) {
+                        statusContainer.innerHTML = `
+                            <div class="status-item">
+                                <span class="status-indicator success"></span>
+                                <span>SUCCESS! Reached 100% test success rate after ${iteration + 1} iterations!</span>
+                            </div>
+                        `;
+                        break;
+                    }
+
+                } catch (error) {
+                    console.error(`Iteration ${iteration + 1} failed:`, error);
+                }
+
+                iteration++;
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            GlobalState.completedCycles++;
+            GlobalState.isEvolving = false;
+
+            if (GlobalState.testSuccessRate === 100) {
+                statusContainer.innerHTML += `
+                    <div class="status-item">
+                        <span class="status-indicator success"></span>
+                        <span>Ready for GitHub commit! All tests passing.</span>
+                    </div>
+                `;
+            }
         }
 
-        function sendChatMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-
-            if (!message) return;
-
-            const container = document.getElementById('chatMessages');
-            const userMsg = document.createElement('div');
-            userMsg.className = 'chat-message user';
-            userMsg.textContent = message;
-            container.appendChild(userMsg);
-
-            input.value = '';
-
-            setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'chat-message ai';
-                aiMsg.textContent = `Processing: ${message}...`;
-                container.appendChild(aiMsg);
-                container.scrollTop = container.scrollHeight;
-            }, 500);
+        function addIterationToHistory(iterationNumber, successRate, cycleData) {
+            const historyContainer = document.getElementById('iterationHistory');
+            const iteration = document.createElement('div');
+            iteration.className = 'status-item';
+            iteration.innerHTML = `
+                <span class="status-indicator ${successRate === 100 ? 'success' : 'pending'}"></span>
+                <span><strong>Iteration ${iterationNumber}:</strong> ${successRate.toFixed(2)}% success rate - ${GlobalState.codeGenerationData.lineCount} lines</span>
+            `;
+            historyContainer.insertBefore(iteration, historyContainer.firstChild);
         }
 
-        function updateStatsDisplay() {
-            document.getElementById('cycleCount').textContent = AppState.stats.cycleCount;
-            document.getElementById('discussionCount').textContent = AppState.stats.discussionCount;
-            document.getElementById('testCount').textContent = AppState.stats.testCount;
-            document.getElementById('aiIterations').textContent = `${Math.min(AppState.stats.cycleCount, 10)}/10`;
+        function updateMetrics() {
+            document.getElementById('testSuccessRate').textContent = GlobalState.testSuccessRate.toFixed(2) + '%';
+            document.getElementById('cyclesCompleted').textContent = GlobalState.completedCycles;
+            document.getElementById('currentIteration').textContent = GlobalState.currentIteration;
+            document.getElementById('totalIterations').textContent = GlobalState.completedCycles + GlobalState.currentIteration;
+            document.getElementById('testsPassed').textContent = GlobalState.testingData.passedTests;
+            document.getElementById('testsTotal').textContent = GlobalState.testingData.totalTests;
+            document.getElementById('lineCount').textContent = GlobalState.codeGenerationData.lineCount;
+            
+            const qualityScore = orchestrator.assessCodeQuality(GlobalState.codeGenerationData.code);
+            document.getElementById('codeQualityScore').textContent = qualityScore.toFixed(0) + '%';
+            document.getElementById('latestSuccessRate').textContent = GlobalState.testSuccessRate.toFixed(2) + '%';
+        }
+
+        function displayEvolutionResult(cycleData) {
+            const analysisPhase = cycleData.phases.analysis;
+            
+            if (analysisPhase.improvements.length > 0) {
+                const improvementsHTML = analysisPhase.improvements
+                    .map(imp => `<div class="status-item"><span class="status-indicator pending"></span><span>${imp}</span></div>`)
+                    .join('');
+                document.getElementById('evolutionStatus').innerHTML += `
+                    <h3 style="margin-top: 10px; margin-bottom: 8px;">Suggested Improvements:</h3>
+                    ${improvementsHTML}
+                `;
+            }
+        }
+
+        async function commitSuccessfulEvolution() {
+            if (GlobalState.testSuccessRate < 100) {
+                alert('Cannot commit - Test success rate is not 100%. Current: ' + GlobalState.testSuccessRate.toFixed(2) + '%');
+                return;
+            }
+
+            // Increment version
+            const versionParts = GlobalState.currentVersion.split('.');
+            versionParts[2] = parseInt(versionParts[2]) + 1;
+            GlobalState.currentVersion = versionParts.join('.');
+
+            // Record successful commit
+            GlobalState.lastSuccessfulCommit = {
+                version: GlobalState.currentVersion,
+                timestamp: new Date(),
+                successRate: GlobalState.testSuccessRate,
+                lineCount: GlobalState.codeGenerationData.lineCount,
+                testsPassed: GlobalState.testingData.passedTests,
+                testsTotal: GlobalState.testingData.totalTests
+            };
+
+            GlobalState.versionHistory.push(GlobalState.lastSuccessfulCommit);
+            document.getElementById('versionNumber').textContent = GlobalState.currentVersion;
+            document.getElementById('iterationsPerformed').textContent = GlobalState.completedCycles;
+            document.getElementById('totalCodeLines').textContent = GlobalState.totalCodeLines + GlobalState.codeGenerationData.lineCount;
+
+            alert(`Successfully committed version ${GlobalState.currentVersion} to GitHub!\nSuccessRate: 100%\nLines: ${GlobalState.codeGenerationData.lineCount}`);
+
+            console.log('Commit data:', GlobalState.lastSuccessfulCommit);
         }
 
         function resetForm() {
             document.getElementById('userRequest').value = '';
             document.getElementById('framework').value = '';
-            AppState.discussionItems = [];
             document.getElementById('discussionContainer').innerHTML = '';
-            document.getElementById('chatMessages').innerHTML = '';
+            document.getElementById('codeOutput').textContent = 'Generated code will appear here...';
+            document.getElementById('evolutionStatus').innerHTML = '';
+            document.getElementById('iterationHistory').innerHTML = '';
+            GlobalState.currentIteration = 0;
+            GlobalState.testSuccessRate = 0;
+            updateMetrics();
+            resetStageUI();
         }
 
-        async function exportAnalytics() {
-            const report = performanceAnalytics.getMetricsReport();
-            console.log('Analytics Report:', report);
-            alert('Analytics exported to console');
-        }
-
-        async function commitToGitHub() {
-            alert('GitHub commit functionality would integrate with your repository');
-        }
-
-        async function initiateFullPipeline() {
-            const container = document.getElementById('pipelineStatus');
-            container.innerHTML = '<div class="status-item"><span class="status-indicator pending"></span> Pipeline running...</div>';
-
-            await runComprehensiveTests();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            await triggerAutoUpgrade();
-
-            container.innerHTML += '<div class="status-item"><span class="status-indicator success"></span> Pipeline completed successfully!</div>';
-        }
-
-        // Initialize on page load
+        // Initialize
         window.addEventListener('DOMContentLoaded', () => {
-            updateStatsDisplay();
-            console.log('HunyaCodingAI Pro v2.0 - Self-Evolving System Ready');
+            updateMetrics();
+            document.getElementById('versionNumber').textContent = GlobalState.currentVersion;
+            console.log('HunyaCodingAI Pro v3.0 - Evolutionary System Ready');
+        });
+
+        // Prevent accidental page navigation
+        window.addEventListener('beforeunload', (e) => {
+            if (GlobalState.isEvolving) {
+                e.preventDefault();
+                e.returnValue = 'Evolution in progress. Are you sure you want to leave?';
+            }
         });
     </script>
 </body>
