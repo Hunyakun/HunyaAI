@@ -52,11 +52,9 @@
         .ai-architecture-panel { animation-delay: 0.2s; }
         .code-panel { animation-delay: 0.3s; }
         .discussion-panel { grid-column: 1 / 4; animation-delay: 0.4s; }
-        .chat-panel { animation-delay: 0.5s; }
-        .data-panel { animation-delay: 0.6s; }
-        .orchestration-panel { grid-column: 1 / 4; animation-delay: 0.7s; }
-        .evolution-panel { grid-column: 1 / 4; animation-delay: 0.8s; }
-        .analytics-panel { grid-column: 1 / 4; animation-delay: 0.9s; }
+        .orchestration-panel { grid-column: 1 / 4; animation-delay: 0.5s; }
+        .evolution-panel { grid-column: 1 / 4; animation-delay: 0.6s; }
+        .analytics-panel { grid-column: 1 / 4; animation-delay: 0.7s; }
 
         h2 {
             color: #00d4ff;
@@ -158,11 +156,11 @@
             padding: 15px;
             border-radius: 6px;
             font-family: 'Courier New', monospace;
-            font-size: 0.75em;
+            font-size: 0.7em;
             overflow-x: auto;
             max-height: 500px;
             overflow-y: auto;
-            line-height: 1.3;
+            line-height: 1.2;
             border: 1px solid #00d4ff;
         }
 
@@ -232,25 +230,10 @@
             flex-shrink: 0;
         }
 
-        .status-indicator.success { 
-            background: #00ff00; 
-            box-shadow: 0 0 10px #00ff00; 
-        }
-
-        .status-indicator.pending { 
-            background: #ff9900; 
-            animation: pulse 1.5s infinite; 
-        }
-
-        .status-indicator.error { 
-            background: #ff0000; 
-            box-shadow: 0 0 10px #ff0000; 
-        }
-
-        .status-indicator.processing { 
-            background: #00d4ff; 
-            animation: pulse 1s infinite; 
-        }
+        .status-indicator.success { background: #00ff00; box-shadow: 0 0 10px #00ff00; }
+        .status-indicator.pending { background: #ff9900; animation: pulse 1.5s infinite; }
+        .status-indicator.error { background: #ff0000; box-shadow: 0 0 10px #ff0000; }
+        .status-indicator.processing { background: #00d4ff; animation: pulse 1s infinite; }
 
         .evolution-cycle {
             background: rgba(0, 212, 255, 0.05);
@@ -281,11 +264,6 @@
             border-left: 3px solid #00ff00;
         }
 
-        .cycle-stage.failed {
-            background: rgba(255, 0, 0, 0.1);
-            border-left: 3px solid #ff0000;
-        }
-
         .ai-box {
             padding: 12px;
             border-radius: 6px;
@@ -294,51 +272,14 @@
             text-align: center;
         }
 
-        .ai-box h4 {
-            font-size: 0.95em;
-            margin-bottom: 5px;
-            color: #00d4ff;
-        }
-
-        .ai-box p {
-            font-size: 0.8em;
-            color: #a0a0a0;
-        }
+        .ai-box h4 { font-size: 0.95em; margin-bottom: 5px; color: #00d4ff; }
+        .ai-box p { font-size: 0.8em; color: #a0a0a0; }
 
         .ai-architecture-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
             margin-bottom: 15px;
-        }
-
-        .chat-messages {
-            max-height: 400px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            border: 1px solid #00d4ff;
-            border-radius: 6px;
-            padding: 10px;
-            background: rgba(10, 10, 10, 0.6);
-        }
-
-        .chat-message {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 4px;
-            animation: slideInLeft 0.3s ease-out;
-        }
-
-        .chat-message.user {
-            background: rgba(0, 212, 255, 0.2);
-            text-align: right;
-            color: #00d4ff;
-        }
-
-        .chat-message.ai {
-            background: rgba(0, 150, 200, 0.2);
-            text-align: left;
-            color: #00d4ff;
         }
 
         .metrics-grid {
@@ -356,16 +297,41 @@
             text-align: center;
         }
 
-        .metric-value {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #00ff00;
+        .metric-value { font-size: 1.5em; font-weight: 700; color: #00ff00; }
+        .metric-label { font-size: 0.8em; color: #a0a0a0; margin-top: 5px; }
+
+        .version-info {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid #00d4ff;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 0.85em;
         }
 
-        .metric-label {
-            font-size: 0.8em;
-            color: #a0a0a0;
-            margin-top: 5px;
+        .version-item { display: flex; flex-direction: column; align-items: center; }
+        .version-label { color: #a0a0a0; font-size: 0.8em; }
+        .version-value { color: #00ff00; font-weight: 700; }
+
+        .code-additions {
+            background: rgba(0, 255, 0, 0.05);
+            border: 1px solid #00ff00;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .code-addition-item {
+            background: rgba(0, 255, 0, 0.1);
+            border-left: 3px solid #00ff00;
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 3px;
         }
 
         @keyframes fadeIn {
@@ -388,39 +354,9 @@
             50% { opacity: 0.5; }
         }
 
-        .version-info {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid #00d4ff;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            font-size: 0.85em;
-        }
-
-        .version-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .version-label {
-            color: #a0a0a0;
-            font-size: 0.8em;
-        }
-
-        .version-value {
-            color: #00ff00;
-            font-weight: 700;
-        }
-
         @media (max-width: 1200px) {
             .main-grid {
                 grid-template-columns: 1fr 1fr;
-            }
-            .ai-architecture-panel {
-                grid-column: 1 / 3;
             }
         }
     </style>
@@ -428,9 +364,9 @@
 <body>
     <div class="container">
         <header>
-            <h1>HunyaCodingAI Pro - Self-Evolving Multi-AI System v3.0</h1>
+            <h1>HunyaCodingAI Pro - Self-Evolving Multi-AI System v3.1</h1>
             <p>Advanced Multi-Layer AI Orchestration with Continuous Self-Evolution Loop</p>
-            <p style="font-size: 0.9em; color: #00ff00; margin-top: 5px;">Discussion → Summarization → Coding → Testing → Iteration Until 100% Success</p>
+            <p style="font-size: 0.9em; color: #00ff00; margin-top: 5px;">Target Success Rate: 85% (Evolves by ADDING code, never removing original code)</p>
         </header>
 
         <div class="main-grid">
@@ -498,14 +434,14 @@
                 <div style="margin-bottom: 10px; text-align: center; color: #00d4ff; font-size: 0.9em;">↓</div>
                 <div class="ai-architecture-grid">
                     <div class="ai-box" style="grid-column: 1 / 4;">
-                        <h4>Testing & Validation</h4>
-                        <p>Unit Tests | Integration Tests | Quality Metrics | Success Rate Analysis</p>
+                        <h4>Testing & Validation (Target: 85%)</h4>
+                        <p>Unit Tests | Integration Tests | Quality Metrics | Additive Enhancement</p>
                     </div>
                 </div>
             </div>
 
             <div class="panel code-panel">
-                <h2>Generated Code</h2>
+                <h2>Generated Code (Always Growing)</h2>
                 <div class="code-output" id="codeOutput">
                     <code>Generated code will appear here after evolution cycle...</code>
                 </div>
@@ -518,7 +454,7 @@
         </div>
 
         <div class="panel orchestration-panel">
-            <h2>Evolution Orchestration - Continuous Improvement Loop</h2>
+            <h2>Evolution Orchestration - Additive Improvement Loop (85% Target)</h2>
             <div class="evolution-cycle">
                 <h3>Current Evolution Cycle Progress</h3>
                 <div id="cycleStages">
@@ -532,7 +468,7 @@
                     </div>
                     <div class="cycle-stage" id="stage-coding">
                         <span class="status-indicator"></span>
-                        <span>STAGE 3: Code Generation with Enhancements</span>
+                        <span>STAGE 3: Code Generation with Additive Enhancements (Keep All Previous Code)</span>
                     </div>
                     <div class="cycle-stage" id="stage-testing">
                         <span class="status-indicator"></span>
@@ -540,7 +476,7 @@
                     </div>
                     <div class="cycle-stage" id="stage-analysis">
                         <span class="status-indicator"></span>
-                        <span>STAGE 5: Success Rate Analysis (Target: 100%)</span>
+                        <span>STAGE 5: Success Rate Analysis (Target: 85%+)</span>
                     </div>
                 </div>
                 <div style="margin-top: 15px;">
@@ -565,11 +501,11 @@
                 </div>
             </div>
             <div id="evolutionStatus"></div>
-            <button onclick="autoEvolveUntil100Percent()" style="width: 100%; margin-top: 10px;">Auto-Evolve Until 100% Success Rate</button>
+            <button onclick="autoEvolveUntil85Percent()" style="width: 100%; margin-top: 10px;">Auto-Evolve Until 85% Success Rate</button>
         </div>
 
         <div class="panel evolution-panel">
-            <h2>Evolution Iterations & Version Control</h2>
+            <h2>Evolution Iterations & Version Control (85% Threshold)</h2>
             <div class="version-info">
                 <div class="version-item">
                     <span class="version-label">Current Version</span>
@@ -588,8 +524,12 @@
                     <span class="version-value" id="latestSuccessRate">0%</span>
                 </div>
             </div>
+            <div id="codeAdditions" class="code-additions" style="display:none;">
+                <strong>Code Additions This Iteration:</strong>
+                <div id="additionsLog"></div>
+            </div>
             <div id="iterationHistory" style="max-height: 300px; overflow-y: auto;"></div>
-            <button onclick="commitSuccessfulEvolution()" style="width: 100%; margin-top: 10px;">Commit to GitHub (100% Success Only)</button>
+            <button onclick="commitSuccessfulEvolution()" style="width: 100%; margin-top: 10px;">Commit to GitHub (85%+ Success Required)</button>
         </div>
 
         <div class="panel analytics-panel">
@@ -614,7 +554,7 @@
 
     <script>
         // =============================================
-        // Enhanced Global State with Evolution Tracking
+        // Enhanced Global State with Additive Evolution Tracking
         // =============================================
         let GlobalState = {
             currentEvolutionCycle: 0,
@@ -622,21 +562,23 @@
             maxIterations: 50,
             isEvolving: false,
             testSuccessRate: 0,
-            targetSuccessRate: 100,
+            targetSuccessRate: 85,
             discussionPhaseData: [],
             summarizationData: {},
-            codeGenerationData: { code: '', lineCount: 0 },
+            codeGenerationData: { code: '', lineCount: 0, baseCodeLength: 0 },
             testingData: { results: [], passedTests: 0, totalTests: 0 },
             versionHistory: [],
             currentVersion: '1.0.0',
             totalCodeLines: 0,
             completedCycles: 0,
             webSearchEnabled: true,
-            lastSuccessfulCommit: null
+            lastSuccessfulCommit: null,
+            codeAdditions: [],
+            originalCode: ''
         };
 
         // =============================================
-        // Multi-AI Orchestrator with Evolution Loop
+        // Multi-AI Orchestrator with Additive Evolution Loop
         // =============================================
         class EvolutionaryAIOrchestrator {
             constructor() {
@@ -646,6 +588,7 @@
                 this.testMetrics = [];
                 this.evolutionPhases = ['discussion', 'summarization', 'coding', 'testing', 'analysis'];
                 this.currentPhaseIndex = 0;
+                this.codeModules = [];
             }
 
             async executeEvolutionCycle(projectDescription, language, framework) {
@@ -653,27 +596,29 @@
                     cycleNumber: GlobalState.currentEvolutionCycle,
                     iterationNumber: GlobalState.currentIteration,
                     timestamp: new Date(),
-                    phases: {}
+                    phases: {},
+                    addedCode: []
                 };
 
                 try {
-                    // Phase 1: Multi-AI Discussion
+                    updateStageUI('discussion', 'active');
                     cycleData.phases.discussion = await this.executeDiscussionPhase(projectDescription, language, framework);
                     updateStageUI('discussion', 'completed');
 
-                    // Phase 2: Summarization
+                    updateStageUI('summarization', 'active');
                     cycleData.phases.summarization = await this.executeSummarizationPhase(cycleData.phases.discussion);
                     updateStageUI('summarization', 'completed');
 
-                    // Phase 3: Code Generation
+                    updateStageUI('coding', 'active');
                     cycleData.phases.coding = await this.executeCodeGenerationPhase(cycleData.phases.summarization, language);
+                    cycleData.addedCode = cycleData.phases.coding.additions;
                     updateStageUI('coding', 'completed');
 
-                    // Phase 4: Testing & Validation
+                    updateStageUI('testing', 'active');
                     cycleData.phases.testing = await this.executeTestingPhase(cycleData.phases.coding);
                     updateStageUI('testing', 'completed');
 
-                    // Phase 5: Analysis & Decision
+                    updateStageUI('analysis', 'active');
                     cycleData.phases.analysis = await this.executeAnalysisPhase(cycleData.phases.testing);
                     updateStageUI('analysis', 'completed');
 
@@ -689,7 +634,6 @@
                 updateStageUI('discussion', 'active');
                 const discussions = [];
 
-                // Architect AI
                 const architectDiscussion = {
                     role: 'Architect AI',
                     perspective: `System architecture for: ${projectDescription}`,
@@ -704,7 +648,6 @@
                 await this.addDiscussionToUI(architectDiscussion);
                 await this.delay(400);
 
-                // Backend AI
                 const backendDiscussion = {
                     role: 'Backend AI',
                     perspective: `Backend implementation for: ${projectDescription}`,
@@ -719,7 +662,6 @@
                 await this.addDiscussionToUI(backendDiscussion);
                 await this.delay(400);
 
-                // Frontend AI
                 const frontendDiscussion = {
                     role: 'Frontend AI',
                     perspective: `User experience for: ${projectDescription}`,
@@ -734,7 +676,6 @@
                 await this.addDiscussionToUI(frontendDiscussion);
                 await this.delay(400);
 
-                // Orchestrator AI Synthesis
                 const orchestratorSynthesis = {
                     role: 'Orchestrator AI',
                     perspective: 'Integration and synthesis of all perspectives',
@@ -742,7 +683,7 @@
                         'Architect + Backend + Frontend = Unified Solution',
                         'Focus on integration points between layers',
                         'Ensure consistent communication protocols',
-                        'Plan iterative development and testing strategy'
+                        'Plan iterative development with additive enhancements'
                     ]
                 };
                 discussions.push(orchestratorSynthesis);
@@ -760,13 +701,38 @@
                     architecture: this.synthesizeArchitecture(discussionData),
                     components: this.identifyComponents(discussionData),
                     specifications: this.generateSpecifications(discussionData),
-                    testCases: this.planTestCases(discussionData)
+                    testCases: this.planTestCases(discussionData),
+                    enhancements: this.planAdditiveEnhancements(discussionData)
                 };
 
                 GlobalState.summarizationData = summary;
                 await this.delay(800);
 
                 return summary;
+            }
+
+            planAdditiveEnhancements(discussionData) {
+                const iterations = GlobalState.currentIteration;
+                const enhancements = [];
+
+                if (iterations === 1) {
+                    enhancements.push('Add ValidationEngine for input validation');
+                    enhancements.push('Add MetricsCollector for performance metrics');
+                } else if (iterations === 2) {
+                    enhancements.push('Add RateLimiter for API rate limiting');
+                    enhancements.push('Add CacheStrategy for intelligent caching');
+                } else if (iterations === 3) {
+                    enhancements.push('Add WebhookManager for event notifications');
+                    enhancements.push('Add AnalyticsEngine for data analysis');
+                } else if (iterations === 4) {
+                    enhancements.push('Add DocumentationGenerator for auto-docs');
+                    enhancements.push('Add HealthChecker for system monitoring');
+                } else if (iterations >= 5) {
+                    enhancements.push('Add DistributedTracing for debugging');
+                    enhancements.push('Add DynamicConfiguration for runtime config');
+                }
+
+                return enhancements;
             }
 
             extractKeyPoints(discussionData) {
@@ -819,35 +785,326 @@
             async executeCodeGenerationPhase(summary, language) {
                 updateStageUI('coding', 'active');
 
-                const baseCode = this.generateBaseCode(summary, language);
-                const enhancedCode = this.enhanceCode(baseCode, summary);
-                const finalCode = this.optimizeCode(enhancedCode, summary);
+                let code = GlobalState.originalCode;
+                const additions = [];
 
-                const lineCount = finalCode.split('\n').length;
+                // Generate base code on first iteration
+                if (GlobalState.currentIteration === 1) {
+                    code = this.generateBaseCode(summary, language);
+                    GlobalState.originalCode = code;
+                    additions.push('Base code generation completed');
+                } else {
+                    // Add enhancements while keeping all previous code
+                    const newModules = this.generateAdditiveModules(summary, language);
+                    code += '\n\n// ===== ITERATION ' + GlobalState.currentIteration + ' ENHANCEMENTS =====\n';
+                    
+                    for (const module of newModules) {
+                        code += '\n' + module.code;
+                        additions.push(module.name);
+                    }
+                    
+                    GlobalState.codeAdditions.push(...additions);
+                }
+
+                const lineCount = code.split('\n').length;
                 GlobalState.codeGenerationData = {
-                    code: finalCode,
+                    code: code,
                     lineCount: lineCount,
+                    baseCodeLength: GlobalState.originalCode.split('\n').length,
                     components: summary.components.length,
-                    language: language
+                    language: language,
+                    additions: additions
                 };
 
-                document.getElementById('codeOutput').textContent = finalCode;
+                document.getElementById('codeOutput').textContent = code;
                 document.getElementById('lineCount').textContent = lineCount;
+
+                // Show additions
+                if (additions.length > 0) {
+                    document.getElementById('codeAdditions').style.display = 'block';
+                    const additionsLog = document.getElementById('additionsLog');
+                    additionsLog.innerHTML += additions
+                        .map(a => `<div class="code-addition-item">+ ${a}</div>`)
+                        .join('');
+                }
 
                 await this.delay(1000);
 
                 return {
-                    code: finalCode,
+                    code: code,
                     lineCount: lineCount,
-                    quality: this.assessCodeQuality(finalCode),
+                    additions: additions,
+                    quality: this.assessCodeQuality(code),
                     timestamp: new Date()
                 };
+            }
+
+            generateAdditiveModules(summary, language) {
+                const modules = [];
+                const enhancements = summary.enhancements || [];
+
+                for (const enhancement of enhancements) {
+                    if (enhancement.includes('Validation')) {
+                        modules.push({
+                            name: 'ValidationEngine Module',
+                            code: `
+// Validation Engine - Iteration ${GlobalState.currentIteration}
+class ValidationEngine {
+    constructor() {
+        this.rules = new Map();
+        this.validators = [];
+        this.customValidators = [];
+    }
+    
+    registerRule(name, validator) {
+        this.rules.set(name, validator);
+    }
+    
+    addValidator(validator) {
+        this.validators.push(validator);
+    }
+    
+    validate(data, schema) {
+        const errors = [];
+        for (const [key, rule] of schema) {
+            if (!this.rules.get(rule)(data[key])) {
+                errors.push({ field: key, error: 'Validation failed' });
+            }
+        }
+        return { valid: errors.length === 0, errors };
+    }
+    
+    async validateAsync(data, schema) {
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(this.validate(data, schema)), 100);
+        });
+    }
+}
+                            `
+                        });
+                    }
+                    
+                    if (enhancement.includes('Metrics')) {
+                        modules.push({
+                            name: 'MetricsCollector Module',
+                            code: `
+// Metrics Collector - Iteration ${GlobalState.currentIteration}
+class MetricsCollector {
+                                constructor() {
+                                    this.metrics = new Map();
+                                    this.timers = new Map();
+                                    this.counters = new Map();
+                                    this.startTime = Date.now();
+                                }
+                                
+                                startTimer(name) {
+                                    this.timers.set(name, Date.now());
+                                }
+                                
+                                endTimer(name) {
+                                    const start = this.timers.get(name);
+                                    const duration = Date.now() - start;
+                                    if (!this.metrics.has(name)) this.metrics.set(name, []);
+                                    this.metrics.get(name).push(duration);
+                                    return duration;
+                                }
+                                
+                                incrementCounter(name) {
+                                    this.counters.set(name, (this.counters.get(name) || 0) + 1);
+                                }
+                                
+                                getMetrics() {
+                                    const result = {};
+                                    for (const [name, values] of this.metrics) {
+                                        result[name] = {
+                                            avg: values.reduce((a,b) => a+b,0) / values.length,
+                                            min: Math.min(...values),
+                                            max: Math.max(...values),
+                                            count: values.length
+                                        };
+                                    }
+                                    return result;
+                                }
+                            }
+                            `
+                        });
+                    }
+                    
+                    if (enhancement.includes('RateLimit')) {
+                        modules.push({
+                            name: 'RateLimiter Module',
+                            code: `
+// Rate Limiter - Iteration ${GlobalState.currentIteration}
+class RateLimiter {
+                                constructor(maxRequests = 100, windowMs = 60000) {
+                                    this.maxRequests = maxRequests;
+                                    this.windowMs = windowMs;
+                                    this.requests = new Map();
+                                }
+                                
+                                isAllowed(identifier) {
+                                    const now = Date.now();
+                                    if (!this.requests.has(identifier)) {
+                                        this.requests.set(identifier, []);
+                                    }
+                                    
+                                    let requests = this.requests.get(identifier);
+                                    requests = requests.filter(time => now - time < this.windowMs);
+                                    
+                                    if (requests.length < this.maxRequests) {
+                                        requests.push(now);
+                                        this.requests.set(identifier, requests);
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                                
+                                getStatus(identifier) {
+                                    const requests = this.requests.get(identifier) || [];
+                                    return {
+                                        remaining: Math.max(0, this.maxRequests - requests.length),
+                                        total: this.maxRequests,
+                                        reset: this.windowMs
+                                    };
+                                }
+                            }
+                            `
+                        });
+                    }
+                    
+                    if (enhancement.includes('Cache')) {
+                        modules.push({
+                            name: 'CacheStrategy Module',
+                            code: `
+// Cache Strategy - Iteration ${GlobalState.currentIteration}
+class CacheStrategy {
+                                constructor(strategy = 'LRU') {
+                                    this.strategy = strategy;
+                                    this.cache = new Map();
+                                    this.accessLog = [];
+                                }
+                                
+                                set(key, value, ttl = 3600000) {
+                                    this.cache.set(key, { value, expiry: Date.now() + ttl });
+                                }
+                                
+                                get(key) {
+                                    const item = this.cache.get(key);
+                                    if (!item) return null;
+                                    if (Date.now() > item.expiry) {
+                                        this.cache.delete(key);
+                                        return null;
+                                    }
+                                    this.accessLog.push({ key, time: Date.now() });
+                                    return item.value;
+                                }
+                                
+                                clear() {
+                                    this.cache.clear();
+                                    this.accessLog = [];
+                                }
+                                
+                                getStats() {
+                                    return {
+                                        size: this.cache.size,
+                                        accesses: this.accessLog.length,
+                                        strategy: this.strategy
+                                    };
+                                }
+                            }
+                            `
+                        });
+                    }
+                    
+                    if (enhancement.includes('Webhook')) {
+                        modules.push({
+                            name: 'WebhookManager Module',
+                            code: `
+// Webhook Manager - Iteration ${GlobalState.currentIteration}
+class WebhookManager {
+                                constructor() {
+                                    this.webhooks = new Map();
+                                    this.events = [];
+                                }
+                                
+                                register(event, url, options = {}) {
+                                    if (!this.webhooks.has(event)) {
+                                        this.webhooks.set(event, []);
+                                    }
+                                    this.webhooks.get(event).push({ url, options, active: true });
+                                }
+                                
+                                async trigger(event, data) {
+                                    this.events.push({ event, data, timestamp: Date.now() });
+                                    const webhooks = this.webhooks.get(event) || [];
+                                    for (const webhook of webhooks) {
+                                        if (webhook.active) {
+                                            await this.callWebhook(webhook.url, data);
+                                        }
+                                    }
+                                }
+                                
+                                async callWebhook(url, data) {
+                                    console.log('Calling webhook:', url, data);
+                                }
+                                
+                                getEventLog() {
+                                    return this.events;
+                                }
+                            }
+                            `
+                        });
+                    }
+                    
+                    if (enhancement.includes('Analytics')) {
+                        modules.push({
+                            name: 'AnalyticsEngine Module',
+                            code: `
+// Analytics Engine - Iteration ${GlobalState.currentIteration}
+class AnalyticsEngine {
+                                constructor() {
+                                    this.data = [];
+                                    this.events = [];
+                                    this.aggregations = new Map();
+                                }
+                                
+                                track(event, properties = {}) {
+                                    this.events.push({
+                                        event,
+                                        properties,
+                                        timestamp: Date.now()
+                                    });
+                                }
+                                
+                                aggregate(metric, reducer) {
+                                    const values = this.events
+                                        .filter(e => e.event === metric)
+                                        .map(e => e.properties);
+                                    return reducer(values);
+                                }
+                                
+                                getReport() {
+                                    return {
+                                        totalEvents: this.events.length,
+                                        events: Array.from(new Set(this.events.map(e => e.event))),
+                                        timespan: this.events.length > 0 ? 
+                                            this.events[this.events.length-1].timestamp - this.events[0].timestamp : 0
+                                    };
+                                }
+                            }
+                            `
+                        });
+                    }
+                }
+
+                return modules;
             }
 
             generateBaseCode(summary, language) {
                 let code = `// Generated Code - ${language} - ${new Date().toISOString()}\n`;
                 code += `// Architecture: ${summary.architecture.pattern}\n`;
-                code += `// Components: ${summary.components.length}\n\n`;
+                code += `// Components: ${summary.components.length}\n`;
+                code += `// Additive Evolution: Code grows with each iteration, never removing original functionality\n\n`;
 
                 summary.components.forEach(comp => {
                     code += `// ${comp.name} - ${comp.responsibility}\n`;
@@ -886,99 +1143,75 @@
                 });
                 code += `    console.log('Application started successfully');\n`;
                 code += `}\n\n`;
-                code += `// Start application\n`;
-                code += `if (typeof module !== 'undefined' && module.exports) {\n`;
-                code += `    module.exports = { bootstrap };\n`;
-                code += `}\n`;
+
+                // Add core systems that remain throughout all iterations
+                code += `// ===== CORE SYSTEMS (ALWAYS PRESENT) =====\n\n`;
+                code += `// Error Handler\n`;
+                code += `class ErrorHandler {\n`;
+                code += `    static handle(error, context) {\n`;
+                code += `        console.error(\`Error in \${context}: \${error.message}\`);\n`;
+                code += `        return { error: error.message, context: context };\n`;
+                code += `    }\n`;
+                code += `}\n\n`;
+
+                code += `// Smart Cache\n`;
+                code += `class SmartCache {\n`;
+                code += `    constructor(maxSize = 1000) {\n`;
+                code += `        this.cache = new Map();\n`;
+                code += `        this.maxSize = maxSize;\n`;
+                code += `    }\n`;
+                code += `    set(key, value, ttl = 3600000) {\n`;
+                code += `        if (this.cache.size >= this.maxSize) {\n`;
+                code += `            const firstKey = this.cache.keys().next().value;\n`;
+                code += `            this.cache.delete(firstKey);\n`;
+                code += `        }\n`;
+                code += `        this.cache.set(key, { value, expiry: Date.now() + ttl });\n`;
+                code += `    }\n`;
+                code += `    get(key) {\n`;
+                code += `        const item = this.cache.get(key);\n`;
+                code += `        if (item && item.expiry > Date.now()) return item.value;\n`;
+                code += `        this.cache.delete(key);\n`;
+                code += `        return null;\n`;
+                code += `    }\n`;
+                code += `}\n\n`;
+
+                code += `// Performance Monitor\n`;
+                code += `class PerformanceMonitor {\n`;
+                code += `    constructor() { this.metrics = new Map(); }\n`;
+                code += `    record(name, value) {\n`;
+                code += `        if (!this.metrics.has(name)) this.metrics.set(name, []);\n`;
+                code += `        this.metrics.get(name).push(value);\n`;
+                code += `    }\n`;
+                code += `    getAverages() {\n`;
+                code += `        const averages = {};\n`;
+                code += `        for (const [name, values] of this.metrics) {\n`;
+                code += `            averages[name] = values.reduce((a, b) => a + b, 0) / values.length;\n`;
+                code += `        }\n`;
+                code += `        return averages;\n`;
+                code += `    }\n`;
+                code += `}\n\n`;
+
+                code += `// Test Utilities\n`;
+                code += `const TestUtils = {\n`;
+                code += `    assert: (condition, message) => { if (!condition) throw new Error(message); return true; },\n`;
+                code += `    assertEquals: (actual, expected, message) => {\n`;
+                code += `        if (actual !== expected) throw new Error(message || \`Expected \${expected}, got \${actual}\`);\n`;
+                code += `        return true;\n`;
+                code += `    },\n`;
+                code += `    assertTrue: (value) => TestUtils.assert(value === true, 'Value is not true'),\n`;
+                code += `    assertFalse: (value) => TestUtils.assert(value === false, 'Value is not false')\n`;
+                code += `};\n\n`;
+
+                code += `// Logger\n`;
+                code += `const Logger = {\n`;
+                code += `    logs: [],\n`;
+                code += `    info: (message) => { Logger.logs.push({ level: 'INFO', message, time: new Date() }); },\n`;
+                code += `    error: (message) => { Logger.logs.push({ level: 'ERROR', message, time: new Date() }); },\n`;
+                code += `    debug: (message) => { Logger.logs.push({ level: 'DEBUG', message, time: new Date() }); },\n`;
+                code += `    getLogs: () => Logger.logs\n`;
+                code += `};\n`;
 
                 return code;
-            }
-
-            enhanceCode(baseCode, summary) {
-                let enhanced = baseCode;
-
-                // Add error handling
-                enhanced += `\n// Enhanced Error Handling\n`;
-                enhanced += `class ErrorHandler {\n`;
-                enhanced += `    static handle(error, context) {\n`;
-                enhanced += `        console.error(\`Error in \${context}: \${error.message}\`);\n`;
-                enhanced += `        return { error: error.message, context: context };\n`;
-                enhanced += `    }\n`;
-                enhanced += `}\n`;
-
-                // Add caching system
-                enhanced += `\n// Smart Caching System\n`;
-                enhanced += `class SmartCache {\n`;
-                enhanced += `    constructor(maxSize = 1000) {\n`;
-                enhanced += `        this.cache = new Map();\n`;
-                enhanced += `        this.maxSize = maxSize;\n`;
-                enhanced += `    }\n`;
-                enhanced += `    set(key, value, ttl = 3600000) {\n`;
-                enhanced += `        if (this.cache.size >= this.maxSize) {\n`;
-                enhanced += `            const firstKey = this.cache.keys().next().value;\n`;
-                enhanced += `            this.cache.delete(firstKey);\n`;
-                enhanced += `        }\n`;
-                enhanced += `        this.cache.set(key, { value, expiry: Date.now() + ttl });\n`;
-                enhanced += `    }\n`;
-                enhanced += `    get(key) {\n`;
-                enhanced += `        const item = this.cache.get(key);\n`;
-                enhanced += `        if (item && item.expiry > Date.now()) return item.value;\n`;
-                enhanced += `        this.cache.delete(key);\n`;
-                enhanced += `        return null;\n`;
-                enhanced += `    }\n`;
-                enhanced += `}\n`;
-
-                // Add performance monitoring
-                enhanced += `\n// Performance Monitoring\n`;
-                enhanced += `class PerformanceMonitor {\n`;
-                enhanced += `    constructor() {\n`;
-                enhanced += `        this.metrics = new Map();\n`;
-                enhanced += `    }\n`;
-                enhanced += `    record(name, value) {\n`;
-                enhanced += `        if (!this.metrics.has(name)) this.metrics.set(name, []);\n`;
-                enhanced += `        this.metrics.get(name).push(value);\n`;
-                enhanced += `    }\n`;
-                enhanced += `    getAverages() {\n`;
-                enhanced += `        const averages = {};\n`;
-                enhanced += `        for (const [name, values] of this.metrics) {\n`;
-                enhanced += `            averages[name] = values.reduce((a, b) => a + b, 0) / values.length;\n`;
-                enhanced += `        }\n`;
-                enhanced += `        return averages;\n`;
-                enhanced += `    }\n`;
-                enhanced += `}\n`;
-
-                return enhanced;
-            }
-
-            optimizeCode(enhancedCode, summary) {
-                let optimized = enhancedCode;
-
-                // Add test utilities
-                optimized += `\n// Test Utilities\n`;
-                optimized += `const TestUtils = {\n`;
-                optimized += `    assert: (condition, message) => {\n`;
-                optimized += `        if (!condition) throw new Error(message);\n`;
-                optimized += `        return true;\n`;
-                optimized += `    },\n`;
-                optimized += `    assertEquals: (actual, expected, message) => {\n`;
-                optimized += `        if (actual !== expected) throw new Error(message || \`Expected \${expected}, got \${actual}\`);\n`;
-                optimized += `        return true;\n`;
-                optimized += `    },\n`;
-                optimized += `    assertTrue: (value) => TestUtils.assert(value === true, 'Value is not true'),\n`;
-                optimized += `    assertFalse: (value) => TestUtils.assert(value === false, 'Value is not false')\n`;
-                optimized += `};\n`;
-
-                // Add comprehensive logging
-                optimized += `\n// Comprehensive Logging System\n`;
-                optimized += `const Logger = {\n`;
-                optimized += `    logs: [],\n`;
-                optimized += `    info: (message) => { Logger.logs.push({ level: 'INFO', message, time: new Date() }); },\n`;
-                optimized += `    error: (message) => { Logger.logs.push({ level: 'ERROR', message, time: new Date() }); },\n`;
-                optimized += `    debug: (message) => { Logger.logs.push({ level: 'DEBUG', message, time: new Date() }); },\n`;
-                optimized += `    getLogs: () => Logger.logs\n`;
-                optimized += `};\n`;
-
-                return optimized;
             }
 
             assessCodeQuality(code) {
@@ -988,13 +1221,17 @@
                 const hasCaching = code.includes('SmartCache');
                 const hasTests = code.includes('TestUtils');
                 const hasMonitoring = code.includes('PerformanceMonitor');
+                const hasValidation = code.includes('ValidationEngine');
+                const hasMetrics = code.includes('MetricsCollector');
 
                 let quality = 50;
-                if (hasErrorHandling) quality += 10;
-                if (hasLogging) quality += 10;
-                if (hasCaching) quality += 10;
-                if (hasTests) quality += 10;
-                if (hasMonitoring) quality += 10;
+                if (hasErrorHandling) quality += 8;
+                if (hasLogging) quality += 8;
+                if (hasCaching) quality += 8;
+                if (hasTests) quality += 8;
+                if (hasMonitoring) quality += 8;
+                if (hasValidation) quality += 8;
+                if (hasMetrics) quality += 8;
 
                 return Math.min(100, quality);
             }
@@ -1032,38 +1269,38 @@
             }
 
             async runUnitTests() {
-                await this.delay(300);
-                const passed = Math.floor(Math.random() * 3) + 5;
-                const total = 8;
-                return { passed, total, name: 'Unit Tests' };
+                await this.delay(200);
+                const base = 5 + GlobalState.currentIteration;
+                const passed = Math.floor(Math.random() * 2) + base - 1;
+                return { passed, total: base, name: 'Unit Tests' };
             }
 
             async runIntegrationTests() {
-                await this.delay(300);
-                const passed = Math.floor(Math.random() * 2) + 3;
-                const total = 5;
-                return { passed, total, name: 'Integration Tests' };
+                await this.delay(200);
+                const base = 4 + Math.floor(GlobalState.currentIteration / 2);
+                const passed = Math.floor(Math.random() * 1) + base - 1;
+                return { passed, total: base, name: 'Integration Tests' };
             }
 
             async runPerformanceTests() {
-                await this.delay(300);
+                await this.delay(200);
                 const passed = Math.floor(Math.random() * 2) + 2;
                 const total = 3;
                 return { passed, total, name: 'Performance Tests' };
             }
 
             async runSecurityTests() {
-                await this.delay(300);
+                await this.delay(200);
                 const passed = Math.floor(Math.random() * 2) + 2;
                 const total = 3;
                 return { passed, total, name: 'Security Tests' };
             }
 
             async runCodeQualityTests() {
-                await this.delay(300);
-                const passed = Math.floor(Math.random() * 2) + 3;
-                const total = 4;
-                return { passed, total, name: 'Code Quality Tests' };
+                await this.delay(200);
+                const base = 3 + Math.floor(GlobalState.currentIteration / 2);
+                const passed = Math.floor(Math.random() * 1) + base - 1;
+                return { passed, total: base, name: 'Code Quality Tests' };
             }
 
             countPassedTests(results) {
@@ -1080,11 +1317,11 @@
                 const successRate = GlobalState.testingData.successRate;
                 const analysis = {
                     successRate: successRate,
-                    isPerfect: successRate === 100,
-                    needsImprovement: successRate < 100,
-                    improvements: successRate < 100 ? this.planImprovements(testingData) : [],
+                    isAbove85: successRate >= 85,
+                    needsImprovement: successRate < 85,
+                    improvements: successRate < 85 ? this.planImprovements(testingData) : [],
                     recommendations: this.generateRecommendations(testingData),
-                    readyForCommit: successRate === 100
+                    readyForCommit: successRate >= 85
                 };
 
                 await this.delay(600);
@@ -1095,30 +1332,30 @@
             planImprovements(testingData) {
                 const improvements = [];
                 if (testingData.unitTests.passed < testingData.unitTests.total) {
-                    improvements.push('Fix failing unit tests - review component logic');
+                    improvements.push('Enhance unit test coverage - add more edge cases');
                 }
                 if (testingData.integrationTests.passed < testingData.integrationTests.total) {
-                    improvements.push('Fix failing integration tests - review component interactions');
+                    improvements.push('Strengthen integration tests - verify component interfaces');
                 }
                 if (testingData.performanceTests.passed < testingData.performanceTests.total) {
-                    improvements.push('Optimize performance - review algorithm complexity');
+                    improvements.push('Optimize performance bottlenecks');
                 }
                 if (testingData.securityTests.passed < testingData.securityTests.total) {
-                    improvements.push('Enhance security - add input validation and sanitization');
+                    improvements.push('Enhance security measures and validation');
                 }
                 if (testingData.codeQualityTests.passed < testingData.codeQualityTests.total) {
-                    improvements.push('Improve code quality - refactor for readability');
+                    improvements.push('Improve code quality and documentation');
                 }
                 return improvements;
             }
 
             generateRecommendations(testingData) {
                 return [
-                    'Increase test coverage to improve reliability',
-                    'Implement more comprehensive error handling',
-                    'Add performance monitoring and alerting',
-                    'Document all public APIs and functions',
-                    'Add integration tests for critical paths'
+                    'Keep all previous code - only add new modules',
+                    'Increase test coverage incrementally',
+                    'Add more defensive programming patterns',
+                    'Implement comprehensive logging throughout',
+                    'Document all public APIs properly'
                 ];
             }
 
@@ -1192,9 +1429,11 @@
 
             GlobalState.isEvolving = true;
             GlobalState.currentEvolutionCycle++;
+            GlobalState.currentIteration = 1;
             resetStageUI();
             document.getElementById('discussionContainer').innerHTML = '';
             document.getElementById('evolutionProgress').style.width = '0%';
+            document.getElementById('additionsLog').innerHTML = '';
 
             try {
                 const cycleData = await orchestrator.executeEvolutionCycle(userRequest, language, framework);
@@ -1213,7 +1452,7 @@
             }
         }
 
-        async function autoEvolveUntil100Percent() {
+        async function autoEvolveUntil85Percent() {
             const userRequest = document.getElementById('userRequest').value;
             const language = document.getElementById('language').value;
             const framework = document.getElementById('framework').value;
@@ -1229,7 +1468,7 @@
             const statusContainer = document.getElementById('evolutionStatus');
             let iteration = 0;
 
-            while (GlobalState.testSuccessRate < 100 && iteration < GlobalState.maxIterations) {
+            while (GlobalState.testSuccessRate < 85 && iteration < GlobalState.maxIterations) {
                 GlobalState.currentIteration = iteration + 1;
                 document.getElementById('currentIteration').textContent = iteration + 1;
                 document.getElementById('totalIterations').textContent = GlobalState.completedCycles + iteration + 1;
@@ -1237,11 +1476,12 @@
                 statusContainer.innerHTML = `
                     <div class="status-item">
                         <span class="status-indicator processing"></span>
-                        <span>Evolution Iteration ${iteration + 1}/${GlobalState.maxIterations} - Success Rate: ${GlobalState.testSuccessRate.toFixed(2)}%</span>
+                        <span>Evolution Iteration ${iteration + 1}/${GlobalState.maxIterations} - Success Rate: ${GlobalState.testSuccessRate.toFixed(2)}% (Target: 85%)</span>
                     </div>
                 `;
 
-                document.getElementById('evolutionProgress').style.width = ((GlobalState.testSuccessRate / 100) * 100) + '%';
+                const progressPercent = Math.min(GlobalState.testSuccessRate, 85);
+                document.getElementById('evolutionProgress').style.width = ((progressPercent / 85) * 100) + '%';
 
                 resetStageUI();
                 document.getElementById('discussionContainer').innerHTML = '';
@@ -1254,11 +1494,11 @@
                     updateMetrics();
                     addIterationToHistory(iteration + 1, successRate, cycleData);
 
-                    if (successRate === 100) {
+                    if (successRate >= 85) {
                         statusContainer.innerHTML = `
                             <div class="status-item">
                                 <span class="status-indicator success"></span>
-                                <span>SUCCESS! Reached 100% test success rate after ${iteration + 1} iterations!</span>
+                                <span>SUCCESS! Reached 85%+ test success rate (${successRate.toFixed(2)}%) after ${iteration + 1} iterations!</span>
                             </div>
                         `;
                         break;
@@ -1275,13 +1515,14 @@
             GlobalState.completedCycles++;
             GlobalState.isEvolving = false;
 
-            if (GlobalState.testSuccessRate === 100) {
+            if (GlobalState.testSuccessRate >= 85) {
                 statusContainer.innerHTML += `
                     <div class="status-item">
                         <span class="status-indicator success"></span>
-                        <span>Ready for GitHub commit! All tests passing.</span>
+                        <span>Ready for GitHub commit! Success rate: ${GlobalState.testSuccessRate.toFixed(2)}% - All code additions preserved.</span>
                     </div>
                 `;
+                document.querySelector('button[onclick="commitSuccessfulEvolution()"]').disabled = false;
             }
         }
 
@@ -1289,9 +1530,14 @@
             const historyContainer = document.getElementById('iterationHistory');
             const iteration = document.createElement('div');
             iteration.className = 'status-item';
+            const statusClass = successRate >= 85 ? 'success' : 'pending';
             iteration.innerHTML = `
-                <span class="status-indicator ${successRate === 100 ? 'success' : 'pending'}"></span>
-                <span><strong>Iteration ${iterationNumber}:</strong> ${successRate.toFixed(2)}% success rate - ${GlobalState.codeGenerationData.lineCount} lines</span>
+                <span class="status-indicator ${statusClass}"></span>
+                <span>
+                    <strong>Iteration ${iterationNumber}:</strong> ${successRate.toFixed(2)}% success rate 
+                    | Lines: ${GlobalState.codeGenerationData.lineCount} 
+                    | Added: ${cycleData.addedCode.length} modules
+                </span>
             `;
             historyContainer.insertBefore(iteration, historyContainer.firstChild);
         }
@@ -1318,39 +1564,43 @@
                     .map(imp => `<div class="status-item"><span class="status-indicator pending"></span><span>${imp}</span></div>`)
                     .join('');
                 document.getElementById('evolutionStatus').innerHTML += `
-                    <h3 style="margin-top: 10px; margin-bottom: 8px;">Suggested Improvements:</h3>
+                    <h3 style="margin-top: 10px; margin-bottom: 8px;">Suggested Improvements for Next Iteration:</h3>
                     ${improvementsHTML}
                 `;
             }
         }
 
         async function commitSuccessfulEvolution() {
-            if (GlobalState.testSuccessRate < 100) {
-                alert('Cannot commit - Test success rate is not 100%. Current: ' + GlobalState.testSuccessRate.toFixed(2) + '%');
+            if (GlobalState.testSuccessRate < 85) {
+                alert('Cannot commit - Test success rate must be 85%+. Current: ' + GlobalState.testSuccessRate.toFixed(2) + '%');
                 return;
             }
 
-            // Increment version
             const versionParts = GlobalState.currentVersion.split('.');
             versionParts[2] = parseInt(versionParts[2]) + 1;
             GlobalState.currentVersion = versionParts.join('.');
 
-            // Record successful commit
             GlobalState.lastSuccessfulCommit = {
                 version: GlobalState.currentVersion,
                 timestamp: new Date(),
                 successRate: GlobalState.testSuccessRate,
                 lineCount: GlobalState.codeGenerationData.lineCount,
                 testsPassed: GlobalState.testingData.passedTests,
-                testsTotal: GlobalState.testingData.totalTests
+                testsTotal: GlobalState.testingData.totalTests,
+                codeAdditions: GlobalState.codeAdditions.length
             };
 
             GlobalState.versionHistory.push(GlobalState.lastSuccessfulCommit);
+            GlobalState.totalCodeLines += GlobalState.codeGenerationData.lineCount;
             document.getElementById('versionNumber').textContent = GlobalState.currentVersion;
             document.getElementById('iterationsPerformed').textContent = GlobalState.completedCycles;
-            document.getElementById('totalCodeLines').textContent = GlobalState.totalCodeLines + GlobalState.codeGenerationData.lineCount;
+            document.getElementById('totalCodeLines').textContent = GlobalState.totalCodeLines;
 
-            alert(`Successfully committed version ${GlobalState.currentVersion} to GitHub!\nSuccessRate: 100%\nLines: ${GlobalState.codeGenerationData.lineCount}`);
+            alert(`Successfully committed version ${GlobalState.currentVersion} to GitHub!
+Success Rate: ${GlobalState.testSuccessRate.toFixed(2)}%
+Lines: ${GlobalState.codeGenerationData.lineCount}
+Code Additions: ${GlobalState.codeAdditions.length}
+All original code preserved - purely additive evolution!`);
 
             console.log('Commit data:', GlobalState.lastSuccessfulCommit);
         }
@@ -1362,8 +1612,12 @@
             document.getElementById('codeOutput').textContent = 'Generated code will appear here...';
             document.getElementById('evolutionStatus').innerHTML = '';
             document.getElementById('iterationHistory').innerHTML = '';
+            document.getElementById('additionsLog').innerHTML = '';
+            document.getElementById('codeAdditions').style.display = 'none';
             GlobalState.currentIteration = 0;
             GlobalState.testSuccessRate = 0;
+            GlobalState.codeAdditions = [];
+            GlobalState.originalCode = '';
             updateMetrics();
             resetStageUI();
         }
@@ -1372,10 +1626,9 @@
         window.addEventListener('DOMContentLoaded', () => {
             updateMetrics();
             document.getElementById('versionNumber').textContent = GlobalState.currentVersion;
-            console.log('HunyaCodingAI Pro v3.0 - Evolutionary System Ready');
+            console.log('HunyaCodingAI Pro v3.1 - Evolutionary System Ready (85% Target with Additive Code)');
         });
 
-        // Prevent accidental page navigation
         window.addEventListener('beforeunload', (e) => {
             if (GlobalState.isEvolving) {
                 e.preventDefault();
