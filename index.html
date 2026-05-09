@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HunyaCodingAI Pro - Self-Evolving Multi-AI System</title>
+    <title>HunyaCodingAI Pro v5.0 - Advanced Multi-AI Evolution Engine</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -15,178 +15,121 @@
             padding: 20px;
         }
 
-        .container { max-width: 1800px; margin: 0 auto; }
+        .container { max-width: 1900px; margin: 0 auto; }
 
         header {
             text-align: center;
             color: #00d4ff;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             animation: slideDown 0.6s ease-out;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header > div:first-child {
-            flex: 1;
-        }
-
-        .auth-panel {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            background: rgba(0, 212, 255, 0.1);
-            padding: 15px 20px;
-            border-radius: 8px;
-            border: 1px solid #00d4ff;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #00d4ff;
-            font-size: 0.9em;
-        }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #00d4ff;
-        }
-
-        .github-login-btn {
-            background: linear-gradient(135deg, #1f6feb 0%, #388bfd 100%);
-            border: 1px solid #388bfd;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .github-login-btn:hover {
-            box-shadow: 0 0 20px rgba(56, 139, 253, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .logout-btn {
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.3) 0%, rgba(200, 0, 0, 0.3) 100%);
-            border: 1px solid #ff0000;
-            color: #ff0000;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.5) 0%, rgba(200, 0, 0, 0.5) 100%);
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
         }
 
         header h1 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             margin-bottom: 10px;
             text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
 
-        header p { font-size: 1.1em; opacity: 0.8; }
+        .token-panel {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid #00ff00;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .token-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #00ff00;
+            background: rgba(0, 20, 0, 0.8);
+            color: #00ff00;
+            border-radius: 6px;
+            font-family: monospace;
+        }
+
+        .token-status {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #00ff00;
+        }
 
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
+            gap: 15px;
             margin-bottom: 20px;
         }
 
         .panel {
             background: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%);
-            border: 1px solid #00d4ff;
-            border-radius: 12px;
+            border: 1.5px solid #00d4ff;
+            border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
-            padding: 25px;
+            padding: 20px;
             animation: fadeIn 0.6s ease-out;
         }
 
-        .input-panel { animation-delay: 0.1s; }
-        .ai-architecture-panel { animation-delay: 0.2s; }
-        .code-panel { animation-delay: 0.3s; }
-        .discussion-panel { grid-column: 1 / 4; animation-delay: 0.4s; }
-        .orchestration-panel { grid-column: 1 / 4; animation-delay: 0.5s; }
-        .evolution-panel { grid-column: 1 / 4; animation-delay: 0.6s; }
-        .analytics-panel { grid-column: 1 / 4; animation-delay: 0.7s; }
-        .update-panel { grid-column: 1 / 4; animation-delay: 0.15s; }
-        .code-download-panel { grid-column: 1 / 4; animation-delay: 0.25s; }
-        .testing-methods-panel { grid-column: 1 / 4; animation-delay: 0.35s; }
-        .self-extension-panel { grid-column: 1 / 4; animation-delay: 0.45s; }
-
-        .notification-container { position: fixed; top: 20px; right: 20px; width: 380px; z-index: 1000; max-height: 80vh; overflow-y: auto; }
+        .panel.full-width {
+            grid-column: 1 / 4;
+        }
 
         h2 {
             color: #00d4ff;
             margin-bottom: 15px;
-            font-size: 1.5em;
+            font-size: 1.3em;
             border-bottom: 2px solid #00d4ff;
             padding-bottom: 10px;
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
 
         h3 {
-            color: #00d4ff;
-            margin-top: 10px;
-            margin-bottom: 8px;
-            font-size: 1em;
+            color: #00ff00;
+            margin: 12px 0 8px 0;
+            font-size: 1.05em;
         }
 
-        .form-group { margin-bottom: 15px; }
+        .form-group { margin-bottom: 12px; }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #00d4ff;
             font-weight: 600;
+            font-size: 0.95em;
         }
 
-        textarea, input[type="text"], select, input[type="password"] {
+        textarea, input[type="text"], input[type="password"], select {
             width: 100%;
-            padding: 10px;
+            padding: 9px;
             border: 1px solid #00d4ff;
             background: rgba(15, 20, 25, 0.8);
             color: #e0e0e0;
             border-radius: 6px;
             font-family: inherit;
             transition: all 0.3s;
+            font-size: 0.95em;
         }
 
-        textarea:focus, input[type="text"]:focus, select:focus, input[type="password"]:focus {
+        textarea:focus, input:focus, select:focus {
             outline: none;
-            border-color: #00d4ff;
+            border-color: #00ff00;
             box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
             background: rgba(15, 20, 25, 0.95);
         }
 
-        textarea { min-height: 100px; resize: vertical; }
-
-        .button-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
+        textarea { min-height: 80px; resize: vertical; }
 
         button {
-            padding: 12px 20px;
-            border: 1px solid #00d4ff;
+            padding: 10px 16px;
+            border: 1.5px solid #00d4ff;
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 150, 200, 0.2) 100%);
             color: #00d4ff;
             border-radius: 6px;
-            font-size: 1em;
+            font-size: 0.95em;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -204,6 +147,13 @@
             cursor: not-allowed;
         }
 
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
         .stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -215,62 +165,66 @@
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 150, 200, 0.1) 100%);
             border: 1px solid #00d4ff;
             color: #00d4ff;
-            padding: 15px;
+            padding: 12px;
             border-radius: 6px;
             text-align: center;
         }
 
-        .stat-number { font-size: 1.8em; font-weight: 700; }
-        .stat-label { font-size: 0.85em; opacity: 0.8; }
+        .stat-number { font-size: 1.6em; font-weight: 700; color: #00ff00; }
+        .stat-label { font-size: 0.8em; opacity: 0.8; margin-top: 5px; }
 
         .code-output {
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
             color: #00d4ff;
-            padding: 15px;
+            padding: 12px;
             border-radius: 6px;
             font-family: 'Courier New', monospace;
-            font-size: 0.7em;
-            overflow-x: auto;
-            max-height: 500px;
-            overflow-y: auto;
-            line-height: 1.2;
+            font-size: 0.75em;
+            overflow: auto;
+            max-height: 400px;
+            line-height: 1.3;
             border: 1px solid #00d4ff;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
 
         .ai-discussion-item {
-            background: rgba(20, 30, 40, 0.6);
+            background: rgba(20, 30, 40, 0.8);
             border-left: 4px solid #00d4ff;
             padding: 12px;
             margin-bottom: 12px;
             border-radius: 4px;
-            animation: slideInLeft 0.4s ease-out;
+            animation: slideInLeft 0.3s ease-out;
             font-size: 0.9em;
+            box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.1);
         }
 
         .ai-name {
             font-weight: 700;
-            margin-bottom: 5px;
-            font-size: 0.85em;
-            color: #00d4ff;
+            margin-bottom: 6px;
+            font-size: 0.9em;
+            color: #00ff00;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .discussion-content {
-            color: #c0c0c0;
-            font-size: 0.9em;
-            line-height: 1.4;
+            color: #d0d0d0;
+            font-size: 0.88em;
+            line-height: 1.5;
         }
 
         .discussion-scroll {
-            max-height: 600px;
+            max-height: 500px;
             overflow-y: auto;
             padding-right: 10px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 12px;
+            height: 14px;
             background: rgba(0, 212, 255, 0.1);
-            border-radius: 6px;
+            border-radius: 7px;
             overflow: hidden;
             margin-top: 10px;
             border: 1px solid #00d4ff;
@@ -278,17 +232,17 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #00d4ff 0%, #00ff00 50%, #0096c8 100%);
+            background: linear-gradient(90deg, #00ff00 0%, #00d4ff 50%, #00ff00 100%);
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.4s ease;
             box-shadow: 0 0 15px #00d4ff;
         }
 
         .status-item {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
             padding: 10px;
+            margin-bottom: 10px;
             background: rgba(20, 30, 40, 0.6);
             border-radius: 6px;
             font-size: 0.9em;
@@ -308,104 +262,58 @@
         .status-indicator.error { background: #ff0000; box-shadow: 0 0 10px #ff0000; }
         .status-indicator.processing { background: #00d4ff; animation: pulse 1s infinite; }
 
-        .evolution-cycle {
-            background: rgba(0, 212, 255, 0.05);
-            border: 2px solid #00d4ff;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-        }
-
         .cycle-stage {
             display: flex;
             align-items: center;
-            padding: 8px;
+            padding: 10px;
             margin-bottom: 8px;
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(0, 212, 255, 0.08);
             border-radius: 4px;
             font-size: 0.9em;
+            border-left: 3px solid #00d4ff;
+            transition: all 0.3s;
         }
 
         .cycle-stage.active {
-            background: rgba(0, 255, 0, 0.1);
-            border-left: 3px solid #00ff00;
-            padding-left: 10px;
+            background: rgba(0, 255, 0, 0.15);
+            border-left-color: #00ff00;
+            padding-left: 12px;
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
         }
 
         .cycle-stage.completed {
-            background: rgba(0, 255, 0, 0.1);
-            border-left: 3px solid #00ff00;
+            background: rgba(0, 255, 0, 0.08);
+            border-left-color: #00ff00;
         }
 
-        .ai-box {
-            padding: 12px;
-            border-radius: 6px;
+        .ai-role {
+            display: inline-block;
+            padding: 4px 8px;
+            background: rgba(0, 212, 255, 0.2);
             border: 1px solid #00d4ff;
-            background: rgba(0, 212, 255, 0.05);
-            text-align: center;
-        }
-
-        .ai-box h4 { font-size: 0.95em; margin-bottom: 5px; color: #00d4ff; }
-        .ai-box p { font-size: 0.8em; color: #a0a0a0; }
-
-        .ai-architecture-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
 
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 15px;
+            margin-top: 15px;
         }
 
         .metric-box {
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(0, 212, 255, 0.08);
             border: 1px solid #00d4ff;
             padding: 12px;
             border-radius: 6px;
             text-align: center;
         }
 
-        .metric-value { font-size: 1.5em; font-weight: 700; color: #00ff00; }
+        .metric-value { font-size: 1.8em; font-weight: 700; color: #00ff00; }
         .metric-label { font-size: 0.8em; color: #a0a0a0; margin-top: 5px; }
-
-        .version-info {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid #00d4ff;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            font-size: 0.85em;
-        }
-
-        .version-item { display: flex; flex-direction: column; align-items: center; }
-        .version-label { color: #a0a0a0; font-size: 0.8em; }
-        .version-value { color: #00ff00; font-weight: 700; }
-
-        .code-additions {
-            background: rgba(0, 255, 0, 0.05);
-            border: 1px solid #00ff00;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 4px;
-            font-size: 0.85em;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .code-addition-item {
-            background: rgba(0, 255, 0, 0.1);
-            border-left: 3px solid #00ff00;
-            padding: 8px;
-            margin-bottom: 8px;
-            border-radius: 3px;
-        }
 
         .notification {
             background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 150, 200, 0.2) 100%);
@@ -413,8 +321,9 @@
             border-radius: 8px;
             padding: 15px;
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-            animation: slideIn 0.5s ease-out;
+            animation: slideIn 0.4s ease-out;
             margin-bottom: 10px;
+            font-size: 0.95em;
         }
 
         .notification.success {
@@ -432,117 +341,17 @@
             background: linear-gradient(135deg, rgba(255, 153, 0, 0.1) 0%, rgba(200, 120, 0, 0.1) 100%);
         }
 
-        .notification-close {
-            float: right;
-            cursor: pointer;
-            color: #00d4ff;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .notification-close:hover { color: #00ff00; }
-
-        .download-progress {
-            width: 100%;
-            height: 24px;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 10px 0;
-            border: 1px solid #00d4ff;
-            position: relative;
-        }
-
-        .download-progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #00ff00, #00d4ff);
-            width: 0%;
-            transition: width 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-size: 0.75em;
-            font-weight: bold;
-        }
-
-        .module-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .module-item {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid #00d4ff;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.85em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .module-checkbox {
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-            accent-color: #00d4ff;
-        }
-
-        .download-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .download-stat {
-            background: rgba(0, 212, 255, 0.1);
-            padding: 10px;
-            border-radius: 6px;
-            border-left: 3px solid #00d4ff;
-            font-size: 0.85em;
-        }
-
-        .download-stat-label { color: #a0a0a0; font-size: 0.8em; }
-        .download-stat-value { color: #00ff00; font-weight: 700; margin-top: 3px; }
-
-        .test-method-item {
-            background: rgba(0, 212, 255, 0.05);
-            border: 1px solid #00d4ff;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            font-size: 0.9em;
-        }
-
-        .test-method-name {
-            color: #00ff00;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .test-method-description {
-            color: #c0c0c0;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-        }
-
-        .test-method-code {
-            background: rgba(10, 10, 10, 0.9);
-            color: #00d4ff;
-            padding: 8px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.75em;
-            overflow-x: auto;
-            max-height: 150px;
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 380px;
+            z-index: 1000;
+            max-height: 80vh;
             overflow-y: auto;
         }
 
-        .extension-strategy-item {
+        .test-result {
             background: rgba(0, 255, 0, 0.05);
             border: 1px solid #00ff00;
             padding: 12px;
@@ -551,35 +360,62 @@
             font-size: 0.9em;
         }
 
-        .extension-title {
-            color: #00ff00;
+        .test-result.failed {
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .test-name {
             font-weight: 700;
+            color: #00ff00;
             margin-bottom: 5px;
         }
 
-        .disabled-content {
-            opacity: 0.5;
-            pointer-events: none;
+        .test-result.failed .test-name {
+            color: #ff0000;
         }
 
-        .login-prompt {
-            background: rgba(255, 153, 0, 0.1);
-            border: 1px solid #ff9900;
-            color: #ff9900;
-            padding: 15px;
+        .test-output {
+            background: rgba(10, 10, 10, 0.9);
+            color: #ff0000;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.8em;
+            overflow: auto;
+            max-height: 120px;
+            margin-top: 5px;
+        }
+
+        .evolution-info {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            padding: 12px;
             border-radius: 6px;
-            margin-bottom: 15px;
-            text-align: center;
-            font-weight: 600;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: rgba(10, 10, 10, 0.95);
+            color: #00d4ff;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75em;
+            overflow: auto;
+            border: 1px solid #00d4ff;
+            margin: 10px 0;
+            max-height: 200px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(-15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -595,20 +431,15 @@
 
         @keyframes pulse {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.6; }
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1400px) {
             .main-grid {
                 grid-template-columns: 1fr 1fr;
             }
-            header {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .auth-panel {
-                width: 100%;
-                justify-content: center;
+            .panel.full-width {
+                grid-column: 1 / 3;
             }
         }
     </style>
@@ -618,226 +449,81 @@
     
     <div class="container">
         <header>
-            <div>
-                <h1>HunyaCodingAI Pro - Self-Evolving Multi-AI System v3.4</h1>
-                <p>Advanced Multi-Layer AI Orchestration with GitHub Integration</p>
-                <p style="font-size: 0.9em; color: #00ff00; margin-top: 5px;">Target Success Rate: 85% | GitHub OAuth Login | Real-time Module Management | Published Testing Methods</p>
-            </div>
-            <div class="auth-panel">
-                <div id="authStatus">
-                    <button class="github-login-btn" onclick="startGitHubOAuth()">
-                        <span>🔗</span>
-                        <span>Login with GitHub</span>
-                    </button>
-                </div>
-                <div id="userStatus" style="display: none;">
-                    <div class="user-info">
-                        <img id="userAvatar" class="user-avatar" alt="avatar">
-                        <div>
-                            <div id="userName" style="color: #00ff00; font-weight: bold;"></div>
-                            <div style="font-size: 0.85em; color: #a0a0a0;" id="userLogin"></div>
-                        </div>
-                    </div>
-                    <button class="logout-btn" onclick="logoutGitHub()">Logout</button>
-                </div>
-            </div>
+            <h1>🤖 HunyaCodingAI Pro v5.0</h1>
+            <p style="color: #00ff00; font-size: 1.1em;">Advanced Multi-AI Evolution Engine with Token-Based Control</p>
         </header>
 
-        <div id="mainContent" class="disabled-content">
+        <div class="token-panel">
+            <h3>🔐 Token Configuration</h3>
+            <label>GitHub Token:</label>
+            <input type="password" id="githubToken" class="token-input" placeholder="ghp_..." onchange="saveTokens()">
+            <label>Anthropic API Token:</label>
+            <input type="password" id="anthropicToken" class="token-input" placeholder="sk-ant-..." onchange="saveTokens()">
+            <div class="token-status" id="tokenStatus">⚠️ Tokens not configured</div>
+        </div>
+
+        <div id="mainContent">
             <div class="main-grid">
-                <div class="panel update-panel">
-                    <h2>🔄 System Update Status</h2>
-                    <div id="updateStatus" style="font-size: 0.9em;">
-                        <div class="status-item">
-                            <span class="status-indicator success"></span>
-                            <span>Update System: <strong>Online</strong></span>
-                        </div>
-                        <div class="status-item">
-                            <span class="status-indicator processing"></span>
-                            <span>Last Check: <strong id="lastCheckTime">Never</strong></span>
-                        </div>
-                        <div class="status-item">
-                            <span class="status-indicator success"></span>
-                            <span>System Version: <strong id="systemVersion">3.4.0</strong></span>
-                        </div>
-                    </div>
-                    <button onclick="githubManager.checkForUpdates()" style="width: 100%; margin-top: 10px;">Check for Updates Now</button>
-                </div>
-
-                <div class="panel code-download-panel">
-                    <h2>⬇️ Enhanced Code Download & Push to GitHub</h2>
+                <!-- Input Panel -->
+                <div class="panel">
+                    <h2>📝 Project Input</h2>
                     <div class="form-group">
-                        <label>Download Type</label>
-                        <select id="downloadType">
-                            <option value="all">Full Enhanced Code Package</option>
-                            <option value="modules">Selected Modules Only</option>
-                            <option value="delta">Delta Updates (Incremental)</option>
-                            <option value="core">Core Modules Only</option>
-                        </select>
-                    </div>
-                    <div id="moduleSelection" style="display: none;">
-                        <label style="margin-bottom: 10px;">Select Modules:</label>
-                        <div class="module-list" id="moduleCheckboxes"></div>
-                    </div>
-                    <div class="download-stats">
-                        <div class="download-stat">
-                            <div class="download-stat-label">Downloaded</div>
-                            <div class="download-stat-value" id="downloadedSize">0 MB</div>
-                        </div>
-                        <div class="download-stat">
-                            <div class="download-stat-label">Progress</div>
-                            <div class="download-stat-value" id="downloadProgress">0%</div>
-                        </div>
-                        <div class="download-stat">
-                            <div class="download-stat-label">Speed</div>
-                            <div class="download-stat-value" id="downloadSpeed">0 MB/s</div>
-                        </div>
-                        <div class="download-stat">
-                            <div class="download-stat-label">ETA</div>
-                            <div class="download-stat-value" id="downloadETA">--:--</div>
-                        </div>
-                    </div>
-                    <div class="download-progress">
-                        <div class="download-progress-fill" id="downloadProgressBar" style="width: 0%;">
-                            <span id="progressText" style="width: 100%; text-align: center;">0%</span>
-                        </div>
-                    </div>
-                    <div class="button-group" style="margin-top: 15px;">
-                        <button onclick="githubManager.startDownload()">Start Download</button>
-                        <button onclick="githubManager.cancelDownload()">Cancel</button>
-                    </div>
-                    <button onclick="githubManager.pushToGitHub()" style="width: 100%; margin-top: 10px; background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.2) 100%); border-color: #00ff00; color: #00ff00;">🚀 Push Evolved Code to GitHub</button>
-                </div>
-
-                <div class="panel input-panel">
-                    <h2>Project Input</h2>
-                    <div class="form-group">
-                        <label for="userRequest">Project Description</label>
-                        <textarea id="userRequest" placeholder="Enter project details..."></textarea>
+                        <label for="projectDesc">Project Description</label>
+                        <textarea id="projectDesc" placeholder="Enter project details, features, requirements..."></textarea>
                     </div>
                     <div class="form-group">
                         <label for="language">Language</label>
                         <select id="language">
                             <option value="python">Python</option>
                             <option value="javascript">JavaScript</option>
-                            <option value="java">Java</option>
                             <option value="typescript">TypeScript</option>
+                            <option value="java">Java</option>
                             <option value="cpp">C++</option>
                             <option value="rust">Rust</option>
+                            <option value="go">Go</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="framework">Framework</label>
-                        <input type="text" id="framework" placeholder="e.g., Django, React, Spring Boot">
-                    </div>
                     <div class="button-group">
-                        <button onclick="startEvolutionCycle()">Start Evolution Cycle</button>
-                        <button onclick="resetForm()">Reset</button>
+                        <button onclick="startEvolutionCycle()">🚀 Start Evolution</button>
+                        <button onclick="resetForm()">🔄 Reset</button>
                     </div>
-                    <div class="stats">
+                </div>
+
+                <!-- AI Architecture Panel -->
+                <div class="panel">
+                    <h2>🏗️ AI Architecture</h2>
+                    <div class="ai-role">Architect AI</div>
+                    <div class="ai-role">Dev AI</div>
+                    <div class="ai-role">QA AI</div>
+                    <div class="ai-role">Orchestrator</div>
+                    <p style="margin-top: 15px; font-size: 0.9em; color: #c0c0c0;">
+                        Multi-layer AI system with collaborative discussion, synthesis, and iterative code generation.
+                    </p>
+                    <h3 style="margin-top: 15px;">Current Status</h3>
+                    <div class="stats" style="margin-top: 10px;">
                         <div class="stat-box">
-                            <div class="stat-number" id="currentIteration">0</div>
-                            <div class="stat-label">Current Iteration</div>
+                            <div class="stat-number" id="iteration">0</div>
+                            <div class="stat-label">Iteration</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number" id="testSuccessRate">0%</div>
+                            <div class="stat-number" id="successRate">0%</div>
                             <div class="stat-label">Success Rate</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number" id="cyclesCompleted">0</div>
-                            <div class="stat-label">Cycles Completed</div>
+                            <div class="stat-number" id="lineCount">0</div>
+                            <div class="stat-label">Lines of Code</div>
                         </div>
                         <div class="stat-box">
-                            <div class="stat-number" id="totalIterations">0</div>
-                            <div class="stat-label">Total Iterations</div>
+                            <div class="stat-number" id="version">1.0.0</div>
+                            <div class="stat-label">Version</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="panel ai-architecture-panel">
-                    <h2>AI Architecture</h2>
-                    <div class="ai-architecture-grid">
-                        <div class="ai-box">
-                            <h4>Discussion</h4>
-                            <p>Multi-AI Conversation<br>Design Synthesis</p>
-                        </div>
-                        <div class="ai-box">
-                            <h4>Summarization</h4>
-                            <p>Extract Core Ideas<br>Generate Specs</p>
-                        </div>
-                        <div class="ai-box">
-                            <h4>Code Generation</h4>
-                            <p>Create Implementation<br>Full Stack Code</p>
-                        </div>
-                    </div>
-                    <div style="margin-bottom: 10px; text-align: center; color: #00d4ff; font-size: 0.9em;">↓</div>
-                    <div class="ai-architecture-grid">
-                        <div class="ai-box" style="grid-column: 1 / 4;">
-                            <h4>Testing & Validation (Target: 85%)</h4>
-                            <p>Unit Tests | Integration Tests | Quality Metrics | Additive Enhancement</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel code-panel">
-                    <h2>Generated Code (Always Growing)</h2>
-                    <div class="code-output" id="codeOutput">
-                        <code>Generated code will appear here after evolution cycle...</code>
-                    </div>
-                </div>
-            </div>
-
-            <div class="panel discussion-panel">
-                <h2>🤖 Multi-AI Discussion Phase (Real-Time Generated)</h2>
-                <div id="discussionContainer" class="discussion-scroll"></div>
-                <button onclick="generateRealtimeDiscussion()" style="width: 100%; margin-top: 15px;">Generate New Discussion</button>
-            </div>
-
-            <div class="panel testing-methods-panel">
-                <h2>📋 Published Testing Methods</h2>
-                <div id="testingMethodsContainer"></div>
-                <button onclick="executePublishedTests()" style="width: 100%; margin-top: 15px;">Run All Tests</button>
-            </div>
-
-            <div class="panel self-extension-panel">
-                <h2>🔬 Self-Extension Strategy (Separate from Code Generation)</h2>
-                <div id="extensionStrategiesContainer"></div>
-                <button onclick="startSelfExtension()" style="width: 100%; margin-top: 15px;">Trigger Self-Extension Protocol</button>
-            </div>
-
-            <div class="panel orchestration-panel">
-                <h2>Evolution Orchestration - Additive Improvement Loop (85% Target)</h2>
-                <div class="evolution-cycle">
-                    <h3>Current Evolution Cycle Progress</h3>
-                    <div id="cycleStages">
-                        <div class="cycle-stage" id="stage-discussion">
-                            <span class="status-indicator"></span>
-                            <span>STAGE 1: Multi-AI Discussion (Architect, Backend, Frontend, Orchestrator)</span>
-                        </div>
-                        <div class="cycle-stage" id="stage-summarization">
-                            <span class="status-indicator"></span>
-                            <span>STAGE 2: Summarization & Knowledge Extraction</span>
-                        </div>
-                        <div class="cycle-stage" id="stage-coding">
-                            <span class="status-indicator"></span>
-                            <span>STAGE 3: Code Generation with Additive Enhancements (Keep All Previous Code)</span>
-                        </div>
-                        <div class="cycle-stage" id="stage-testing">
-                            <span class="status-indicator"></span>
-                            <span>STAGE 4: Comprehensive Testing & Validation</span>
-                        </div>
-                        <div class="cycle-stage" id="stage-analysis">
-                            <span class="status-indicator"></span>
-                            <span>STAGE 5: Success Rate Analysis (Target: 85%+)</span>
-                        </div>
-                    </div>
-                    <div style="margin-top: 15px;">
-                        <label style="margin-bottom: 10px;">Evolution Progress:</label>
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="evolutionProgress" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    <div class="metrics-grid" style="margin-top: 15px;">
+                <!-- Metrics Panel -->
+                <div class="panel">
+                    <h2>📊 Metrics Dashboard</h2>
+                    <div class="metrics-grid">
                         <div class="metric-box">
                             <div class="metric-label">Tests Passed</div>
                             <div class="metric-value" id="testsPassed">0</div>
@@ -847,369 +533,162 @@
                             <div class="metric-value" id="testsTotal">0</div>
                         </div>
                         <div class="metric-box">
-                            <div class="metric-label">Line Count</div>
-                            <div class="metric-value" id="lineCount">0</div>
+                            <div class="metric-label">Cycles</div>
+                            <div class="metric-value" id="cycles">0</div>
                         </div>
                     </div>
+                    <h3 style="margin-top: 15px;">Quick Actions</h3>
+                    <button onclick="generateDiscussion()" style="width: 100%; margin-top: 10px;">💬 Generate Discussion</button>
+                    <button onclick="runTests()" style="width: 100%; margin-top: 8px;">✅ Run Tests</button>
                 </div>
-                <div id="evolutionStatus"></div>
-                <button onclick="autoEvolveUntil85Percent()" style="width: 100%; margin-top: 10px;">Auto-Evolve Until 85% Success Rate</button>
             </div>
 
-            <div class="panel evolution-panel">
-                <h2>Evolution Iterations & Version Control (85% Threshold)</h2>
-                <div class="version-info">
-                    <div class="version-item">
-                        <span class="version-label">Current Version</span>
-                        <span class="version-value" id="versionNumber">1.0.0</span>
-                    </div>
-                    <div class="version-item">
-                        <span class="version-label">Iterations Performed</span>
-                        <span class="version-value" id="iterationsPerformed">0</span>
-                    </div>
-                    <div class="version-item">
-                        <span class="version-label">Total Code Lines</span>
-                        <span class="version-value" id="totalCodeLines">0</span>
-                    </div>
-                    <div class="version-item">
-                        <span class="version-label">Latest Success Rate</span>
-                        <span class="version-value" id="latestSuccessRate">0%</span>
-                    </div>
+            <!-- Multi-AI Discussion Panel -->
+            <div class="panel full-width">
+                <h2>🤖 Multi-AI Discussion Phase</h2>
+                <div class="evolution-info" id="discussionStatus">
+                    ⏳ Waiting for project input...
                 </div>
-                <div id="codeAdditions" class="code-additions" style="display:none;">
-                    <strong>Code Additions This Iteration:</strong>
-                    <div id="additionsLog"></div>
-                </div>
-                <div id="iterationHistory" style="max-height: 300px; overflow-y: auto;"></div>
-                <button onclick="commitSuccessfulEvolution()" style="width: 100%; margin-top: 10px;">Commit to GitHub (85%+ Success Required)</button>
+                <div id="discussionContainer" class="discussion-scroll"></div>
+                <button onclick="generateDiscussion()" style="width: 100%; margin-top: 15px;">🔄 Generate New Discussion</button>
             </div>
 
-            <div class="panel analytics-panel">
-                <h2>Analytics & Metrics Dashboard</h2>
-                <div class="metrics-grid">
-                    <div class="metric-box">
-                        <div class="metric-label">Avg. Response Time</div>
-                        <div class="metric-value" id="avgResponseTime">0ms</div>
+            <!-- Orchestration Panel -->
+            <div class="panel full-width">
+                <h2>🎯 Evolution Orchestration (Target: 85% Success Rate)</h2>
+                <div id="cycleStages">
+                    <div class="cycle-stage" id="stage-input">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 0:</strong> Get Project Input</span>
                     </div>
-                    <div class="metric-box">
-                        <div class="metric-label">Code Quality Score</div>
-                        <div class="metric-value" id="codeQualityScore">0%</div>
+                    <div class="cycle-stage" id="stage-discussion">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 1:</strong> Multi-AI Discussion (Architect, Dev, QA)</span>
                     </div>
-                    <div class="metric-box">
-                        <div class="metric-label">Test Coverage</div>
-                        <div class="metric-value" id="testCoverage">0%</div>
+                    <div class="cycle-stage" id="stage-summarization">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 2:</strong> Synthesize & Extract Requirements</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-coding">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 3:</strong> Code Generation (Additive Growth)</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-testing">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 4:</strong> Testing & Validation</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-analysis">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 5:</strong> Success Analysis</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-feedback">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 6:</strong> Feedback Loop → Back to Discussion if < 85%</span>
                     </div>
                 </div>
-                <div id="analyticsDetails" style="margin-top: 15px;"></div>
+                <label style="margin-top: 15px;">Evolution Progress:</label>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="evolutionProgress" style="width: 0%;"></div>
+                </div>
+                <button onclick="autoEvolveUntil85()" style="width: 100%; margin-top: 15px; background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.2) 100%); border-color: #00ff00;">⚡ Auto-Evolve Until 85%</button>
+            </div>
+
+            <!-- Code Output Panel -->
+            <div class="panel full-width">
+                <h2>💾 Generated Code (Cumulative)</h2>
+                <div class="evolution-info" id="codeStats">
+                    📋 Lines: 0 | Version: 1.0.0 | Iterations: 0
+                </div>
+                <div class="code-output" id="codeOutput">
+// Generated code will appear here after evolution cycle...
+// All code is cumulative and always growing
+                </div>
+                <button onclick="downloadCode()" style="width: 100%; margin-top: 15px;">⬇️ Download Code</button>
+            </div>
+
+            <!-- Testing Results Panel -->
+            <div class="panel full-width">
+                <h2>✅ Testing & Validation Results</h2>
+                <div id="testingContainer">
+                    <p style="color: #a0a0a0; font-size: 0.9em;">No tests executed yet</p>
+                </div>
+                <button onclick="runTests()" style="width: 100%; margin-top: 15px;">🧪 Execute All Tests</button>
+            </div>
+
+            <!-- Version Control Panel -->
+            <div class="panel full-width">
+                <h2>📚 Version History & Commit Log</h2>
+                <div id="versionHistory" style="max-height: 300px; overflow-y: auto;">
+                    <p style="color: #a0a0a0; font-size: 0.9em;">No commits yet. Commit after reaching 85% success rate.</p>
+                </div>
+                <button onclick="commitToGitHub()" style="width: 100%; margin-top: 15px; background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.2) 100%); border-color: #00ff00;">🚀 Commit to GitHub (85%+ Required)</button>
+            </div>
+
+            <!-- Debug & Analytics Panel -->
+            <div class="panel full-width">
+                <h2>🔍 Debug Console & Analytics</h2>
+                <div style="background: rgba(10, 10, 10, 0.9); border: 1px solid #00d4ff; border-radius: 6px; padding: 10px; max-height: 250px; overflow-y: auto; font-family: monospace; font-size: 0.8em; color: #00d4ff;" id="debugConsole">
+                    System ready. Awaiting token configuration...
+                </div>
+                <button onclick="clearDebugConsole()" style="width: 100%; margin-top: 10px;">🗑️ Clear Console</button>
             </div>
         </div>
     </div>
 
     <script>
         // =============================================
-        // GitHub OAuth Configuration
+        // Global State & Configuration
         // =============================================
-        const GITHUB_CLIENT_ID = 'Iv23litOB1HajHCZRaVn';
-        const GITHUB_REDIRECT_URI = window.location.origin + window.location.pathname;
-        const GITHUB_AUTH_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=repo,user&redirect_uri=${encodeURIComponent(GITHUB_REDIRECT_URI)}`;
+        const CONFIG = {
+            API_ANTHROPIC: 'https://api.anthropic.com/v1/messages',
+            API_GITHUB: 'https://api.github.com',
+            MODEL: 'claude-3-5-sonnet-20241022'
+        };
 
-        // =============================================
-        // Global State Management
-        // =============================================
         const GlobalState = {
-            currentVersion: '3.4.0',
-            systemRuntime: 0,
-            evolutionCycles: 0,
-            totalLineCount: 0,
+            tokens: { github: '', anthropic: '' },
+            currentIteration: 0,
             successRate: 0,
-            isInSelfExtensionMode: false,
-            isInNormalGenerationMode: false,
+            totalLineCount: 0,
+            generatedCode: '',
             discussionHistory: [],
             testResults: [],
-            extensionMetadata: {},
-            isAuthenticated: false,
-            githubUser: null,
-            githubToken: null
+            versionHistory: [],
+            isProcessing: false,
+            currentCycle: 0
         };
 
         // =============================================
-        // GitHub Authentication Manager
+        // Token Management
         // =============================================
-        class GitHubAuthManager {
-            constructor() {
-                this.loadAuthState();
-                this.handleOAuthCallback();
-            }
+        function saveTokens() {
+            const github = document.getElementById('githubToken').value;
+            const anthropic = document.getElementById('anthropicToken').value;
+            
+            GlobalState.tokens = { github, anthropic };
+            localStorage.setItem('tokens', JSON.stringify(GlobalState.tokens));
+            updateTokenStatus();
+            logDebug('✅ Tokens saved successfully');
+        }
 
-            startOAuth() {
-                // Store return URL
-                sessionStorage.setItem('oauthReturnUrl', window.location.href);
-                window.location.href = GITHUB_AUTH_URL;
-            }
-
-            handleOAuthCallback() {
-                const params = new URLSearchParams(window.location.search);
-                const code = params.get('code');
-
-                if (code) {
-                    // Exchange code for token (requires backend)
-                    this.exchangeCodeForToken(code);
-                }
-            }
-
-            exchangeCodeForToken(code) {
-                // This would normally be handled by a backend server
-                // For demo purposes, we'll use a placeholder
-                showNotification('OAuth callback received. Please configure your backend to handle token exchange.', 'warning');
-            }
-
-            setAuthentication(user, token) {
-                GlobalState.isAuthenticated = true;
-                GlobalState.githubUser = user;
-                GlobalState.githubToken = token;
-                localStorage.setItem('githubAuth', JSON.stringify({ user, token, timestamp: Date.now() }));
-                this.updateAuthUI();
-            }
-
-            logout() {
-                GlobalState.isAuthenticated = false;
-                GlobalState.githubUser = null;
-                GlobalState.githubToken = null;
-                localStorage.removeItem('githubAuth');
-                this.updateAuthUI();
-                showNotification('Logged out from GitHub', 'success');
-            }
-
-            loadAuthState() {
-                const authData = localStorage.getItem('githubAuth');
-                if (authData) {
-                    try {
-                        const { user, token, timestamp } = JSON.parse(authData);
-                        // Check if token is not too old (24 hours)
-                        if (Date.now() - timestamp < 86400000) {
-                            this.setAuthentication(user, token);
-                        } else {
-                            localStorage.removeItem('githubAuth');
-                        }
-                    } catch (e) {
-                        localStorage.removeItem('githubAuth');
-                    }
-                }
-            }
-
-            updateAuthUI() {
-                const authStatus = document.getElementById('authStatus');
-                const userStatus = document.getElementById('userStatus');
-
-                if (GlobalState.isAuthenticated && GlobalState.githubUser) {
-                    authStatus.style.display = 'none';
-                    userStatus.style.display = 'flex';
-                    document.getElementById('userName').textContent = GlobalState.githubUser.name || GlobalState.githubUser.login;
-                    document.getElementById('userLogin').textContent = `@${GlobalState.githubUser.login}`;
-                    document.getElementById('userAvatar').src = GlobalState.githubUser.avatar_url;
-                    document.getElementById('mainContent').classList.remove('disabled-content');
-                } else {
-                    authStatus.style.display = 'block';
-                    userStatus.style.display = 'none';
-                    document.getElementById('mainContent').classList.add('disabled-content');
-                }
+        function loadTokens() {
+            const stored = localStorage.getItem('tokens');
+            if (stored) {
+                GlobalState.tokens = JSON.parse(stored);
+                document.getElementById('githubToken').value = GlobalState.tokens.github;
+                document.getElementById('anthropicToken').value = GlobalState.tokens.anthropic;
+                updateTokenStatus();
             }
         }
 
-        // =============================================
-        // GitHub Manager (with self-evolution features)
-        // =============================================
-        class GitHubManager {
-            constructor() {
-                this.downloadProgress = 0;
-                this.isDownloading = false;
-            }
-
-            checkForUpdates() {
-                if (!GlobalState.isAuthenticated) {
-                    showNotification('Please login with GitHub first', 'warning');
-                    return;
-                }
-                showNotification('Checking for updates...', 'info');
-                document.getElementById('lastCheckTime').textContent = new Date().toLocaleTimeString();
-                // Simulate update check
-                setTimeout(() => {
-                    showNotification('System is up to date!', 'success');
-                }, 2000);
-            }
-
-            startDownload() {
-                if (!GlobalState.isAuthenticated) {
-                    showNotification('Please login with GitHub first', 'warning');
-                    return;
-                }
-                this.isDownloading = true;
-                this.downloadProgress = 0;
-                const downloadType = document.getElementById('downloadType').value;
-                
-                showNotification(`Starting download: ${downloadType}`, 'info');
-                this.simulateDownload();
-            }
-
-            simulateDownload() {
-                if (!this.isDownloading) return;
-                
-                this.downloadProgress += Math.random() * 15;
-                if (this.downloadProgress > 100) this.downloadProgress = 100;
-
-                document.getElementById('downloadProgressBar').style.width = this.downloadProgress + '%';
-                document.getElementById('progressText').textContent = Math.floor(this.downloadProgress) + '%';
-                document.getElementById('downloadProgress').textContent = Math.floor(this.downloadProgress) + '%';
-                document.getElementById('downloadedSize').textContent = (this.downloadProgress * 5 / 100).toFixed(1) + ' MB';
-                document.getElementById('downloadSpeed').textContent = (Math.random() * 2 + 0.5).toFixed(2) + ' MB/s';
-
-                if (this.downloadProgress < 100) {
-                    setTimeout(() => this.simulateDownload(), 500);
-                } else {
-                    this.isDownloading = false;
-                    showNotification('Download completed! Code ready for commit.', 'success');
-                }
-            }
-
-            cancelDownload() {
-                this.isDownloading = false;
-                this.downloadProgress = 0;
-                document.getElementById('downloadProgressBar').style.width = '0%';
-                document.getElementById('progressText').textContent = '0%';
-                showNotification('Download cancelled', 'warning');
-            }
-
-            pushToGitHub() {
-                if (!GlobalState.isAuthenticated) {
-                    showNotification('Please login with GitHub first', 'warning');
-                    return;
-                }
-
-                if (GlobalState.successRate < 85) {
-                    showNotification(`Current success rate: ${GlobalState.successRate}%. Minimum 85% required for push.`, 'error');
-                    return;
-                }
-
-                showNotification('🚀 Preparing to push evolved code to GitHub repository...', 'info');
-                
-                setTimeout(() => {
-                    const commitMessage = `Auto-evolved code iteration: ${GlobalState.evolutionCycles} - Success rate: ${GlobalState.successRate}%`;
-                    showNotification(`✅ Successfully pushed to GitHub!\nCommit: "${commitMessage}"`, 'success');
-                }, 3000);
-            }
-        }
-
-        // =============================================
-        // Real-Time Discussion Generator
-        // =============================================
-        class RealtimeDiscussionGenerator {
-            constructor() {
-                this.aiPersonalities = {
-                    architect: {
-                        name: 'System Architect',
-                        prefix: 'Architect:',
-                        color: '#00d4ff',
-                        focus: ['architecture', 'design patterns', 'scalability', 'system design']
-                    },
-                    backend: {
-                        name: 'Backend Engineer',
-                        prefix: 'Backend:',
-                        color: '#00ff00',
-                        focus: ['database', 'API design', 'performance', 'data structures']
-                    },
-                    frontend: {
-                        name: 'Frontend Developer',
-                        prefix: 'Frontend:',
-                        color: '#ff9900',
-                        focus: ['UI/UX', 'responsive design', 'user experience', 'frontend frameworks']
-                    },
-                    orchestrator: {
-                        name: 'AI Orchestrator',
-                        prefix: 'Orchestrator:',
-                        color: '#9900ff',
-                        focus: ['coordination', 'workflow', 'integration', 'optimization']
-                    }
-                };
-
-                this.discussionTopics = [
-                    'We should implement a microservices architecture for better scalability',
-                    'Let\'s optimize the database queries to improve performance',
-                    'Consider implementing a caching layer to reduce latency',
-                    'We need comprehensive error handling and logging throughout',
-                    'Implement CI/CD pipeline for automated deployments',
-                    'Focus on security: input validation, SQL injection prevention',
-                    'Create modular components for reusability',
-                    'Implement comprehensive unit and integration tests',
-                    'Use design patterns like Factory, Strategy, and Observer',
-                    'Implement real-time data synchronization'
-                ];
-
-                this.responses = {
-                    agreement: [
-                        'Absolutely, that\'s a solid approach.',
-                        'Great point! Let\'s implement that.',
-                        'I agree completely. This aligns well with best practices.',
-                        'Excellent suggestion. I\'ll add that to the design.'
-                    ],
-                    counterpoint: [
-                        'We should consider the trade-offs though.',
-                        'That\'s worth exploring, but we need to evaluate alternatives.',
-                        'I see your point, but let\'s think about performance implications.',
-                        'Good idea, but we might want to measure impact first.'
-                    ],
-                    expansion: [
-                        'Taking that further, we could also implement...',
-                        'Building on that, let\'s add support for...',
-                        'To complement that, we should consider...',
-                        'That integrates well with our plan to...'
-                    ]
-                };
-            }
-
-            generateDiscussion(topic = null) {
-                const discussion = [];
-                const selectedTopic = topic || this.discussionTopics[Math.floor(Math.random() * this.discussionTopics.length)];
-                const personalities = Object.values(this.aiPersonalities);
-                
-                const initiator = personalities[Math.floor(Math.random() * personalities.length)];
-                discussion.push({
-                    speaker: initiator.name,
-                    message: selectedTopic,
-                    color: initiator.color,
-                    timestamp: new Date().toLocaleTimeString()
-                });
-
-                for (let i = 0; i < 3; i++) {
-                    const respondent = personalities[Math.floor(Math.random() * personalities.length)];
-                    const responseType = Object.keys(this.responses)[Math.floor(Math.random() * 3)];
-                    const responseText = this.responses[responseType][Math.floor(Math.random() * this.responses[responseType].length)];
-                    
-                    discussion.push({
-                        speaker: respondent.name,
-                        message: responseText,
-                        color: respondent.color,
-                        timestamp: new Date().toLocaleTimeString()
-                    });
-                }
-
-                return discussion;
-            }
-
-            renderDiscussion(discussion) {
-                const container = document.getElementById('discussionContainer');
-                container.innerHTML = '';
-                
-                discussion.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.className = 'ai-discussion-item';
-                    itemElement.innerHTML = `
-                        <div class="ai-name" style="color: ${item.color};">${item.speaker} (${item.timestamp})</div>
-                        <div class="discussion-content">${item.message}</div>
-                    `;
-                    container.appendChild(itemElement);
-                });
-
-                GlobalState.discussionHistory = discussion;
+        function updateTokenStatus() {
+            const status = document.getElementById('tokenStatus');
+            if (GlobalState.tokens.github && GlobalState.tokens.anthropic) {
+                status.innerHTML = '✅ Ready: Both tokens configured';
+                status.style.color = '#00ff00';
+            } else {
+                status.innerHTML = '⚠️ Configuration needed: Both tokens required';
+                status.style.color = '#ff9900';
             }
         }
 
@@ -1218,132 +697,482 @@
         // =============================================
         function showNotification(message, type = 'info') {
             const container = document.getElementById('notificationContainer');
-            const notification = document.createElement('div');
-            notification.className = `notification ${type}`;
-            notification.innerHTML = `
-                <span class="notification-close" onclick="this.parentElement.remove();">×</span>
-                <div>${message}</div>
-            `;
-            container.appendChild(notification);
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            notif.innerHTML = message;
+            
+            container.insertBefore(notif, container.firstChild);
+            setTimeout(() => notif.remove(), 5000);
+            
+            logDebug(`[${type.toUpperCase()}] ${message.replace(/<[^>]*>/g, '')}`);
+        }
 
-            setTimeout(() => {
-                if (notification.parentElement) {
-                    notification.remove();
+        // =============================================
+        // Debug Console
+        // =============================================
+        function logDebug(message) {
+            const console = document.getElementById('debugConsole');
+            const timestamp = new Date().toLocaleTimeString();
+            const line = document.createElement('div');
+            line.textContent = `[${timestamp}] ${message}`;
+            console.insertBefore(line, console.firstChild);
+            
+            if (console.children.length > 100) {
+                console.removeChild(console.lastChild);
+            }
+        }
+
+        function clearDebugConsole() {
+            document.getElementById('debugConsole').innerHTML = '';
+            logDebug('Console cleared');
+        }
+
+        // =============================================
+        // Multi-AI Discussion System
+        // =============================================
+        async function generateDiscussion() {
+            if (!GlobalState.tokens.anthropic) {
+                showNotification('⚠️ Configure Anthropic token first', 'warning');
+                return;
+            }
+
+            const projectDesc = document.getElementById('projectDesc').value;
+            if (!projectDesc) {
+                showNotification('⚠️ Enter project description first', 'warning');
+                return;
+            }
+
+            GlobalState.isProcessing = true;
+            updateStageStatus('stage-discussion', 'active');
+            logDebug('🤖 Starting Multi-AI Discussion...');
+            showNotification('💬 Generating AI Discussion...', 'info');
+
+            try {
+                const discussion = await callAnthropicAPI(
+                    `You are a panel of expert AIs. Conduct a structured discussion about this project:
+
+PROJECT: ${projectDesc}
+LANGUAGE: ${document.getElementById('language').value}
+
+ROLES:
+1. Architect AI - Focus on system design, architecture patterns, scalability
+2. Development AI - Focus on implementation, code structure, best practices
+3. QA AI - Focus on testing, validation, quality assurance
+
+Each AI should provide 2-3 key points. Format each perspective clearly with the AI name.
+Keep it concise but thorough.`
+                );
+
+                GlobalState.discussionHistory.push({
+                    iteration: GlobalState.currentIteration,
+                    content: discussion,
+                    timestamp: new Date().toISOString()
+                });
+
+                displayDiscussion(discussion);
+                updateStageStatus('stage-discussion', 'completed');
+                logDebug('✅ Discussion generated successfully');
+                showNotification('✅ Discussion complete', 'success');
+
+            } catch (error) {
+                logDebug(`❌ Discussion error: ${error.message}`);
+                showNotification(`❌ Discussion failed: ${error.message}`, 'error');
+                updateStageStatus('stage-discussion', 'error');
+            } finally {
+                GlobalState.isProcessing = false;
+            }
+        }
+
+        function displayDiscussion(content) {
+            const container = document.getElementById('discussionContainer');
+            const lines = content.split('\n');
+            let currentAI = 'System';
+            let currentContent = '';
+
+            container.innerHTML = '';
+
+            lines.forEach(line => {
+                if (line.includes('Architect') || line.includes('Development') || line.includes('QA')) {
+                    if (currentContent) {
+                        addDiscussionItem(currentAI, currentContent);
+                        currentContent = '';
+                    }
+                    currentAI = line.trim();
+                } else if (line.trim()) {
+                    currentContent += line + '\n';
                 }
-            }, 5000);
+            });
+
+            if (currentContent) {
+                addDiscussionItem(currentAI, currentContent);
+            }
+        }
+
+        function addDiscussionItem(aiName, content) {
+            const container = document.getElementById('discussionContainer');
+            const item = document.createElement('div');
+            item.className = 'ai-discussion-item';
+            item.innerHTML = `
+                <div class="ai-name">🤖 ${aiName}</div>
+                <div class="discussion-content">${content.replace(/\n/g, '<br>')}</div>
+            `;
+            container.appendChild(item);
         }
 
         // =============================================
-        // Global Functions
+        // Code Generation System
         // =============================================
-        function startGitHubOAuth() {
-            authManager.startOAuth();
-        }
-
-        function logoutGitHub() {
-            authManager.logout();
-        }
-
-        function generateRealtimeDiscussion() {
-            if (!GlobalState.isAuthenticated) {
-                showNotification('Please login with GitHub first', 'warning');
+        async function generateCode() {
+            if (!GlobalState.tokens.anthropic) {
+                showNotification('⚠️ Configure tokens first', 'warning');
                 return;
             }
-            const discussion = discussionGenerator.generateDiscussion();
-            discussionGenerator.renderDiscussion(discussion);
+
+            updateStageStatus('stage-coding', 'active');
+            logDebug('💻 Generating code based on discussion...');
+            showNotification('💻 Generating code...', 'info');
+
+            try {
+                const lastDiscussion = GlobalState.discussionHistory[GlobalState.discussionHistory.length - 1]?.content || '';
+                const language = document.getElementById('language').value;
+                const project = document.getElementById('projectDesc').value;
+
+                const prompt = `Based on this discussion:
+${lastDiscussion}
+
+Generate ${language} code for: ${project}
+
+IMPORTANT:
+- Keep ALL previous code (if exists): ${GlobalState.generatedCode ? '[Previous code exists]' : '[First iteration]'}
+- ADD new features/improvements
+- Include comments
+- Make it production-ready
+- Return ONLY the complete code, no explanations
+
+Current code length: ${GlobalState.generatedCode.split('\n').length} lines`;
+
+                const newCode = await callAnthropicAPI(prompt);
+                
+                if (newCode) {
+                    GlobalState.generatedCode = GlobalState.generatedCode + '\n\n// ===== ITERATION ' + (GlobalState.currentIteration + 1) + ' =====\n' + newCode;
+                    updateCodeDisplay();
+                    updateStageStatus('stage-coding', 'completed');
+                    logDebug(`✅ Code generated (${newCode.split('\n').length} lines added)`);
+                    showNotification('✅ Code generation complete', 'success');
+                }
+
+            } catch (error) {
+                logDebug(`❌ Code generation error: ${error.message}`);
+                showNotification(`❌ Code generation failed: ${error.message}`, 'error');
+                updateStageStatus('stage-coding', 'error');
+            }
         }
 
-        function startEvolutionCycle() {
-            if (!GlobalState.isAuthenticated) {
-                showNotification('Please login with GitHub first', 'warning');
+        function updateCodeDisplay() {
+            document.getElementById('codeOutput').textContent = GlobalState.generatedCode;
+            const lines = GlobalState.generatedCode.split('\n').length;
+            GlobalState.totalLineCount = lines;
+            document.getElementById('codeStats').innerHTML = 
+                `📋 Lines: ${lines} | Version: ${(1.0 + GlobalState.currentIteration * 0.1).toFixed(1)} | Iterations: ${GlobalState.currentIteration}`;
+            document.getElementById('lineCount').textContent = lines;
+        }
+
+        // =============================================
+        // Testing System
+        // =============================================
+        async function runTests() {
+            if (!GlobalState.generatedCode) {
+                showNotification('⚠️ No code to test. Generate code first.', 'warning');
                 return;
             }
+
+            updateStageStatus('stage-testing', 'active');
+            logDebug('🧪 Running tests...');
+            showNotification('🧪 Executing tests...', 'info');
+
+            try {
+                const testPrompt = `Test this ${document.getElementById('language').value} code and return test results:
+
+${GlobalState.generatedCode.substring(0, 2000)}...
+
+Return format:
+TEST_NAME: result (PASS/FAIL)
+[if FAIL, explain the error]`;
+
+                const results = await callAnthropicAPI(testPrompt);
+                parseAndDisplayTests(results);
+                
+                updateStageStatus('stage-testing', 'completed');
+                showNotification('✅ Tests completed', 'success');
+
+            } catch (error) {
+                logDebug(`❌ Testing error: ${error.message}`);
+                showNotification(`❌ Testing failed: ${error.message}`, 'error');
+                updateStageStatus('stage-testing', 'error');
+            }
+        }
+
+        function parseAndDisplayTests(results) {
+            const container = document.getElementById('testingContainer');
+            container.innerHTML = '';
+
+            const lines = results.split('\n');
+            let passed = 0;
+            let total = 0;
+
+            lines.forEach(line => {
+                if (line.includes(':') && (line.includes('PASS') || line.includes('FAIL'))) {
+                    total++;
+                    const isPassed = line.includes('PASS');
+                    if (isPassed) passed++;
+
+                    const testDiv = document.createElement('div');
+                    testDiv.className = `test-result ${isPassed ? '' : 'failed'}`;
+                    testDiv.innerHTML = `
+                        <div class="test-name">${isPassed ? '✅' : '❌'} ${line.split(':')[0]}</div>
+                        <div>${line.split(':')[1]}</div>
+                    `;
+                    container.appendChild(testDiv);
+                }
+            });
+
+            GlobalState.successRate = total > 0 ? Math.round((passed / total) * 100) : 0;
+            document.getElementById('successRate').textContent = GlobalState.successRate + '%';
+            document.getElementById('testsPassed').textContent = passed;
+            document.getElementById('testsTotal').textContent = total;
+
+            updateProgressBar();
+            logDebug(`📊 Tests: ${passed}/${total} passed (${GlobalState.successRate}%)`);
+        }
+
+        // =============================================
+        // Evolution Cycle Management
+        // =============================================
+        async function startEvolutionCycle() {
+            if (!GlobalState.tokens.anthropic) {
+                showNotification('⚠️ Configure Anthropic token first', 'warning');
+                return;
+            }
+
+            if (!document.getElementById('projectDesc').value) {
+                showNotification('⚠️ Enter project description first', 'warning');
+                return;
+            }
+
+            GlobalState.isProcessing = true;
+            GlobalState.currentCycle++;
+            GlobalState.currentIteration++;
+            updateStageStatus('stage-input', 'completed');
+
+            logDebug(`🚀 Starting Evolution Cycle #${GlobalState.currentCycle} (Iteration #${GlobalState.currentIteration})`);
+
+            // Stage 1: Discussion
+            await generateDiscussion();
             
-            const request = document.getElementById('userRequest').value;
-            if (!request) {
-                showNotification('Please enter a project description', 'warning');
-                return;
+            // Stage 2: Summarization (implicit in orchestration)
+            updateStageStatus('stage-summarization', 'active');
+            await new Promise(r => setTimeout(r, 500));
+            updateStageStatus('stage-summarization', 'completed');
+
+            // Stage 3: Code Generation
+            await generateCode();
+
+            // Stage 4 & 5: Testing
+            await runTests();
+
+            // Stage 5: Analysis
+            updateStageStatus('stage-analysis', 'active');
+            await new Promise(r => setTimeout(r, 500));
+
+            if (GlobalState.successRate >= 85) {
+                updateStageStatus('stage-analysis', 'completed');
+                updateStageStatus('stage-feedback', 'completed');
+                showNotification('🎉 Success Rate 85%+ Achieved! Ready to commit.', 'success');
+                logDebug('🎉 SUCCESS: 85%+ rate achieved!');
+            } else {
+                updateStageStatus('stage-analysis', 'completed');
+                updateStageStatus('stage-feedback', 'active');
+                logDebug(`⚠️ Success rate: ${GlobalState.successRate}%. Need more iterations.`);
+                showNotification(`⚠️ Success rate: ${GlobalState.successRate}%. Continuing improvements...`, 'warning');
+                
+                await new Promise(r => setTimeout(r, 1000));
+                if (!GlobalState.isProcessing) return;
+                
+                updateStageStatus('stage-feedback', 'completed');
+                updateStageStatus('stage-discussion', 'pending');
             }
 
-            GlobalState.evolutionCycles++;
-            GlobalState.successRate = 50 + Math.random() * 40;
-            
-            document.getElementById('cyclesCompleted').textContent = GlobalState.evolutionCycles;
-            document.getElementById('testSuccessRate').textContent = GlobalState.successRate.toFixed(1) + '%';
-            document.getElementById('evolutionProgress').style.width = GlobalState.successRate + '%';
-            
-            showNotification(`Starting evolution cycle ${GlobalState.evolutionCycles}...`, 'info');
+            GlobalState.isProcessing = false;
+            updateProgressBar();
+            document.getElementById('iteration').textContent = GlobalState.currentIteration;
+            document.getElementById('cycles').textContent = GlobalState.currentCycle;
         }
 
-        function executePublishedTests() {
-            if (!GlobalState.isAuthenticated) {
-                showNotification('Please login with GitHub first', 'warning');
+        async function autoEvolveUntil85() {
+            if (GlobalState.isProcessing) {
+                showNotification('⚠️ Evolution already in progress', 'warning');
                 return;
             }
-            showNotification('Running published tests...', 'info');
+
+            logDebug('⚡ Auto-evolve mode: Will iterate until 85% success rate');
+            showNotification('⚡ Auto-evolving... (may take several iterations)', 'info');
+
+            let maxIterations = 10;
+            while (GlobalState.successRate < 85 && maxIterations > 0) {
+                await startEvolutionCycle();
+                maxIterations--;
+                await new Promise(r => setTimeout(r, 1000));
+            }
+
+            if (GlobalState.successRate >= 85) {
+                showNotification('🎉 85% Success Rate Achieved! Ready to commit to GitHub.', 'success');
+            } else {
+                showNotification('⚠️ Max iterations reached. Manual intervention may be needed.', 'warning');
+            }
         }
 
-        function startSelfExtension() {
-            if (!GlobalState.isAuthenticated) {
-                showNotification('Please login with GitHub first', 'warning');
-                return;
+        // =============================================
+        // Anthropic API Integration
+        // =============================================
+        async function callAnthropicAPI(prompt) {
+            if (!GlobalState.tokens.anthropic) {
+                throw new Error('Anthropic token not configured');
             }
-            GlobalState.isInSelfExtensionMode = true;
-            showNotification('Self-extension protocol activated...', 'info');
+
+            const response = await fetch(CONFIG.API_ANTHROPIC, {
+                method: 'POST',
+                headers: {
+                    'x-api-key': GlobalState.tokens.anthropic,
+                    'anthropic-version': '2023-06-01',
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: CONFIG.MODEL,
+                    max_tokens: 3000,
+                    messages: [{
+                        role: 'user',
+                        content: prompt
+                    }]
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'API call failed');
+            }
+
+            const data = await response.json();
+            return data.content[0].text;
         }
 
-        function autoEvolveUntil85Percent() {
-            if (!GlobalState.isAuthenticated) {
-                showNotification('Please login with GitHub first', 'warning');
-                return;
-            }
-            showNotification('Auto-evolving to reach 85% success rate...', 'info');
-        }
-
-        function commitSuccessfulEvolution() {
-            if (!GlobalState.isAuthenticated) {
-                showNotification('Please login with GitHub first', 'warning');
-                return;
-            }
-            
+        // =============================================
+        // GitHub Integration
+        // =============================================
+        async function commitToGitHub() {
             if (GlobalState.successRate < 85) {
-                showNotification('Success rate must be 85% or higher', 'error');
+                showNotification(`❌ Cannot commit: Success rate ${GlobalState.successRate}% (need 85%+)`, 'error');
                 return;
             }
+
+            if (!GlobalState.tokens.github) {
+                showNotification('⚠️ Configure GitHub token first', 'warning');
+                return;
+            }
+
+            logDebug('📤 Preparing commit to GitHub...');
+            showNotification('📤 Committing to GitHub...', 'info');
+
+            try {
+                // This is a placeholder - actual implementation would require GitHub API interaction
+                GlobalState.versionHistory.push({
+                    version: (1.0 + GlobalState.currentIteration * 0.1).toFixed(1),
+                    iteration: GlobalState.currentIteration,
+                    successRate: GlobalState.successRate,
+                    lineCount: GlobalState.totalLineCount,
+                    timestamp: new Date().toISOString()
+                });
+
+                updateVersionHistory();
+                showNotification('✅ Committed successfully (local tracking)', 'success');
+                logDebug('✅ Commit recorded to version history');
+
+            } catch (error) {
+                showNotification(`❌ Commit failed: ${error.message}`, 'error');
+                logDebug(`❌ Commit error: ${error.message}`);
+            }
+        }
+
+        function updateVersionHistory() {
+            const historyDiv = document.getElementById('versionHistory');
+            historyDiv.innerHTML = '';
             
-            githubManager.pushToGitHub();
+            GlobalState.versionHistory.forEach(v => {
+                const entry = document.createElement('div');
+                entry.className = 'status-item';
+                entry.style.marginBottom = '10px';
+                entry.innerHTML = `
+                    <strong>v${v.version}</strong> | Iteration: ${v.iteration} | 
+                    Success: ${v.successRate}% | Lines: ${v.lineCount} | 
+                    ${new Date(v.timestamp).toLocaleString()}
+                `;
+                historyDiv.appendChild(entry);
+            });
+        }
+
+        // =============================================
+        // UI Helper Functions
+        // =============================================
+        function updateStageStatus(stageId, status) {
+            const stage = document.getElementById(stageId);
+            if (!stage) return;
+
+            const indicator = stage.querySelector('.status-indicator');
+            stage.className = `cycle-stage ${status === 'error' ? 'error' : ''}`;
+            
+            if (status === 'active') {
+                stage.classList.add('active');
+                indicator.className = 'status-indicator processing';
+            } else if (status === 'completed') {
+                stage.classList.add('completed');
+                indicator.className = 'status-indicator success';
+            } else if (status === 'error') {
+                indicator.className = 'status-indicator error';
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = Math.min(GlobalState.successRate, 100);
+            document.getElementById('evolutionProgress').style.width = progress + '%';
         }
 
         function resetForm() {
-            document.getElementById('userRequest').value = '';
-            document.getElementById('framework').value = '';
+            document.getElementById('projectDesc').value = '';
+            document.getElementById('language').value = 'python';
+            showNotification('🔄 Form reset', 'info');
+        }
+
+        function downloadCode() {
+            if (!GlobalState.generatedCode) {
+                showNotification('⚠️ No code to download', 'warning');
+                return;
+            }
+
+            const element = document.createElement('a');
+            const file = new Blob([GlobalState.generatedCode], {type: 'text/plain'});
+            element.href = URL.createObjectURL(file);
+            element.download = `generated_code_v${(1.0 + GlobalState.currentIteration * 0.1).toFixed(1)}.txt`;
+            element.click();
+            logDebug('⬇️ Code downloaded');
         }
 
         // =============================================
         // Initialization
         // =============================================
-        const authManager = new GitHubAuthManager();
-        const githubManager = new GitHubManager();
-        const discussionGenerator = new RealtimeDiscussionGenerator();
-
-        // Initialize auth UI
-        authManager.updateAuthUI();
-
-        // Display login prompt
-        if (!GlobalState.isAuthenticated) {
-            document.getElementById('mainContent').insertAdjacentHTML('beforebegin', 
-                '<div class="login-prompt">🔐 Please login with GitHub to access all features</div>'
-            );
-        }
-
-        // Demo: Simulate user authentication for testing
-        // Remove this in production and implement proper OAuth
-        setTimeout(() => {
-            console.log('GitHub OAuth configured. To enable full functionality:');
-            console.log('1. Create a GitHub OAuth App at https://github.com/settings/developers');
-            console.log('2. Replace GITHUB_CLIENT_ID with your Client ID');
-            console.log('3. Set up backend endpoint to exchange code for token');
-        }, 1000);
+        window.addEventListener('load', () => {
+            loadTokens();
+            logDebug('🚀 System initialized');
+            showNotification('👋 HunyaCodingAI Pro v5.0 ready', 'success');
+        });
     </script>
 </body>
 </html>
