@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HunyaCodingAI Pro v5.0 - Advanced Multi-AI Evolution Engine</title>
+    <title>HunyaCodingAI Pro v6.0 - Multi-API Evolution Engine</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -36,8 +36,15 @@
             padding: 15px;
             border-radius: 8px;
             margin: 20px auto;
-            max-width: 600px;
+            max-width: 900px;
             text-align: center;
+        }
+
+        .token-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
         }
 
         .token-input {
@@ -49,12 +56,27 @@
             color: #00ff00;
             border-radius: 6px;
             font-family: monospace;
+            font-size: 0.9em;
         }
 
         .token-status {
             margin-top: 10px;
             font-size: 0.9em;
             color: #00ff00;
+        }
+
+        .token-group {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: left;
+        }
+
+        .token-group h4 {
+            color: #00ff00;
+            margin-bottom: 10px;
+            font-size: 0.95em;
         }
 
         .main-grid {
@@ -199,6 +221,11 @@
             box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.1);
         }
 
+        .ai-discussion-item.feedback {
+            border-left-color: #ffb900;
+            background: rgba(255, 185, 0, 0.08);
+        }
+
         .ai-name {
             font-weight: 700;
             margin-bottom: 6px;
@@ -206,6 +233,10 @@
             color: #00ff00;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        .ai-discussion-item.feedback .ai-name {
+            color: #ffb900;
         }
 
         .discussion-content {
@@ -286,17 +317,6 @@
             border-left-color: #00ff00;
         }
 
-        .ai-role {
-            display: inline-block;
-            padding: 4px 8px;
-            background: rgba(0, 212, 255, 0.2);
-            border: 1px solid #00d4ff;
-            border-radius: 4px;
-            font-size: 0.85em;
-            margin-right: 5px;
-            margin-bottom: 5px;
-        }
-
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -375,18 +395,6 @@
             color: #ff0000;
         }
 
-        .test-output {
-            background: rgba(10, 10, 10, 0.9);
-            color: #ff0000;
-            padding: 8px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 0.8em;
-            overflow: auto;
-            max-height: 120px;
-            margin-top: 5px;
-        }
-
         .evolution-info {
             background: rgba(0, 212, 255, 0.1);
             border: 1px solid #00d4ff;
@@ -396,17 +404,26 @@
             font-size: 0.9em;
         }
 
-        .code-block {
-            background: rgba(10, 10, 10, 0.95);
-            color: #00d4ff;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.75em;
-            overflow: auto;
-            border: 1px solid #00d4ff;
-            margin: 10px 0;
-            max-height: 200px;
+        .api-status {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 8px;
+            margin-bottom: 5px;
+            border: 1px solid;
+        }
+
+        .api-status.ok {
+            background: rgba(0, 255, 0, 0.1);
+            border-color: #00ff00;
+            color: #00ff00;
+        }
+
+        .api-status.error {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: #ff0000;
+            color: #ff0000;
         }
 
         @keyframes fadeIn {
@@ -441,6 +458,9 @@
             .panel.full-width {
                 grid-column: 1 / 3;
             }
+            .token-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -449,17 +469,31 @@
     
     <div class="container">
         <header>
-            <h1>🤖 HunyaCodingAI Pro v5.0</h1>
-            <p style="color: #00ff00; font-size: 1.1em;">Advanced Multi-AI Evolution Engine with Token-Based Control</p>
+            <h1>🤖 HunyaCodingAI Pro v6.0</h1>
+            <p style="color: #00ff00; font-size: 1.1em;">Advanced Multi-AI Evolution with Gemini & OpenAI Integration</p>
         </header>
 
         <div class="token-panel">
-            <h3>🔐 Token Configuration</h3>
-            <label>GitHub Token:</label>
-            <input type="password" id="githubToken" class="token-input" placeholder="ghp_..." onchange="saveTokens()">
-            <label>Anthropic API Token:</label>
-            <input type="password" id="anthropicToken" class="token-input" placeholder="sk-ant-..." onchange="saveTokens()">
+            <h3>🔐 Token Configuration (Gemini + OpenAI)</h3>
+            <div class="token-grid">
+                <div class="token-group">
+                    <h4>🔵 Gemini API</h4>
+                    <label>API Key:</label>
+                    <input type="password" id="geminiToken" class="token-input" placeholder="AIzaSy..." onchange="saveTokens()">
+                </div>
+                <div class="token-group">
+                    <h4>⚫ OpenAI API</h4>
+                    <label>API Key:</label>
+                    <input type="password" id="openaiToken" class="token-input" placeholder="sk-..." onchange="saveTokens()">
+                </div>
+                <div class="token-group">
+                    <h4>📄 GitHub</h4>
+                    <label>Token:</label>
+                    <input type="password" id="githubToken" class="token-input" placeholder="ghp_..." onchange="saveTokens()">
+                </div>
+            </div>
             <div class="token-status" id="tokenStatus">⚠️ Tokens not configured</div>
+            <div id="apiStatus" style="margin-top: 10px;"></div>
         </div>
 
         <div id="mainContent">
@@ -491,15 +525,21 @@
 
                 <!-- AI Architecture Panel -->
                 <div class="panel">
-                    <h2>🏗️ AI Architecture</h2>
-                    <div class="ai-role">Architect AI</div>
-                    <div class="ai-role">Dev AI</div>
-                    <div class="ai-role">QA AI</div>
-                    <div class="ai-role">Orchestrator</div>
+                    <h2>🏗️ AI Panel</h2>
+                    <div style="margin-bottom: 10px;">
+                        <strong>Discussion:</strong><br>
+                        • Gemini (Architecture)<br>
+                        • OpenAI (Development)
+                    </div>
+                    <div style="margin-bottom: 10px;">
+                        <strong>Code Review:</strong><br>
+                        • Gemini (Analysis)<br>
+                        • OpenAI (Feedback)
+                    </div>
                     <p style="margin-top: 15px; font-size: 0.9em; color: #c0c0c0;">
-                        Multi-layer AI system with collaborative discussion, synthesis, and iterative code generation.
+                        Cross-AI feedback loop for continuous improvement
                     </p>
-                    <h3 style="margin-top: 15px;">Current Status</h3>
+                    <h3 style="margin-top: 15px;">Status</h3>
                     <div class="stats" style="margin-top: 10px;">
                         <div class="stat-box">
                             <div class="stat-number" id="iteration">0</div>
@@ -507,11 +547,11 @@
                         </div>
                         <div class="stat-box">
                             <div class="stat-number" id="successRate">0%</div>
-                            <div class="stat-label">Success Rate</div>
+                            <div class="stat-label">Success</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-number" id="lineCount">0</div>
-                            <div class="stat-label">Lines of Code</div>
+                            <div class="stat-label">Lines</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-number" id="version">1.0.0</div>
@@ -522,7 +562,7 @@
 
                 <!-- Metrics Panel -->
                 <div class="panel">
-                    <h2>📊 Metrics Dashboard</h2>
+                    <h2>📊 Metrics</h2>
                     <div class="metrics-grid">
                         <div class="metric-box">
                             <div class="metric-label">Tests Passed</div>
@@ -537,51 +577,51 @@
                             <div class="metric-value" id="cycles">0</div>
                         </div>
                     </div>
-                    <h3 style="margin-top: 15px;">Quick Actions</h3>
-                    <button onclick="generateDiscussion()" style="width: 100%; margin-top: 10px;">💬 Generate Discussion</button>
+                    <h3 style="margin-top: 15px;">Actions</h3>
+                    <button onclick="generateDiscussion()" style="width: 100%; margin-top: 10px;">💬 Discussion</button>
                     <button onclick="runTests()" style="width: 100%; margin-top: 8px;">✅ Run Tests</button>
                 </div>
             </div>
 
             <!-- Multi-AI Discussion Panel -->
             <div class="panel full-width">
-                <h2>🤖 Multi-AI Discussion Phase</h2>
+                <h2>🤖 Multi-AI Discussion & Feedback</h2>
                 <div class="evolution-info" id="discussionStatus">
                     ⏳ Waiting for project input...
                 </div>
                 <div id="discussionContainer" class="discussion-scroll"></div>
-                <button onclick="generateDiscussion()" style="width: 100%; margin-top: 15px;">🔄 Generate New Discussion</button>
+                <button onclick="generateDiscussion()" style="width: 100%; margin-top: 15px;">🔄 Generate Discussion</button>
             </div>
 
             <!-- Orchestration Panel -->
             <div class="panel full-width">
-                <h2>🎯 Evolution Orchestration (Target: 85% Success Rate)</h2>
+                <h2>🎯 Evolution Orchestration (Target: 85%)</h2>
                 <div id="cycleStages">
                     <div class="cycle-stage" id="stage-input">
                         <span class="status-indicator"></span>
-                        <span><strong>STAGE 0:</strong> Get Project Input</span>
+                        <span><strong>STAGE 0:</strong> Project Input</span>
                     </div>
                     <div class="cycle-stage" id="stage-discussion">
                         <span class="status-indicator"></span>
-                        <span><strong>STAGE 1:</strong> Multi-AI Discussion (Architect, Dev, QA)</span>
-                    </div>
-                    <div class="cycle-stage" id="stage-summarization">
-                        <span class="status-indicator"></span>
-                        <span><strong>STAGE 2:</strong> Synthesize & Extract Requirements</span>
+                        <span><strong>STAGE 1:</strong> Multi-AI Discussion (Gemini + OpenAI)</span>
                     </div>
                     <div class="cycle-stage" id="stage-coding">
                         <span class="status-indicator"></span>
-                        <span><strong>STAGE 3:</strong> Code Generation (Additive Growth)</span>
+                        <span><strong>STAGE 2:</strong> Code Generation (Additive)</span>
                     </div>
                     <div class="cycle-stage" id="stage-testing">
                         <span class="status-indicator"></span>
-                        <span><strong>STAGE 4:</strong> Testing & Validation</span>
+                        <span><strong>STAGE 3:</strong> Testing & Validation</span>
+                    </div>
+                    <div class="cycle-stage" id="stage-feedback">
+                        <span class="status-indicator"></span>
+                        <span><strong>STAGE 4:</strong> AI Feedback Review (Gemini + OpenAI)</span>
                     </div>
                     <div class="cycle-stage" id="stage-analysis">
                         <span class="status-indicator"></span>
                         <span><strong>STAGE 5:</strong> Success Analysis</span>
                     </div>
-                    <div class="cycle-stage" id="stage-feedback">
+                    <div class="cycle-stage" id="stage-loop">
                         <span class="status-indicator"></span>
                         <span><strong>STAGE 6:</strong> Feedback Loop → Back to Discussion if < 85%</span>
                     </div>
@@ -612,21 +652,20 @@
                 <div id="testingContainer">
                     <p style="color: #a0a0a0; font-size: 0.9em;">No tests executed yet</p>
                 </div>
-                <button onclick="runTests()" style="width: 100%; margin-top: 15px;">🧪 Execute All Tests</button>
+                <button onclick="runTests()" style="width: 100%; margin-top: 15px;">🧪 Execute Tests</button>
             </div>
 
-            <!-- Version Control Panel -->
+            <!-- Feedback Review Panel -->
             <div class="panel full-width">
-                <h2>📚 Version History & Commit Log</h2>
-                <div id="versionHistory" style="max-height: 300px; overflow-y: auto;">
-                    <p style="color: #a0a0a0; font-size: 0.9em;">No commits yet. Commit after reaching 85% success rate.</p>
+                <h2>📋 AI Feedback Review</h2>
+                <div id="feedbackContainer">
+                    <p style="color: #a0a0a0; font-size: 0.9em;">Feedback appears after tests complete</p>
                 </div>
-                <button onclick="commitToGitHub()" style="width: 100%; margin-top: 15px; background: linear-gradient(135deg, rgba(0, 255, 0, 0.2) 0%, rgba(0, 200, 100, 0.2) 100%); border-color: #00ff00;">🚀 Commit to GitHub (85%+ Required)</button>
             </div>
 
-            <!-- Debug & Analytics Panel -->
+            <!-- Debug Console Panel -->
             <div class="panel full-width">
-                <h2>🔍 Debug Console & Analytics</h2>
+                <h2>🔍 Debug Console</h2>
                 <div style="background: rgba(10, 10, 10, 0.9); border: 1px solid #00d4ff; border-radius: 6px; padding: 10px; max-height: 250px; overflow-y: auto; font-family: monospace; font-size: 0.8em; color: #00d4ff;" id="debugConsole">
                     System ready. Awaiting token configuration...
                 </div>
@@ -640,20 +679,20 @@
         // Global State & Configuration
         // =============================================
         const CONFIG = {
-            API_ANTHROPIC: 'https://api.anthropic.com/v1/messages',
-            API_GITHUB: 'https://api.github.com',
-            MODEL: 'claude-3-5-sonnet-20241022'
+            API_GEMINI: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent',
+            API_OPENAI: 'https://api.openai.com/v1/chat/completions',
+            API_GITHUB: 'https://api.github.com'
         };
 
         const GlobalState = {
-            tokens: { github: '', anthropic: '' },
+            tokens: { gemini: '', openai: '', github: '' },
             currentIteration: 0,
             successRate: 0,
             totalLineCount: 0,
             generatedCode: '',
             discussionHistory: [],
+            feedbackHistory: [],
             testResults: [],
-            versionHistory: [],
             isProcessing: false,
             currentCycle: 0
         };
@@ -662,10 +701,11 @@
         // Token Management
         // =============================================
         function saveTokens() {
+            const gemini = document.getElementById('geminiToken').value;
+            const openai = document.getElementById('openaiToken').value;
             const github = document.getElementById('githubToken').value;
-            const anthropic = document.getElementById('anthropicToken').value;
             
-            GlobalState.tokens = { github, anthropic };
+            GlobalState.tokens = { gemini, openai, github };
             localStorage.setItem('tokens', JSON.stringify(GlobalState.tokens));
             updateTokenStatus();
             logDebug('✅ Tokens saved successfully');
@@ -675,21 +715,34 @@
             const stored = localStorage.getItem('tokens');
             if (stored) {
                 GlobalState.tokens = JSON.parse(stored);
+                document.getElementById('geminiToken').value = GlobalState.tokens.gemini;
+                document.getElementById('openaiToken').value = GlobalState.tokens.openai;
                 document.getElementById('githubToken').value = GlobalState.tokens.github;
-                document.getElementById('anthropicToken').value = GlobalState.tokens.anthropic;
                 updateTokenStatus();
             }
         }
 
         function updateTokenStatus() {
             const status = document.getElementById('tokenStatus');
-            if (GlobalState.tokens.github && GlobalState.tokens.anthropic) {
-                status.innerHTML = '✅ Ready: Both tokens configured';
+            const apiStatus = document.getElementById('apiStatus');
+            
+            const geminiOk = GlobalState.tokens.gemini ? '✅' : '❌';
+            const openaiOk = GlobalState.tokens.openai ? '✅' : '❌';
+            const githubOk = GlobalState.tokens.github ? '✅' : '❌';
+            
+            if (GlobalState.tokens.gemini && GlobalState.tokens.openai) {
+                status.innerHTML = '✅ Ready: All tokens configured';
                 status.style.color = '#00ff00';
             } else {
-                status.innerHTML = '⚠️ Configuration needed: Both tokens required';
+                status.innerHTML = '⚠️ Configure Gemini & OpenAI tokens';
                 status.style.color = '#ff9900';
             }
+
+            apiStatus.innerHTML = `
+                <span class="api-status ${GlobalState.tokens.gemini ? 'ok' : 'error'}">Gemini ${geminiOk}</span>
+                <span class="api-status ${GlobalState.tokens.openai ? 'ok' : 'error'}">OpenAI ${openaiOk}</span>
+                <span class="api-status ${GlobalState.tokens.github ? 'ok' : 'error'}">GitHub ${githubOk}</span>
+            `;
         }
 
         // =============================================
@@ -728,11 +781,73 @@
         }
 
         // =============================================
+        // Gemini API Call
+        // =============================================
+        async function callGeminiAPI(prompt) {
+            if (!GlobalState.tokens.gemini) {
+                throw new Error('Gemini token not configured');
+            }
+
+            const response = await fetch(`${CONFIG.API_GEMINI}?key=${GlobalState.tokens.gemini}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{ text: prompt }]
+                    }],
+                    generationConfig: {
+                        maxOutputTokens: 2048,
+                        temperature: 0.7
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'Gemini API failed');
+            }
+
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+        }
+
+        // =============================================
+        // OpenAI API Call
+        // =============================================
+        async function callOpenAIAPI(prompt) {
+            if (!GlobalState.tokens.openai) {
+                throw new Error('OpenAI token not configured');
+            }
+
+            const response = await fetch(CONFIG.API_OPENAI, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${GlobalState.tokens.openai}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'gpt-4o-mini',
+                    messages: [{ role: 'user', content: prompt }],
+                    max_tokens: 2048,
+                    temperature: 0.7
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'OpenAI API failed');
+            }
+
+            const data = await response.json();
+            return data.choices[0].message.content;
+        }
+
+        // =============================================
         // Multi-AI Discussion System
         // =============================================
         async function generateDiscussion() {
-            if (!GlobalState.tokens.anthropic) {
-                showNotification('⚠️ Configure Anthropic token first', 'warning');
+            if (!GlobalState.tokens.gemini || !GlobalState.tokens.openai) {
+                showNotification('⚠️ Configure Gemini & OpenAI tokens first', 'warning');
                 return;
             }
 
@@ -748,28 +863,40 @@
             showNotification('💬 Generating AI Discussion...', 'info');
 
             try {
-                const discussion = await callAnthropicAPI(
-                    `You are a panel of expert AIs. Conduct a structured discussion about this project:
-
+                const discussionPrompt = `You are an expert AI for ${document.getElementById('language').value} development.
+                
 PROJECT: ${projectDesc}
-LANGUAGE: ${document.getElementById('language').value}
 
-ROLES:
-1. Architect AI - Focus on system design, architecture patterns, scalability
-2. Development AI - Focus on implementation, code structure, best practices
-3. QA AI - Focus on testing, validation, quality assurance
+Provide 3-4 key architectural and design considerations for this project. Be concise and technical.
+Format your response with clear points, starting each with a bullet or number.`;
 
-Each AI should provide 2-3 key points. Format each perspective clearly with the AI name.
-Keep it concise but thorough.`
-                );
+                // Gemini provides architecture perspective
+                logDebug('🔵 Calling Gemini for architectural perspective...');
+                const geminiPerspective = await callGeminiAPI(discussionPrompt);
+                
+                // OpenAI provides development perspective
+                logDebug('⚫ Calling OpenAI for development perspective...');
+                const devPrompt = `You are an expert developer for ${document.getElementById('language').value}.
+                
+PROJECT: ${projectDesc}
 
-                GlobalState.discussionHistory.push({
+Based on the architecture considerations, provide 3-4 key implementation points and best practices.
+Be concise and technical.
+Format your response with clear points, starting each with a bullet or number.`;
+
+                const openaiPerspective = await callOpenAIAPI(devPrompt);
+
+                // Store discussion
+                const discussion = {
                     iteration: GlobalState.currentIteration,
-                    content: discussion,
+                    gemini: geminiPerspective,
+                    openai: openaiPerspective,
                     timestamp: new Date().toISOString()
-                });
+                };
 
+                GlobalState.discussionHistory.push(discussion);
                 displayDiscussion(discussion);
+
                 updateStageStatus('stage-discussion', 'completed');
                 logDebug('✅ Discussion generated successfully');
                 showNotification('✅ Discussion complete', 'success');
@@ -783,78 +910,75 @@ Keep it concise but thorough.`
             }
         }
 
-        function displayDiscussion(content) {
+        function displayDiscussion(discussion) {
             const container = document.getElementById('discussionContainer');
-            const lines = content.split('\n');
-            let currentAI = 'System';
-            let currentContent = '';
-
             container.innerHTML = '';
 
-            lines.forEach(line => {
-                if (line.includes('Architect') || line.includes('Development') || line.includes('QA')) {
-                    if (currentContent) {
-                        addDiscussionItem(currentAI, currentContent);
-                        currentContent = '';
-                    }
-                    currentAI = line.trim();
-                } else if (line.trim()) {
-                    currentContent += line + '\n';
-                }
-            });
-
-            if (currentContent) {
-                addDiscussionItem(currentAI, currentContent);
-            }
-        }
-
-        function addDiscussionItem(aiName, content) {
-            const container = document.getElementById('discussionContainer');
-            const item = document.createElement('div');
-            item.className = 'ai-discussion-item';
-            item.innerHTML = `
-                <div class="ai-name">🤖 ${aiName}</div>
-                <div class="discussion-content">${content.replace(/\n/g, '<br>')}</div>
+            // Display Gemini perspective
+            const geminiDiv = document.createElement('div');
+            geminiDiv.className = 'ai-discussion-item';
+            geminiDiv.innerHTML = `
+                <div class="ai-name">🔵 GEMINI - ARCHITECTURE</div>
+                <div class="discussion-content">${discussion.gemini.replace(/\n/g, '<br>')}</div>
             `;
-            container.appendChild(item);
+            container.appendChild(geminiDiv);
+
+            // Display OpenAI perspective
+            const openaiDiv = document.createElement('div');
+            openaiDiv.className = 'ai-discussion-item';
+            openaiDiv.innerHTML = `
+                <div class="ai-name">⚫ OPENAI - DEVELOPMENT</div>
+                <div class="discussion-content">${discussion.openai.replace(/\n/g, '<br>')}</div>
+            `;
+            container.appendChild(openaiDiv);
         }
 
         // =============================================
-        // Code Generation System
+        // Code Generation
         // =============================================
         async function generateCode() {
-            if (!GlobalState.tokens.anthropic) {
-                showNotification('⚠️ Configure tokens first', 'warning');
+            if (!GlobalState.tokens.gemini) {
+                showNotification('⚠️ Configure Gemini token', 'warning');
                 return;
             }
 
             updateStageStatus('stage-coding', 'active');
-            logDebug('💻 Generating code based on discussion...');
+            logDebug('💻 Generating code...');
             showNotification('💻 Generating code...', 'info');
 
             try {
-                const lastDiscussion = GlobalState.discussionHistory[GlobalState.discussionHistory.length - 1]?.content || '';
+                const lastDiscussion = GlobalState.discussionHistory[GlobalState.discussionHistory.length - 1];
+                if (!lastDiscussion) {
+                    throw new Error('No discussion available');
+                }
+
                 const language = document.getElementById('language').value;
                 const project = document.getElementById('projectDesc').value;
 
-                const prompt = `Based on this discussion:
-${lastDiscussion}
+                const prompt = `Generate production-ready ${language} code for this project:
 
-Generate ${language} code for: ${project}
+PROJECT: ${project}
 
-IMPORTANT:
-- Keep ALL previous code (if exists): ${GlobalState.generatedCode ? '[Previous code exists]' : '[First iteration]'}
-- ADD new features/improvements
-- Include comments
+ARCHITECTURE INSIGHTS:
+${lastDiscussion.gemini}
+
+DEVELOPMENT CONSIDERATIONS:
+${lastDiscussion.openai}
+
+REQUIREMENTS:
+- Keep ALL previous code: ${GlobalState.generatedCode ? '[Code exists - add new features]' : '[First iteration]'}
+- Add new features/improvements
+- Include detailed comments
 - Make it production-ready
-- Return ONLY the complete code, no explanations
+- Return ONLY the code, no explanations
 
-Current code length: ${GlobalState.generatedCode.split('\n').length} lines`;
+Current code lines: ${GlobalState.generatedCode.split('\n').length}`;
 
-                const newCode = await callAnthropicAPI(prompt);
+                const newCode = await callGeminiAPI(prompt);
                 
                 if (newCode) {
-                    GlobalState.generatedCode = GlobalState.generatedCode + '\n\n// ===== ITERATION ' + (GlobalState.currentIteration + 1) + ' =====\n' + newCode;
+                    GlobalState.generatedCode = GlobalState.generatedCode + 
+                        '\n\n// ===== ITERATION ' + (GlobalState.currentIteration + 1) + ' =====\n' + newCode;
                     updateCodeDisplay();
                     updateStageStatus('stage-coding', 'completed');
                     logDebug(`✅ Code generated (${newCode.split('\n').length} lines added)`);
@@ -878,11 +1002,11 @@ Current code length: ${GlobalState.generatedCode.split('\n').length} lines`;
         }
 
         // =============================================
-        // Testing System
+        // Testing & Feedback System
         // =============================================
         async function runTests() {
             if (!GlobalState.generatedCode) {
-                showNotification('⚠️ No code to test. Generate code first.', 'warning');
+                showNotification('⚠️ No code to test', 'warning');
                 return;
             }
 
@@ -891,25 +1015,157 @@ Current code length: ${GlobalState.generatedCode.split('\n').length} lines`;
             showNotification('🧪 Executing tests...', 'info');
 
             try {
-                const testPrompt = `Test this ${document.getElementById('language').value} code and return test results:
+                const testPrompt = `Test this ${document.getElementById('language').value} code snippet:
 
-${GlobalState.generatedCode.substring(0, 2000)}...
+${GlobalState.generatedCode.substring(0, 1500)}...
 
-Return format:
-TEST_NAME: result (PASS/FAIL)
-[if FAIL, explain the error]`;
+Provide test results in this format:
+TEST_NAME: PASS/FAIL
+[if FAIL, brief error explanation]
 
-                const results = await callAnthropicAPI(testPrompt);
+Provide 5-8 test cases.`;
+
+                const results = await callOpenAIAPI(testPrompt);
                 parseAndDisplayTests(results);
                 
                 updateStageStatus('stage-testing', 'completed');
-                showNotification('✅ Tests completed', 'success');
+                logDebug('✅ Tests completed');
+
+                // Now get feedback from both APIs
+                await generateAIFeedback();
 
             } catch (error) {
                 logDebug(`❌ Testing error: ${error.message}`);
                 showNotification(`❌ Testing failed: ${error.message}`, 'error');
                 updateStageStatus('stage-testing', 'error');
             }
+        }
+
+        async function generateAIFeedback() {
+            updateStageStatus('stage-feedback', 'active');
+            logDebug('📋 Collecting AI feedback...');
+            showNotification('📋 Collecting AI feedback...', 'info');
+
+            try {
+                const codeSnippet = GlobalState.generatedCode.substring(0, 2000);
+                const testResults = GlobalState.testResults;
+
+                // Gemini feedback
+                logDebug('🔵 Getting Gemini code review...');
+                const geminiFeedbackPrompt = `Review this ${document.getElementById('language').value} code and provide improvements:
+
+CODE:
+${codeSnippet}
+
+TEST RESULTS:
+${testResults.map(r => `${r.name}: ${r.passed ? 'PASS' : 'FAIL'}`).join('\n')}
+
+Provide 3-4 specific improvement suggestions focusing on:
+- Code quality
+- Performance
+- Maintainability
+- Best practices
+
+Be concise and actionable.`;
+
+                const geminiFeedback = await callGeminiAPI(geminiFeedbackPrompt);
+
+                // OpenAI feedback
+                logDebug('⚫ Getting OpenAI code review...');
+                const openaiReviewPrompt = `As a senior code reviewer, analyze these test results and code:
+
+TEST RESULTS:
+${testResults.map(r => `${r.name}: ${r.passed ? 'PASS' : 'FAIL'}`).join('\n')}
+
+CODE SNIPPET:
+${codeSnippet}
+
+Provide 3-4 specific recommendations for:
+- Fixing failing tests
+- Improving code reliability
+- Better error handling
+- Optimization opportunities
+
+Be concise and actionable.`;
+
+                const openaiReview = await callOpenAIAPI(openaiReviewPrompt);
+
+                // Store feedback
+                const feedback = {
+                    iteration: GlobalState.currentIteration,
+                    gemini: geminiFeedback,
+                    openai: openaiReview,
+                    timestamp: new Date().toISOString()
+                };
+
+                GlobalState.feedbackHistory.push(feedback);
+                displayFeedback(feedback);
+
+                updateStageStatus('stage-feedback', 'completed');
+                logDebug('✅ Feedback collected');
+                showNotification('✅ Feedback received', 'success');
+
+                // Add feedback to discussion for next iteration
+                addFeedbackToDiscussion(feedback);
+
+            } catch (error) {
+                logDebug(`❌ Feedback error: ${error.message}`);
+                showNotification(`❌ Feedback failed: ${error.message}`, 'error');
+                updateStageStatus('stage-feedback', 'error');
+            }
+        }
+
+        function displayFeedback(feedback) {
+            const container = document.getElementById('feedbackContainer');
+            container.innerHTML = '';
+
+            // Gemini feedback
+            const geminiDiv = document.createElement('div');
+            geminiDiv.className = 'ai-discussion-item feedback';
+            geminiDiv.innerHTML = `
+                <div class="ai-name">🔵 GEMINI - CODE QUALITY REVIEW</div>
+                <div class="discussion-content">${feedback.gemini.replace(/\n/g, '<br>')}</div>
+            `;
+            container.appendChild(geminiDiv);
+
+            // OpenAI review
+            const openaiDiv = document.createElement('div');
+            openaiDiv.className = 'ai-discussion-item feedback';
+            openaiDiv.innerHTML = `
+                <div class="ai-name">⚫ OPENAI - RELIABILITY REVIEW</div>
+                <div class="discussion-content">${feedback.openai.replace(/\n/g, '<br>')}</div>
+            `;
+            container.appendChild(openaiDiv);
+        }
+
+        function addFeedbackToDiscussion(feedback) {
+            const container = document.getElementById('discussionContainer');
+            
+            const feedbackHeader = document.createElement('div');
+            feedbackHeader.style.marginTop = '20px';
+            feedbackHeader.style.padding = '10px';
+            feedbackHeader.style.borderTop = '2px solid #ffb900';
+            feedbackHeader.style.color = '#ffb900';
+            feedbackHeader.textContent = '📋 FEEDBACK FROM TEST RESULTS (Iteration ' + GlobalState.currentIteration + ')';
+            container.appendChild(feedbackHeader);
+
+            // Add Gemini feedback
+            const geminiDiv = document.createElement('div');
+            geminiDiv.className = 'ai-discussion-item feedback';
+            geminiDiv.innerHTML = `
+                <div class="ai-name">🔵 GEMINI - IMPROVEMENTS</div>
+                <div class="discussion-content">${feedback.gemini.substring(0, 300).replace(/\n/g, '<br>')}...</div>
+            `;
+            container.appendChild(geminiDiv);
+
+            // Add OpenAI feedback
+            const openaiDiv = document.createElement('div');
+            openaiDiv.className = 'ai-discussion-item feedback';
+            openaiDiv.innerHTML = `
+                <div class="ai-name">⚫ OPENAI - RECOMMENDATIONS</div>
+                <div class="discussion-content">${feedback.openai.substring(0, 300).replace(/\n/g, '<br>')}...</div>
+            `;
+            container.appendChild(openaiDiv);
         }
 
         function parseAndDisplayTests(results) {
@@ -919,6 +1175,7 @@ TEST_NAME: result (PASS/FAIL)
             const lines = results.split('\n');
             let passed = 0;
             let total = 0;
+            GlobalState.testResults = [];
 
             lines.forEach(line => {
                 if (line.includes(':') && (line.includes('PASS') || line.includes('FAIL'))) {
@@ -926,11 +1183,17 @@ TEST_NAME: result (PASS/FAIL)
                     const isPassed = line.includes('PASS');
                     if (isPassed) passed++;
 
+                    const testName = line.split(':')[0].trim();
+                    GlobalState.testResults.push({
+                        name: testName,
+                        passed: isPassed
+                    });
+
                     const testDiv = document.createElement('div');
                     testDiv.className = `test-result ${isPassed ? '' : 'failed'}`;
                     testDiv.innerHTML = `
-                        <div class="test-name">${isPassed ? '✅' : '❌'} ${line.split(':')[0]}</div>
-                        <div>${line.split(':')[1]}</div>
+                        <div class="test-name">${isPassed ? '✅' : '❌'} ${testName}</div>
+                        <div>${line.split(':').slice(1).join(':').trim()}</div>
                     `;
                     container.appendChild(testDiv);
                 }
@@ -949,8 +1212,8 @@ TEST_NAME: result (PASS/FAIL)
         // Evolution Cycle Management
         // =============================================
         async function startEvolutionCycle() {
-            if (!GlobalState.tokens.anthropic) {
-                showNotification('⚠️ Configure Anthropic token first', 'warning');
+            if (!GlobalState.tokens.gemini || !GlobalState.tokens.openai) {
+                showNotification('⚠️ Configure API tokens first', 'warning');
                 return;
             }
 
@@ -964,42 +1227,31 @@ TEST_NAME: result (PASS/FAIL)
             GlobalState.currentIteration++;
             updateStageStatus('stage-input', 'completed');
 
-            logDebug(`🚀 Starting Evolution Cycle #${GlobalState.currentCycle} (Iteration #${GlobalState.currentIteration})`);
+            logDebug(`🚀 Starting Evolution Cycle #${GlobalState.currentCycle}`);
 
             // Stage 1: Discussion
             await generateDiscussion();
             
-            // Stage 2: Summarization (implicit in orchestration)
-            updateStageStatus('stage-summarization', 'active');
-            await new Promise(r => setTimeout(r, 500));
-            updateStageStatus('stage-summarization', 'completed');
-
-            // Stage 3: Code Generation
+            // Stage 2: Code Generation
             await generateCode();
 
-            // Stage 4 & 5: Testing
+            // Stage 3-5: Testing & Feedback
             await runTests();
 
-            // Stage 5: Analysis
+            // Stage 6: Analysis
             updateStageStatus('stage-analysis', 'active');
             await new Promise(r => setTimeout(r, 500));
 
             if (GlobalState.successRate >= 85) {
                 updateStageStatus('stage-analysis', 'completed');
-                updateStageStatus('stage-feedback', 'completed');
-                showNotification('🎉 Success Rate 85%+ Achieved! Ready to commit.', 'success');
+                updateStageStatus('stage-loop', 'completed');
+                showNotification('🎉 Success Rate 85%+ Achieved!', 'success');
                 logDebug('🎉 SUCCESS: 85%+ rate achieved!');
             } else {
                 updateStageStatus('stage-analysis', 'completed');
-                updateStageStatus('stage-feedback', 'active');
-                logDebug(`⚠️ Success rate: ${GlobalState.successRate}%. Need more iterations.`);
-                showNotification(`⚠️ Success rate: ${GlobalState.successRate}%. Continuing improvements...`, 'warning');
-                
-                await new Promise(r => setTimeout(r, 1000));
-                if (!GlobalState.isProcessing) return;
-                
-                updateStageStatus('stage-feedback', 'completed');
-                updateStageStatus('stage-discussion', 'pending');
+                updateStageStatus('stage-loop', 'active');
+                logDebug(`⚠️ Success rate: ${GlobalState.successRate}%. Feedback will be used in next iteration.`);
+                showNotification(`⚠️ Success rate: ${GlobalState.successRate}%. Feedback collected for improvement.`, 'warning');
             }
 
             GlobalState.isProcessing = false;
@@ -1010,12 +1262,12 @@ TEST_NAME: result (PASS/FAIL)
 
         async function autoEvolveUntil85() {
             if (GlobalState.isProcessing) {
-                showNotification('⚠️ Evolution already in progress', 'warning');
+                showNotification('⚠️ Evolution in progress', 'warning');
                 return;
             }
 
-            logDebug('⚡ Auto-evolve mode: Will iterate until 85% success rate');
-            showNotification('⚡ Auto-evolving... (may take several iterations)', 'info');
+            logDebug('⚡ Auto-evolving until 85%...');
+            showNotification('⚡ Starting auto-evolution...', 'info');
 
             let maxIterations = 10;
             while (GlobalState.successRate < 85 && maxIterations > 0) {
@@ -1025,98 +1277,10 @@ TEST_NAME: result (PASS/FAIL)
             }
 
             if (GlobalState.successRate >= 85) {
-                showNotification('🎉 85% Success Rate Achieved! Ready to commit to GitHub.', 'success');
+                showNotification('🎉 85% Achieved! Ready to commit.', 'success');
             } else {
-                showNotification('⚠️ Max iterations reached. Manual intervention may be needed.', 'warning');
+                showNotification('⚠️ Max iterations reached', 'warning');
             }
-        }
-
-        // =============================================
-        // Anthropic API Integration
-        // =============================================
-        async function callAnthropicAPI(prompt) {
-            if (!GlobalState.tokens.anthropic) {
-                throw new Error('Anthropic token not configured');
-            }
-
-            const response = await fetch(CONFIG.API_ANTHROPIC, {
-                method: 'POST',
-                headers: {
-                    'x-api-key': GlobalState.tokens.anthropic,
-                    'anthropic-version': '2023-06-01',
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    model: CONFIG.MODEL,
-                    max_tokens: 3000,
-                    messages: [{
-                        role: 'user',
-                        content: prompt
-                    }]
-                })
-            });
-
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.error?.message || 'API call failed');
-            }
-
-            const data = await response.json();
-            return data.content[0].text;
-        }
-
-        // =============================================
-        // GitHub Integration
-        // =============================================
-        async function commitToGitHub() {
-            if (GlobalState.successRate < 85) {
-                showNotification(`❌ Cannot commit: Success rate ${GlobalState.successRate}% (need 85%+)`, 'error');
-                return;
-            }
-
-            if (!GlobalState.tokens.github) {
-                showNotification('⚠️ Configure GitHub token first', 'warning');
-                return;
-            }
-
-            logDebug('📤 Preparing commit to GitHub...');
-            showNotification('📤 Committing to GitHub...', 'info');
-
-            try {
-                // This is a placeholder - actual implementation would require GitHub API interaction
-                GlobalState.versionHistory.push({
-                    version: (1.0 + GlobalState.currentIteration * 0.1).toFixed(1),
-                    iteration: GlobalState.currentIteration,
-                    successRate: GlobalState.successRate,
-                    lineCount: GlobalState.totalLineCount,
-                    timestamp: new Date().toISOString()
-                });
-
-                updateVersionHistory();
-                showNotification('✅ Committed successfully (local tracking)', 'success');
-                logDebug('✅ Commit recorded to version history');
-
-            } catch (error) {
-                showNotification(`❌ Commit failed: ${error.message}`, 'error');
-                logDebug(`❌ Commit error: ${error.message}`);
-            }
-        }
-
-        function updateVersionHistory() {
-            const historyDiv = document.getElementById('versionHistory');
-            historyDiv.innerHTML = '';
-            
-            GlobalState.versionHistory.forEach(v => {
-                const entry = document.createElement('div');
-                entry.className = 'status-item';
-                entry.style.marginBottom = '10px';
-                entry.innerHTML = `
-                    <strong>v${v.version}</strong> | Iteration: ${v.iteration} | 
-                    Success: ${v.successRate}% | Lines: ${v.lineCount} | 
-                    ${new Date(v.timestamp).toLocaleString()}
-                `;
-                historyDiv.appendChild(entry);
-            });
         }
 
         // =============================================
@@ -1127,7 +1291,7 @@ TEST_NAME: result (PASS/FAIL)
             if (!stage) return;
 
             const indicator = stage.querySelector('.status-indicator');
-            stage.className = `cycle-stage ${status === 'error' ? 'error' : ''}`;
+            stage.className = `cycle-stage`;
             
             if (status === 'active') {
                 stage.classList.add('active');
@@ -1160,7 +1324,7 @@ TEST_NAME: result (PASS/FAIL)
             const element = document.createElement('a');
             const file = new Blob([GlobalState.generatedCode], {type: 'text/plain'});
             element.href = URL.createObjectURL(file);
-            element.download = `generated_code_v${(1.0 + GlobalState.currentIteration * 0.1).toFixed(1)}.txt`;
+            element.download = `generated_v${(1.0 + GlobalState.currentIteration * 0.1).toFixed(1)}.txt`;
             element.click();
             logDebug('⬇️ Code downloaded');
         }
@@ -1170,8 +1334,8 @@ TEST_NAME: result (PASS/FAIL)
         // =============================================
         window.addEventListener('load', () => {
             loadTokens();
-            logDebug('🚀 System initialized');
-            showNotification('👋 HunyaCodingAI Pro v5.0 ready', 'success');
+            logDebug('🚀 System initialized (v6.0)');
+            showNotification('👋 HunyaCodingAI Pro v6.0 Ready', 'success');
         });
     </script>
 </body>
